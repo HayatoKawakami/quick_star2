@@ -1,40 +1,102 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
+ruby "2.7.6"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.7'
-# Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5'
-# Use Puma as the app server
-gem 'puma', '~> 5.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
+# 基盤
+gem "rails", "6.1.7"
+# railsを動かすためのアプリケーションサーバー
+gem "puma", "~> 5.0"
+# アセットパイプラインのコンパイル時にsassにも対応する
+gem 'sass-rails', '~> 5.0'
+# JavaScriptを圧縮してくれる(if_elseを三項演算子にしてくれたりホワイトスペースを削除したり)
+gem 'uglifier', '>= 1.3.0'
+# Sprocketsの補助？単体でjsを読み込む場合もあるらしい
+gem 'mini_racer', platforms: :ruby
+# digestやauthenticate等の対応
+gem 'bcrypt', "~> 3.1.7"
+# coffeeが使えるようにする
+gem 'coffee-rails', '~> 4.2'
+# 画面遷移を高速化
+gem 'turbolinks', '~> 5'
+# JSONファイルを簡単に生成できるようにする
+gem "jbuilder"
+# railsの起動時間を短縮してくれる
+gem "bootsnap", require: false
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+# 後で確認する
+gem 'rubyzip', '2.3.0'
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# gem "redis", "~> 4.0"
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
 
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+# Use Sass to process CSS
+# gem "sassc-rails"
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
+# railsをslimに対応させる
+gem 'slim-rails'
+# htmlをslimにコンバートする
+gem 'html2slim'
+
+# 各文言の日本語化
+gem 'rails-i18n'
+
+# データベースをMySQLに対応させる
+gem "mysql2", "~> 0.5"
+
+# 環境変数を管理するgem。.envファイルに各種パスワードやネットに公開したくない情報を自動で読み取ってくれる
+gem 'dotenv-rails'
+
+# その他
+
+
+# 開発環境とテスト環境
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # デバッグで使用する
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # RSpecに対応させる
+  gem 'rspec-rails', '~> 3.7'
+  # RSpecで使用するfixtureの役割
+  gem 'factory_bot_rails', '~> 4.11'
 end
 
+
+# 開発環境のみ
 group :development do
-  gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # デフォルトエラーページで起動できるコンソール機能
+  gem 'web-console'
+  # ファイルの変更を検知して、可能であれば自動で対応する
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  # アプリケーションプリローダー。常にアクティブにしてテストやタスクの処理を高速化できる
+  # gem 'spring'
+  # springのファイルシステムの変更検知方法をpollingからlistenに変更してくれる
+  # gem 'spring-watcher-listen', '~> 2.0.0'
+  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  # gem "rack-mini-profiler"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# テスト環境のみ
+group :development do
+  # ブラウザテストを簡単に行えるようにする。ウェブブラウザでの操作をエミューレートできるようになる
+  gem 'capybara'
+  # Webブラウザの動作を自動化する
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+end
+
+# windowsの何かに必要らしい
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+
