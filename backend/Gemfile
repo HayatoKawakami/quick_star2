@@ -33,6 +33,8 @@ gem "importmap-rails"
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
+# SPA化の何かに使う(調べる)
+gem 'rack-cors'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

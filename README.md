@@ -19,6 +19,7 @@
 
 ■ 言語 ■ 
 Ruby 2.7.6
+React.js 
 ■ フレームワーク ■ 
 Ruby on Rails v6.1.7
 ■ テスト ■ 
