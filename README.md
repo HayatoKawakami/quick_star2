@@ -24,60 +24,46 @@ React.js
 Ruby on Rails v6.1.7
 ■ テスト ■ 
 RSpec 
+
+■コーディングチェック■
+rubocop
+ESLint
 ■ Gem ■ 
+sass-rails
+uglifier
 
-gem 'sass-rails', '~> 5.0'
+'mini_racer', platforms: :ruby
 
-gem 'uglifier', '>= 1.3.0'
+'bcrypt'
 
-gem 'mini_racer', platforms: :ruby
-
-gem 'bcrypt'
-
-gem 'coffee-rails', '~> 4.2'
-
-gem 'turbolinks', '~> 5'
-
-gem 'jbuilder', '~> 2.5'
-
-gem 'bootsnap', '>= 1.1.0', require: f
-
-gem 'slim-rails'
-
-gem 'html2slim'
-
-gem 'rails-i18n'
-
-gem 'mysql2'
-
-gem 'dotenv-rails'
-
-gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-gem 'rspec-rails', '~> 3.7'
-
-gem 'factory_bot_rails', '~> 4.11'
-
+'coffee-rails'
+'turbolinks'
+'jbuilder'
+'bootsnap', '>= 1.1.0', require: f
+'slim-rails'
+'html2slim'
+'rails-i18n'
+'mysql2'
+'dotenv-rails'
+'byebug', platforms: [:mri, :mingw, :x64_mingw]
+'rspec-rails'
+'factory_bot_rails'
 group :development do
+'web-console'
+'listen'
+'spring'
+'spring-watcher-listen'
+'capybara'
+'selenium-webdriver'
+'webdrivers'
+'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'web-console', '>= 3.3.0'
+【フロントエンドのパッケージ】
 
-gem 'listen', '>= 3.0.5', '< 3.2' アプリケーションプリローダー。常にアクティブにしてテストやタスクの処理を高速化できる gem 'spring'
-
-gem 'spring-watcher-listen', '~> 2.0.0' end
-
-gem 'capybara'
-
-gem 'selenium-webdriver' gem 'webdrivers'
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 【コード管理】
-
 github
-
 【デプロイ】
-
 AWS
-
 【ワイヤーフレーム・デザインカンプ】
+Adobe XD

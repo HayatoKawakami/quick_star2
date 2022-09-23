@@ -36,6 +36,10 @@ gem "stimulus-rails"
 # SPA化の何かに使う(調べる)
 gem 'rack-cors'
 
+# rubocopを導入する
+gem 'rubocop'
+gem 'rubocop-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
