@@ -36,6 +36,8 @@ gem "stimulus-rails"
 # SPA化の何かに使う(調べる)
 gem 'rack-cors'
 
+
+gem 'devise'
 # rubocopを導入する
 gem 'rubocop'
 gem 'rubocop-rails'
