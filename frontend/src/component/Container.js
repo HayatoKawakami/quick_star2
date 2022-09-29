@@ -5,7 +5,7 @@ class Container extends React.Component {
   render(){
     return( 
       <div className="container">
-        <h1>これはcontainerです！！</h1>
+        <h1>これはcontainerです</h1>
         <UserShow />
       </div>
     );
