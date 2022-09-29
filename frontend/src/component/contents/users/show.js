@@ -1,23 +1,23 @@
+import React, {useState, useEffect} from "react";
 
-import React, {useState} from "react";
-class UserShow extends React.Component {
-  
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     name: this.user.name,
-  //   }
-  // }
-  
-  render(){
-  
-    return(
-      <div>
-        <p>これはuserのshowページです</p>
-        {/* <p>{this.user.name}</p> */}
-      </div>
-    );
-  }
+function UserShow() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(()=>{
+    fetch("http://localhost:3000/api/v1/users/", {method: "GET"})
+    .then(response => response.json())
+    .then(data => { setUsers(data); })
+  }, [])
+
+  console.log(users);
+
+  return(
+    <div>
+      <p>これはuserのindexページです</p>
+      <p></p>
+    </div>
+  );
 }
 
 export {UserShow};
