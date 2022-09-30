@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 
-function UserShow() {
+const UserProfile = () => {
 
   const [users, setUsers] = useState([]);
 
@@ -14,10 +15,11 @@ function UserShow() {
 
   return(
     <div>
-      <p>これはuserのindexページです</p>
+      <p>これはuserのトップページです</p>
+      <Link to="/">ホームへ</Link>
       <p></p>
     </div>
   );
 }
 
-export {UserShow};
+export {UserProfile};
