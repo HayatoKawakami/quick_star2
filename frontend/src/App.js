@@ -2,25 +2,15 @@ import React from "react";
 
 import { StatusBar } from "./components/layouts/StatusBar";
 import { Menu } from "./components/layouts/Menu";
-
-import { BrowserRouter, Routes, Route} from "react-router-dom";
-import { Home } from "./components/pages/home/Home";
-import { UserProfile } from "./components/pages/users/UserProfile";
+import { Container } from "./components/layouts/Container";
 
 
-const App = () => {
+export const App = () => {
     return(
         <>
-            <BrowserRouter>
-                <Menu />
-                <StatusBar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="user" element={<UserProfile />} />
-                </Routes>
-            </BrowserRouter>
+            <Menu />
+            <StatusBar />
+            <Container />
         </>
     );
 }
-
-export {App};

@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+export const Home = () => {
   return(
     <div>
       <h1>Home</h1>
-      <Link to="user">ユーザーページへ</Link>
+      <Link to="users/3">ユーザーページへ</Link>
     </div>
   );
 }
-
-export {Home};
