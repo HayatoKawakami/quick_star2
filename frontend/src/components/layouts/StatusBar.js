@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const StatusBar = () =>{
+  const navigate = useNavigate();
+  
   return(
     <div className="status-bar">
       <p>ステータスバー</p>
-      <Link to="/">＜</Link>
+      <Link to="/"　onClick={()=> navigate(-1)}>＜</Link>
     </div>
   );
 }
