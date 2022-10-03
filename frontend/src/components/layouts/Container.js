@@ -10,7 +10,9 @@ export const Container = () => {
         <h1>これはcontainerです</h1>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/users/:userId" element={<UserProfile />} />
+          <Route path="users">
+            <Route path=":userId" element={<UserProfile />} />
+          </ Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
