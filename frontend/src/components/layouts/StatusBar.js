@@ -6,7 +6,7 @@ export const StatusBar = () =>{
   
   return(
     <div className="status-bar">
-      <p>ステータスバー</p>
+      <h1>Status Bar</h1>
       <Link to="/"　onClick={()=> navigate(-1)}>＜</Link>
     </div>
   );
