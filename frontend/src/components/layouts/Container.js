@@ -1,16 +1,18 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "../pages/home/Home";
+import { UserNew } from "../pages/users/UserNew";
 import { UserProfile } from "../pages/users/UserProfile";
 import { NotFound } from "../layouts/NotFound"
 
 export const Container = () => {
     return(
       <div className="container">
-        <h1>これはcontainerです</h1>
+        <h1>Container</h1>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="users">
+            <Route path="new" element={<UserNew />} />
             <Route path=":userId" element={<UserProfile />} />
           </ Route>
           <Route path="*" element={<NotFound />} />
