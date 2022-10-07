@@ -51,9 +51,9 @@ module Api
 
       private
 
-      def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :birthday, :sex)
-      end
+      # def user_params
+      #   params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :birthday, :sex)
+      # end
 
       def set_user
         @user = User.find(params[:id])

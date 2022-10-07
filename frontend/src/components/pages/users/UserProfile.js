@@ -25,7 +25,3 @@ export const UserProfile = () => {
     </div>
   );
 }
-
-
-
-
