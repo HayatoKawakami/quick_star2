@@ -46,7 +46,6 @@ export const UserNew = () => {
     })
   }
 
-
   return(
     <div>
       <label htmlFor="name">名前</label>

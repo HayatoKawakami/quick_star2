@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, if: :devise_controller?
 
   protected
 
