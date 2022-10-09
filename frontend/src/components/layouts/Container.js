@@ -12,7 +12,7 @@ export const Container = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="users">
-            <Route path="new" element={<UserNew />} />
+            <Route path="sign_up" element={<UserNew />} />
             <Route path=":userId" element={<UserProfile />} />
           </ Route>
           <Route path="*" element={<NotFound />} />
