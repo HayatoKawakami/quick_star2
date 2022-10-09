@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   before_action :configure_sign_up_params, if: :devise_controller?
 
-  protected
+  private
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

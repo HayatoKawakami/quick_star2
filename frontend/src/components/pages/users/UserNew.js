@@ -48,17 +48,51 @@ export const UserNew = () => {
 
   return(
     <div>
+
       <label htmlFor="name">名前</label>
-      <input id="name" name="name" value={name} onChange={handleChangeName} type="text" placeholder="名前" />
+      <input 
+      id="name" 
+      name="name" 
+      value={name} 
+      onChange={handleChangeName} 
+      type="text" 
+      placeholder="名前" 
+      />
+
       <label htmlFor="email">メールアドレス</label>
-      <input id="email" name="email" value={email} onChange={handleChangeEmail} type="text" placeholder="メールアドレス"/>
+      <input 
+      id="email" 
+      name="email" 
+      value={email} 
+      onChange={handleChangeEmail} 
+      type="email" 
+      placeholder="メールアドレス"
+      />
+
       <label htmlFor="password">パスワード</label>
-      <input id="password" name="password" value={password} onChange={handleChangePassword} type="text" placeholder="パスワード"/>
+      <input 
+      id="password" 
+      name="password" 
+      value={password} 
+      onChange={handleChangePassword} 
+      type="password" 
+      placeholder="パスワード"
+      />
+
       <label htmlFor="password_confirmation">パスワード確認</label>
-      <input id="password_confirmation" name="password_confirmation" value={password_confirmation} onChange={handleChangePasswordConfirmation} type="text" placeholder="パスワード確認" />
+      <input 
+      id="password_confirmation" 
+      name="password_confirmation" 
+      value={password_confirmation} 
+      onChange={handleChangePasswordConfirmation} 
+      type="password" 
+      placeholder="パスワード確認" 
+      />
+
       <input type="hidden" name="image" value={image} />
       <input type="hidden" name="sex" value={sex} />
       <input type="hidden" name="birthday" value={birthday} />
+
       <input type="button" onClick={createNewUser} value="新規登録" />
     </div>
   );
