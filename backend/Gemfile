@@ -37,7 +37,6 @@ gem "stimulus-rails"
 gem 'rack-cors'
 
 
-gem 'devise'
 # rubocopを導入する
 gem 'rubocop'
 gem 'rubocop-rails'
