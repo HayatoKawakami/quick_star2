@@ -15,12 +15,20 @@ export const UserProfile = () => {
     })
    }, [])
 
+  const userSex = () => {
+    if (user.sex === 1 ) {
+      return  "男性"
+    } else if (user.sex === 2) {
+      return  "女性"
+    }
+  }
+
   return(
     <div>
       <h2>プロフィール情報</h2>
       <p>ID：{user.id}</p>
       <p>名前：{user.name}</p>
-      <p>性別：{user.sex}</p>
+      <p>性別：{userSex()}</p>
       <p>誕生日：{user.birthday}</p>
     </div>
   );
