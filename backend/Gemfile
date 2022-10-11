@@ -53,16 +53,13 @@ gem 'rubocop-rails'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# railsをslimに対応させる
-gem 'slim-rails'
-# htmlをslimにコンバートする
-gem 'html2slim'
+
 
 # 各文言の日本語化
 gem 'rails-i18n'
 
 # データベースをMySQLに対応させる
-gem "mysql2", "~> 0.5"
+gem "mysql2"
 
 # 環境変数を管理するgem。.envファイルに各種パスワードやネットに公開したくない情報を自動で読み取ってくれる
 gem 'dotenv-rails'
