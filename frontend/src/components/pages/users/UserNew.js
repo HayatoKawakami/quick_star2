@@ -11,9 +11,8 @@ export const UserNew = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const image = "test"
-  const sex = 1
-  const birthday = new Date(1990,3,22)
-
+  const [sex, setSex] = useState(1);
+  const [birthday, setBirthday] = useState('');
 
 
   const handleChangeName = (e) => {
@@ -29,6 +28,13 @@ export const UserNew = () => {
 
   const handleChangePasswordConfirmation = (e) => {
     setPasswordConfirmation(e.target.value);
+  }
+  const handleChangeSex = (e) => {
+    setSex(e.target.value);
+  }
+
+  const handleBirthday = (e) => {
+    setBirthday(e.target.value);
   }
 
   const createNewUser = (event) => {
@@ -48,14 +54,18 @@ export const UserNew = () => {
       setEmail('')
       setPassword('')
       setPasswordConfirmation('')
+      setSex('1')
     })
     
   }
+
+  
 
   return(
     <div>
 
       <label htmlFor="name">名前</label>
+      <br/>
       <input
       id="name"
       name="name"
@@ -64,8 +74,10 @@ export const UserNew = () => {
       type="text"
       placeholder="名前"
       />
+      <br/>
 
       <label htmlFor="email">メールアドレス</label>
+      <br/>
       <input
       id="email"
       name="email"
@@ -74,8 +86,10 @@ export const UserNew = () => {
       type="email"
       placeholder="メールアドレス"
       />
+      <br/>
 
       <label htmlFor="password">パスワード</label>
+      <br/>
       <input
       id="password"
       name="password"
@@ -84,8 +98,10 @@ export const UserNew = () => {
       type="password"
       placeholder="パスワード"
       />
+      <br/>
 
       <label htmlFor="passwordConfirmation">パスワード確認</label>
+      <br/>
       <input
       id="passwordConfirmation"
       name="passwordConfirmation"
@@ -94,10 +110,38 @@ export const UserNew = () => {
       type="password"
       placeholder="パスワード確認"
       />
+      <br/>
 
       <input type="hidden" name="image" value={image} />
-      <input type="hidden" name="sex" value={sex} />
-      <input type="hidden" name="birthday" value={birthday} />
+      
+      <div className="radio">
+        <label htmlFor="sex">性別</label>
+        <br/>
+        <label>
+          <input
+          type="radio"
+          name={sex}
+          value="1"
+          onChange={handleChangeSex}
+          checked="checked"
+          />
+          男性
+        </label>
+        <label>
+          <input
+          type="radio"
+          name={sex}
+          value="2"
+          onChange={handleChangeSex}
+          />
+          女性
+        </label>
+      </div>
+
+      <label htmlFor="birthday">生年月日</label>
+      <br/>
+      <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
+      <br/>
 
       <input type="button" onClick={createNewUser} value="新規登録" />
     </div>
