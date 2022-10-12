@@ -10,10 +10,11 @@ export const UserNew = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const image = "test"
+  const [image, setImage] = useState('')
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
 
+  
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -29,6 +30,13 @@ export const UserNew = () => {
   const handleChangePasswordConfirmation = (e) => {
     setPasswordConfirmation(e.target.value);
   }
+
+  const getImage = (e) => {
+    if (!e.target.files) return
+    const img = e.target.files[0];
+    setImage(img)
+  }
+
   const handleChangeSex = (e) => {
     setSex(e.target.value);
   }
@@ -37,24 +45,30 @@ export const UserNew = () => {
     setBirthday(e.target.value);
   }
 
+  const data = {
+    name: name,
+    email: email,
+    password: password,
+    passwordConfirmation: passwordConfirmation,
+    image: image,
+    sex: sex,
+    birthday: birthday,
+  }
+
+  const resetValue = () => {
+    setName('')
+    setEmail('')
+    setPassword('')
+    setPasswordConfirmation('')
+    setSex('1')
+  }
+
   const createNewUser = (event) => {
-    axios.post(`${baseURL}`,{
-      name: name,
-      email: email,
-      password: password,
-      passwordConfirmation: passwordConfirmation,
-      image: image,
-      sex: sex,
-      birthday: birthday,
-    })
+    axios.post(`${baseURL}`,data)
     .then(response =>{
       console.log('送信したデータ'+ response.data);
       event.preventDefault();
-      setName('')
-      setEmail('')
-      setPassword('')
-      setPasswordConfirmation('')
-      setSex('1')
+      resetValue();
     })
     
   }
@@ -112,7 +126,8 @@ export const UserNew = () => {
       />
       <br/>
 
-      <input type="hidden" name="image" value={image} />
+      <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
+      
       
       <div className="radio">
         <label htmlFor="sex">性別</label>
