@@ -35,7 +35,8 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # SPA化の何かに使う(調べる)
 gem 'rack-cors'
-
+# 画像のアップロード
+gem 'carrierwave'
 
 # rubocopを導入する
 gem 'rubocop'
