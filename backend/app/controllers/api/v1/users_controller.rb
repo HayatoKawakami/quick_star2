@@ -49,7 +49,7 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation, :sex, :birthday, :image)
+        params.permit(:name, :email, :password, :password_confirmation, :sex, :birthday, :image)
       end
 
       def set_user

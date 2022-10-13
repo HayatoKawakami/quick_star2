@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import icon from '../../../../..//backend/public/uploads/user/image/1/sample.jpeg';
 
 const baseURL = "http://localhost:3000/api/v1/users"
 
@@ -30,6 +31,7 @@ export const UserProfile = () => {
       <p>名前：{user.name}</p>
       <p>性別：{userSex()}</p>
       <p>誕生日：{user.birthday}</p>
+      <img src={icon} alt="" />
     </div>
   );
 }

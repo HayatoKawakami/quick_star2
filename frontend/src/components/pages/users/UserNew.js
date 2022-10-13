@@ -1,10 +1,6 @@
 import React,  { useState } from "react";
 import axios from "axios";
 
-const baseURL = "http://localhost:3000/api/v1/users"
-
-axios.defaults.headers.common['content-type'] = 'application/json';
-
 export const UserNew = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,8 +9,6 @@ export const UserNew = () => {
   const [image, setImage] = useState('')
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
-
-  
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -45,15 +39,15 @@ export const UserNew = () => {
     setBirthday(e.target.value);
   }
 
-  const data = {
-    name: name,
-    email: email,
-    password: password,
-    passwordConfirmation: passwordConfirmation,
-    image: image,
-    sex: sex,
-    birthday: birthday,
-  }
+  // const data = {
+  //   name: name,
+  //   email: email,
+  //   password: password,
+  //   passwordConfirmation: passwordConfirmation,
+  //   image: image,
+  //   sex: sex,
+  //   birthday: birthday,
+  // }
 
   const resetValue = () => {
     setName('')
@@ -63,8 +57,22 @@ export const UserNew = () => {
     setSex('1')
   }
 
-  const createNewUser = (event) => {
-    axios.post(`${baseURL}`,data)
+  const Send = (event) => {
+
+    const data = new FormData()
+    data.append("name", name);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("password_confirmation", passwordConfirmation);
+    data.append("image", image);
+    data.append("sex", sex);
+    data.append("birthday", birthday);
+
+    const baseURL = "http://localhost:3000/api/v1/users"
+
+    axios.post(`${baseURL}`,data,{
+      headers:{'Content-Type': 'multipart/form-data'},
+    })
     .then(response =>{
       console.log('送信したデータ'+ response.data);
       event.preventDefault();
@@ -158,7 +166,7 @@ export const UserNew = () => {
       <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       <br/>
 
-      <input type="button" onClick={createNewUser} value="新規登録" />
+      <input type="button" onClick={Send} value="新規登録" />
     </div>
   );
 }
