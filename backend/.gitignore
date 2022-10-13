@@ -26,4 +26,4 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 # 画像ファイルは除外
-/public/uploads
+/public/uploads/

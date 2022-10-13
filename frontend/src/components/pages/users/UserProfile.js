@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import icon from '../../../../..//backend/public/uploads/user/image/1/sample.jpeg';
+import icon from '../../../../..//backend/public/uploads/user/image/1/icon.jpg';
 
 const baseURL = "http://localhost:3000/api/v1/users"
 
