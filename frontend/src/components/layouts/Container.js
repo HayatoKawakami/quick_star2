@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "../pages/home/Home";
 import { UserNew } from "../pages/users/UserNew";
 import { UserProfile } from "../pages/users/UserProfile";
+import { UserEdit } from "../pages/users/UserEdit";
 import { NotFound } from "../layouts/NotFound"
 
 export const Container = () => {
@@ -14,6 +15,7 @@ export const Container = () => {
           <Route path="users">
             <Route path="sign_up" element={<UserNew />} />
             <Route path=":userId" element={<UserProfile />} />
+            <Route path=":userId/edit" element={UserEdit} />
           </ Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
