@@ -39,16 +39,6 @@ export const UserNew = () => {
     setBirthday(e.target.value);
   }
 
-  // const data = {
-  //   name: name,
-  //   email: email,
-  //   password: password,
-  //   passwordConfirmation: passwordConfirmation,
-  //   image: image,
-  //   sex: sex,
-  //   birthday: birthday,
-  // }
-
   const resetValue = () => {
     setName('')
     setEmail('')
