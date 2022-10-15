@@ -31,7 +31,7 @@ module Api
       def edit; end
 
       def update
-        if @user.update(user_params)
+        if @user.update!(user_params)
           render json: @user
         else
           render json: @user.errors
@@ -49,7 +49,7 @@ module Api
       private
 
       def user_params
-        params.permit(:name, :email, :password, :password_confirmation, :sex, :birthday, :image)
+        params.permit(:id, :name, :email, :password, :password_confirmation, :sex, :birthday, :image)
       end
 
       def set_user

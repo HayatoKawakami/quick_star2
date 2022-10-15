@@ -33,6 +33,7 @@ export const UserProfile = () => {
       <p>名前：{user.name}</p>
       <p>性別：{userSex()}</p>
       <p>誕生日：{user.birthday}</p>
+      <p>メールアドレス：{user.email}</p>
 
       <Link to="edit">編集</Link>
       

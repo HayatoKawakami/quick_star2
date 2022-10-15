@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :password, presence: true
   validates :sex, presence: true
   validates :birthday, presence: true
-  validates :image, presence: true
+  # validates :image, presence: true
 
   has_secure_password
   # 画像アップロードの準備

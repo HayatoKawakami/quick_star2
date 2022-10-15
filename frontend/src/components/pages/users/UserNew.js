@@ -60,9 +60,11 @@ export const UserNew = () => {
 
     const baseURL = "http://localhost:3000/api/v1/users"
 
-    axios.post(`${baseURL}`,data,{
+    const config = {
       headers:{'Content-Type': 'multipart/form-data'},
-    })
+    }
+
+    axios.post(`${baseURL}`,data, config)
     .then(response =>{
       console.log('送信したデータ'+ response.data);
       event.preventDefault();
