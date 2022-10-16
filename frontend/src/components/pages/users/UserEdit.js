@@ -9,8 +9,9 @@ export const UserEdit = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(user.password); //初期値がないと警告がでる
   const [image, setImage] = useState('')
+
 
   useEffect(()=> {
     axios.get(`http://localhost:3000/api/v1/users/${userId}`)
@@ -18,15 +19,14 @@ export const UserEdit = () => {
       setUser(response.data);
       setName(response.data.name);
       setEmail(response.data.email);
-      setPassword(response.data.email);
-      setImage(response.data.image);
+      setPassword(response.data.password);
     })
   },[])
   console.log(user);
 
 
   const handleChangeName = (e) =>{
-    setName(e.target.value)
+    setName(e.target.value);
   }
 
   const handleChangeEmail = (e) =>{
@@ -44,10 +44,8 @@ export const UserEdit = () => {
     data.append("name", name );
     data.append("email", email);
     data.append("password", password);
-    if (image){
+    if (image) {
       data.append("image", image);
-    } else {
-      data.append("image", user.image)
     }
     console.log(image)
 
@@ -63,6 +61,16 @@ export const UserEdit = () => {
   return(
     <>
       <h2>「{user.name}」の編集</h2>
+      <img src={`http://localhost:3000/uploads/user/image/${userId}/icon.jpg`} alt="" className='user-icon' />
+      <br />
+      <label htmlFor="image">画像</label>
+      <input type="file"
+      accept='image/*, .jpg, .png, .jpeg, .gif'
+      onChange={getImage}
+      />
+      <br />
+      <br />
+
       <label htmlFor="name">名前</label>
       <input type="text"
       name="name"
@@ -76,13 +84,6 @@ export const UserEdit = () => {
       name="email" 
       onChange={handleChangeEmail}
       value={email}
-      />
-      <br />
-
-      <label htmlFor="image">画像</label>
-      <input type="file"
-      accept='image/*, .jpg, .png, .jpeg, .gif'
-      onChange={getImage}
       />
       <br />
 
