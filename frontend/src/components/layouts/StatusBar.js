@@ -8,6 +8,9 @@ export const StatusBar = () =>{
     <div className="status-bar">
       <h1>Status Bar</h1>
       <Link to="/" onClick={()=> navigate(-1)}>＜</Link>
+
+      {/* <p>ログイン状態：{loggedInStatus}</p> */}
+      <Link to="login">ログイン</Link>
     </div>
   );
 }

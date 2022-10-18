@@ -5,6 +5,7 @@ import { UserNew } from "../pages/users/UserNew";
 import { UserProfile } from "../pages/users/UserProfile";
 import { UserEdit } from "../pages/users/UserEdit";
 import { NotFound } from "../layouts/NotFound"
+import { LoginForm } from "../pages/sessions/LoginForm";
 
 export const Container = () => {
     return(
@@ -17,6 +18,7 @@ export const Container = () => {
             <Route path=":userId" element={<UserProfile />} />
             <Route path=":userId/edit" element={<UserEdit />} />
           </ Route>
+          <Route path="login" element={<LoginForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
