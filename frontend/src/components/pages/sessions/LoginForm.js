@@ -1,0 +1,54 @@
+import React, {useState} from 'react';
+import axios from 'axios';
+
+
+export const LoginForm = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const data = new FormData();
+  data.append("email", email );
+  data.append("password", password);
+  
+
+
+  const Login = (event) => {
+    axios.post("http://localhost:3000/api/v1/login", data,
+      {
+      headers: { 'Content-Type': 'application/json' },
+      },
+      { 
+        withCredentials: true 
+      })
+    .then(response => {
+      console.log("res", response)
+    }) 
+    event.preventDefault();
+  }
+
+
+  return(
+    <>
+      <h2>ログイン</h2>
+      <label htmlFor="email">メールアドレス</label>
+      <input type="email" name='email' value={email} onChange={handleChangeEmail} placeholder="メールアドレス" />
+      <br />
+
+      <label htmlFor="password">パスワード</label>
+      <input type="password" name='password' value={password} onChange={handleChangePassword} placeholder="パスワード" />
+      <br />
+
+      <input type="button" onClick={Login} value="ログイン" />
+    </>
+  ) 
+}
+
