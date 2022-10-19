@@ -15,19 +15,20 @@ export const LoginForm = () => {
     setPassword(e.target.value);
   }
 
-  const data = new FormData();
-  data.append("email", email );
-  data.append("password", password);
-  
-
 
   const Login = (event) => {
+
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("passworld_confirmation", password)
+    console.log(data);
     axios.post("http://localhost:3000/api/v1/login", data,
       {
       headers: { 'Content-Type': 'application/json' },
       },
       { 
-        withCredentials: true 
+        withCredentials: true
       })
     .then(response => {
       console.log("res", response)
@@ -46,6 +47,8 @@ export const LoginForm = () => {
       <label htmlFor="password">パスワード</label>
       <input type="password" name='password' value={password} onChange={handleChangePassword} placeholder="パスワード" />
       <br />
+      <input type="hidden" name="password_confirmation" value={password} id="" />
+
 
       <input type="button" onClick={Login} value="ログイン" />
     </>
