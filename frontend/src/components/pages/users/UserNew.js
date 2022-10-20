@@ -57,6 +57,7 @@ export const UserNew = () => {
     data.append("image", image);
     data.append("sex", sex);
     data.append("birthday", birthday);
+    console.log([...data.entries()]);
 
     const baseURL = "http://localhost:3000/api/v1/users"
 
