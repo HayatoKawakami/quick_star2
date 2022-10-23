@@ -1,7 +1,6 @@
 module Api
   module V1
     class SessionsController < ApplicationController
-      wrap_parameters :user, include: %i[email password]
       def login
         @user = User.find_by(email: session_params[:email].downcase)
         if @user && authenticate(session_params[:password])
