@@ -29,15 +29,9 @@ export const LoginForm = () => {
         password: password,
     }
 
-    console.log(data)
+    console.log(data);
 
-    axios.post("http://localhost:3000/api/v1/login", data,
-      {
-      headers: { 'Content-Type': 'application/json' },
-      },
-      {
-        withCredentials: true
-      })
+    axios.post("http://localhost:3000/api/v1/login", data)
     .then(response => {
       console.log("res", response)
     })
