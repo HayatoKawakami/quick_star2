@@ -1,10 +1,11 @@
 module Api
   module V1
     class SessionsController < ApplicationController
+      wrap_parameters :user
       def login
         @user = User.find_by(email: session_params[:email].downcase)
         if @user && authenticate(session_params[:password])
-          log_in(@user)
+          login!
           render json: { logged_in: true, user: @user }
         else
           render json: { status: 401, errors: ['認証に失敗しました'] }
