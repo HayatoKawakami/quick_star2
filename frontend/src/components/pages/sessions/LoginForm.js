@@ -33,7 +33,7 @@ export const LoginForm = () => {
 
     axios.post("http://localhost:3000/api/v1/login", data)
     .then(response => {
-      console.log("res", response)
+      console.log("res", response);
     })
     event.preventDefault();
   }

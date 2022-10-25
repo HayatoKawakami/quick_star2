@@ -1,10 +1,11 @@
 module Api
   module V1
     class SessionsController < ApplicationController
+      # userとしてラップする
       wrap_parameters :user
       def login
         @user = User.find_by(email: session_params[:email].downcase)
-        if @user && authenticate(session_params[:password])
+        if @user && @user.authenticate(session_params[:password])
           login!
           render json: { logged_in: true, user: @user }
         else
