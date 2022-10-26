@@ -67,10 +67,13 @@ export const UserNew = () => {
 
     axios.post(`${baseURL}`,data, config)
     .then(response =>{
-      console.log('送信したデータ'+ response.data);
+      console.log('ユーザー新規作成完了'+ response.data);
       event.preventDefault();
-      resetValue();
+      // resetValue();
+    }).catch(error =>{
+      console.log("ユーザー新規作成できません", error)
     })
+    
     
   }
 
