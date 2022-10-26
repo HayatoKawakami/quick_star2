@@ -27,6 +27,7 @@ export const LoginForm = () => {
     const data = {
         email: email,
         password: password,
+
     }
 
     console.log(data);
@@ -34,6 +35,10 @@ export const LoginForm = () => {
     axios.post("http://localhost:3000/api/v1/login", data)
     .then(response => {
       console.log("res", response);
+      if (response.logged_in) {
+        
+      }
+      
     })
     event.preventDefault();
   }
