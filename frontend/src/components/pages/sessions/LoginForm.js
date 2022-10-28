@@ -1,11 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
+
+import { useLoggedInStatusContext } from '../../../contexts/context';
 
 
 export const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { loggedInStatus, setLoggedInStatus } = useLoggedInStatusContext();
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -15,19 +19,17 @@ export const LoginForm = () => {
     setPassword(e.target.value);
   }
 
+  const successfulAuth = () => {
+    
+    setLoggedInStatus('ログイン中')
+    
+  }
 
   const Login = (event) => {
-
-    // const data = new FormData()
-    // data.append("email", email);
-    // data.append("password", password);
-    // data.append("password_confirmation", password)
-    // console.log([...data.entries()]);
 
     const data = {
         email: email,
         password: password,
-
     }
 
     console.log(data);
@@ -35,12 +37,12 @@ export const LoginForm = () => {
     axios.post("http://localhost:3000/api/v1/login", data)
     .then(response => {
       console.log("res", response);
-      if (response.logged_in) {
-        
+      if (response.data.logged_in){
+        successfulAuth();
       }
-      
     })
     event.preventDefault();
+    
   }
 
   return(
@@ -65,7 +67,7 @@ export const LoginForm = () => {
       <br />
 
       <input type="button" onClick={Login} value="ログイン" />
+      <p>{loggedInStatus}</p>
     </>
   )
 }
-

@@ -1,13 +1,10 @@
 import React, { useState, createContext, useContext } from "react";
 
-
-
-
 // <<<<<<<<< ログイン状態の確認
-const LoggedInStatus = createContext();
+const LoggedStatus = createContext();
 
 export const useLoggedInStatusContext = () => {
-  return useContext(LoggedInStatus);
+  return useContext(LoggedStatus);
 }
 
 export const LoggedInStatusProvider = ({ children }) => {
@@ -19,8 +16,8 @@ export const LoggedInStatusProvider = ({ children }) => {
   }
 
   return(
-    <LoggedInStatus.Provider value={value}>
+    <LoggedStatus.Provider value={value}>
       {children}
-    </LoggedInStatus.Provider>
+    </LoggedStatus.Provider>
   );
 }

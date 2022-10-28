@@ -6,6 +6,7 @@ import { UserProfile } from "../pages/users/UserProfile";
 import { UserEdit } from "../pages/users/UserEdit";
 import { NotFound } from "../layouts/NotFound"
 import { LoginForm } from "../pages/sessions/LoginForm";
+import { LoggedInStatusProvider } from "../../contexts/context";
 
 export const Container = () => {
     return(
@@ -18,7 +19,13 @@ export const Container = () => {
             <Route path=":userId" element={<UserProfile />} />
             <Route path=":userId/edit" element={<UserEdit />} />
           </ Route>
-          <Route path="login" element={<LoginForm />} />
+          
+            <Route path="login" element={
+            <LoggedInStatusProvider>
+              <LoginForm />
+            </LoggedInStatusProvider>
+            } />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
