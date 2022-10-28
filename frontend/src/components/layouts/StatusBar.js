@@ -2,12 +2,12 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoggedInStatusContext } from "../../contexts/context";
 
+
+
 export const StatusBar = () =>{
   const navigate = useNavigate();
-  const { loggedInStatus } = useLoggedInStatusContext();
+  const { loggedInStatus, setLoggedInStatus } = useLoggedInStatusContext();
 
-  
-  
   return(
     <div className="status-bar">
       <h1>Status Bar</h1>
