@@ -10,9 +10,13 @@ export const useLoggedInStatusContext = () => {
 export const LoggedInStatusProvider = ({ children }) => {
   const [loggedInStatus, setLoggedInStatus] = useState('未ログイン');
 
+  const handleLogin = () => {
+    setLoggedInStatus('ログイン中');
+  }
   const value = {
     loggedInStatus,
     setLoggedInStatus,
+    handleLogin,
   }
 
   return(
