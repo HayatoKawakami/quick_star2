@@ -4,12 +4,13 @@ import axios from 'axios';
 import { useLoggedInStatusContext } from '../../../contexts/context';
 
 
+
 export const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { loggedInStatus, setLoggedInStatus } = useLoggedInStatusContext();
+  const { loggedInStatus, setLoggedInStatus, handleLogin } = useLoggedInStatusContext();
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -17,12 +18,6 @@ export const LoginForm = () => {
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
-  }
-
-  const successfulAuth = () => {
-    
-    setLoggedInStatus('ログイン中')
-    
   }
 
   const Login = (event) => {
@@ -38,7 +33,7 @@ export const LoginForm = () => {
     .then(response => {
       console.log("res", response);
       if (response.data.logged_in){
-        successfulAuth();
+        handleLogin();
       }
     })
     event.preventDefault();

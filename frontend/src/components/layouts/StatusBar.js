@@ -6,8 +6,11 @@ import { useLoggedInStatusContext } from "../../contexts/context";
 
 export const StatusBar = () =>{
   const navigate = useNavigate();
-  const { loggedInStatus, setLoggedInStatus } = useLoggedInStatusContext();
+  const { loggedInStatus, setLoggedInStatus, handleLogin } = useLoggedInStatusContext();
 
+  const changeLoggedInStatus = () =>{
+    handleLogin();
+  }
   return(
     <div className="status-bar">
       <h1>Status Bar</h1>
