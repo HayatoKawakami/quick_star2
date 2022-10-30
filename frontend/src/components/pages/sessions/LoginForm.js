@@ -1,16 +1,14 @@
-import React, {useState, useContext} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 import { useLoggedInStatusContext } from '../../../contexts/context';
-
-
 
 export const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { loggedInStatus, setLoggedInStatus, handleLogin } = useLoggedInStatusContext();
+  const { handleLogin, handleLoginError, setUser } = useLoggedInStatusContext();
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -34,10 +32,15 @@ export const LoginForm = () => {
       console.log("res", response);
       if (response.data.logged_in){
         handleLogin();
+        setUser(response.data);
+      } else {
+        handleLoginError();
       }
     })
+    .catch(error => {
+      console.log("ログイン処理エラー", error);
+    })
     event.preventDefault();
-    
   }
 
   return(
@@ -62,7 +65,9 @@ export const LoginForm = () => {
       <br />
 
       <input type="button" onClick={Login} value="ログイン" />
-      <p>{loggedInStatus}</p>
+
     </>
   )
 }
+
+
