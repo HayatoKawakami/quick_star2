@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { StatusBar } from "./components/layouts/StatusBar";
 import { Menu } from "./components/layouts/Menu";
@@ -8,15 +8,13 @@ import { LoggedInStatusProvider } from "./contexts/context";
 
 export const App = () => {
 
-    
-
     return(
         <>
-            <Menu />
             <LoggedInStatusProvider>
+                <Menu />
                 <StatusBar />
+                <Container />
             </LoggedInStatusProvider>
-            <Container />
         </>
     );
 }
