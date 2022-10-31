@@ -1,6 +1,9 @@
 import React,  { useState } from "react";
 import axios from "axios";
 
+import { useLoggedInStatusContext } from "../../../contexts/LoginContext";
+import { useConstContext } from "../../../contexts/ConstContext";
+
 export const UserNew = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -10,33 +13,20 @@ export const UserNew = () => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  }
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  }
+  const { handleLogin, setUser } = useLoggedInStatusContext();
 
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
+  const { baseApiURL } = useConstContext();
 
-  const handleChangePasswordConfirmation = (e) => {
-    setPasswordConfirmation(e.target.value);
-  }
-
+  const handleChangeName = (e) => { setName(e.target.value); }
+  const handleChangeEmail = (e) => { setEmail(e.target.value); }
+  const handleChangePassword = (e) => { setPassword(e.target.value); }
+  const handleChangePasswordConfirmation = (e) => { setPasswordConfirmation(e.target.value); }
+  const handleChangeSex = (e) => { setSex(e.target.value); }
+  const handleBirthday = (e) => { setBirthday(e.target.value); }
   const getImage = (e) => {
     if (!e.target.files) return
     const img = e.target.files[0];
     setImage(img)
-  }
-
-  const handleChangeSex = (e) => {
-    setSex(e.target.value);
-  }
-
-  const handleBirthday = (e) => {
-    setBirthday(e.target.value);
   }
 
   const resetValue = () => {
@@ -48,7 +38,6 @@ export const UserNew = () => {
   }
 
   const Send = (event) => {
-
     const data = new FormData()
     data.append("name", name);
     data.append("email", email);
@@ -58,26 +47,20 @@ export const UserNew = () => {
     data.append("sex", sex);
     data.append("birthday", birthday);
     console.log([...data.entries()]);
-
-    const baseURL = "http://localhost:3000/api/v1/users"
-
     const config = {
       headers:{'Content-Type': 'multipart/form-data'},
     }
-
-    axios.post(`${baseURL}`,data, config)
+    axios.post(`${baseApiURL}/users`,data, config)
     .then(response =>{
       console.log('ユーザー新規作成完了'+ response.data);
+      handleLogin();
+      setUser(response.data.user);
       event.preventDefault();
       // resetValue();
     }).catch(error =>{
       console.log("ユーザー新規作成できません", error)
     })
-    
-    
   }
-
-  
 
   return(
     <div>

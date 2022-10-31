@@ -1,47 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-
-import { useLoggedInStatusContext } from '../../../contexts/context';
+import React from 'react';
+import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 
 export const LoginForm = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { email, setEmail, password, setPassword, Login } = useLoggedInStatusContext();
 
-  const { handleLogin, handleLoginError, setUser } = useLoggedInStatusContext();
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-
-  const Login = (event) => {
-
-    const data = {
-        email: email,
-        password: password,
-    }
-
-    console.log(data);
-
-    axios.post("http://localhost:3000/api/v1/login", data)
-    .then(response => {
-      console.log("res", response);
-      if (response.data.logged_in){
-        handleLogin();
-        setUser(response.data);
-      } else {
-        handleLoginError();
-      }
-    })
-    .catch(error => {
-      console.log("ログイン処理エラー", error);
-    })
-    event.preventDefault();
-  }
+  const handleChangeEmail = (e) => { setEmail(e.target.value); }
+  const handleChangePassword = (e) => { setPassword(e.target.value); }
 
   return(
     <>
@@ -65,7 +30,6 @@ export const LoginForm = () => {
       <br />
 
       <input type="button" onClick={Login} value="ログイン" />
-
     </>
   )
 }
