@@ -29,7 +29,7 @@ export const UserProfile = () => {
 
   return(
     <div>
-      <h2>プロフィール情報</h2>
+      <h2>「{user.name}」の編集画面</h2>
       <img src={`${baseURL}/uploads/user/image/${userId}/icon.jpg`} className="user-icon" alt="" />
       <p>名前：{user.name}</p>
       <p>性別：{userSex()}</p>

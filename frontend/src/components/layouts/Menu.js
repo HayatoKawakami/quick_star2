@@ -5,23 +5,30 @@ import { useLoggedInStatusContext } from "../../contexts/LoginContext";
 export const Menu = () => {
 
   const baseURL = "http://localhost:3000";
-  const { user, Logout, loggedInStatus } = useLoggedInStatusContext();
+  const { user, Logout, loggedInStatus, logged_in } = useLoggedInStatusContext();
 
-  const LoginOutBox = () => {
-    if (loggedInStatus === "未ログイン") {
-      return <Link className="btn blue-btn" to="login">ログイン</Link>
-    }
-    return <p className="btn red-btn" onClick={Logout}>ログアウト</p>
-  }
-
-  const UserBox = () => {
-    if (loggedInStatus === "ログイン中") {
+  const LoginAndLogoutBox = () => {
+    if (logged_in === true) {
+      // ログイン時のメニュー
       return (
-      <div className="menu-user-box">
-        <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
-        <p>{user.name}</p>
-      </div>
+        <>
+          <Link to={`users/${user.id}`}>
+            <div className="menu-user-box">
+              <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
+              <p>{user.name}</p>
+            </div>
+          </Link>
+          <p className="btn red-btn" onClick={Logout}>ログアウト</p>
+        </>
       )
+    } else {
+      // ログアウト時のメニュー
+      return(
+        <>
+          <Link to="users/sign_up">ユーザー新規登録</Link>
+          <Link className="btn blue-btn" to="login">ログイン</Link>
+        </>
+      );
     }
   }
 
@@ -30,11 +37,8 @@ export const Menu = () => {
       <h1>Menu</h1>
       <Link to="/">HOME</Link>
       <br />
-      <Link to="users/sign_up">ユーザー新規登録</Link>
-      <Link to={`users/${user.id}`}>
-        {UserBox()}
-      </Link>
-      {LoginOutBox()}
+      {LoginAndLogoutBox()}
+      {`ログイン状態: ${loggedInStatus}`}
     </div>
   );
 }

@@ -38,6 +38,7 @@ export const UserNew = () => {
   }
 
   const Send = (event) => {
+
     const data = new FormData()
     data.append("name", name);
     data.append("email", email);
@@ -47,9 +48,11 @@ export const UserNew = () => {
     data.append("sex", sex);
     data.append("birthday", birthday);
     console.log([...data.entries()]);
+
     const config = {
       headers:{'Content-Type': 'multipart/form-data'},
     }
+    
     axios.post(`${baseApiURL}/users`,data, config)
     .then(response =>{
       console.log('ユーザー新規作成完了'+ response.data);
