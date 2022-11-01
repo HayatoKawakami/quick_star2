@@ -16,7 +16,17 @@ export const LoggedInStatusProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // jsxでの表示の条件分岐のために定義
+  const [logged_in, setLogged_in] = useState(false);
+
   const { baseApiURL } = useConstContext();
+
+  const saveJSON = () => {
+    localStorage.setItem("user", "これはローカルストレージのテスト");
+  }
+  const loadJSON = () => {
+    localStorage.getItem("user");
+  }
 
   const Login = (event) => {
 
@@ -32,7 +42,7 @@ export const LoggedInStatusProvider = ({ children }) => {
       console.log("res", response);
       if (response.data.logged_in){
         handleLogin();
-        setUser(response.data.user)
+        setUser(response.data.user);
       } else {
         handleLoginError();
       }
@@ -43,9 +53,26 @@ export const LoggedInStatusProvider = ({ children }) => {
     event.preventDefault();
   }
 
-  const handleLogin = () => {
-    setLoggedInStatus('ログイン中');
+  const Logout = () => {
+    axios.delete(`${baseApiURL}/logout`)
+    .then(response => {
+      console.log("user", response.data);
+      handleLogout();
+      setUser({});
+    })
   }
+
+  const handleLogin = () => {
+    setLoggedInStatus("ログイン中");
+    setLogged_in(true);
+  }
+
+  const handleLogout = () => {
+    setLoggedInStatus("未ログイン");
+    setLogged_in(false);
+    setUser({});
+  }
+
   const handleLoginError = () => {
     setLoggedInStatus('ログイン失敗');
   }
@@ -53,6 +80,7 @@ export const LoggedInStatusProvider = ({ children }) => {
   useEffect(() => {
     checkLoginStatus();
   },[])
+  
 
   const checkLoginStatus = () => {
     axios.get(`${baseApiURL}/logged_in`,
@@ -62,21 +90,15 @@ export const LoggedInStatusProvider = ({ children }) => {
     .then(response => {
       console.log("ログイン状況", response.data);
       if (response.data.logged_in){
-        UserBox();
+        setLoggedInStatus("ログイン中");
+        setUser(response.data.user);
+      } else if (!response.data.logged_in) {
+        setLoggedInStatus("未ログイン");
+        setUser({});
       }
     })
     .catch(error => {
       console.log("ログインエラー", error);
-      setLoggedInStatus("未ログイン");
-    })
-  }
-
-  const Logout = () => {
-    axios.delete(`${baseApiURL}/logout`)
-    .then(response => {
-      console.log("user", response.data);
-      setLoggedInStatus("未ログイン");
-      setUser({});
     })
   }
 
@@ -94,6 +116,7 @@ export const LoggedInStatusProvider = ({ children }) => {
     setPassword,
     Login,
     Logout,
+    logged_in,
   }
 
   return(

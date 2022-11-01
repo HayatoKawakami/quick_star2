@@ -1,6 +1,19 @@
 * {
   list-style: none;
   text-decoration: none;
+  margin: 0;
+}
+
+.menu {
+  padding: 30px;
+}
+.status-bar {
+  background-color: rgb(244, 244, 244);
+  padding: 30px;
+}
+
+.container {
+  padding: 30px;
 }
 .user-icon {
   width: 100px;
