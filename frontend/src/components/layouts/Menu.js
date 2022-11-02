@@ -5,7 +5,7 @@ import { useLoggedInStatusContext } from "../../contexts/LoginContext";
 export const Menu = () => {
 
   const baseURL = "http://localhost:3000";
-  const { user, Logout, loggedInStatus, logged_in } = useLoggedInStatusContext();
+  const { user, Logout, logged_in } = useLoggedInStatusContext();
 
   const LoginAndLogoutBox = () => {
     if (logged_in === true) {
@@ -19,6 +19,7 @@ export const Menu = () => {
             </div>
           </Link>
           <p className="btn red-btn" onClick={Logout}>ログアウト</p>
+          <p>ログイン状態：ログイン中</p>
         </>
       )
     } else {
@@ -27,6 +28,7 @@ export const Menu = () => {
         <>
           <Link to="users/sign_up">ユーザー新規登録</Link>
           <Link className="btn blue-btn" to="login">ログイン</Link>
+          <p>ログイン状態：未ログイン</p>
         </>
       );
     }
@@ -38,7 +40,6 @@ export const Menu = () => {
       <Link to="/">HOME</Link>
       <br />
       {LoginAndLogoutBox()}
-      {`ログイン状態: ${loggedInStatus}`}
     </div>
   );
 }
