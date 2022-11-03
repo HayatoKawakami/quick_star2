@@ -12,7 +12,7 @@ export const Menu = () => {
       // ログイン時のメニュー
       return (
         <>
-          <Link to={`users/${user.id}`}>
+          <Link to={`users/profile`}>
             <div className="menu-user-box">
               <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
               <p>{user.name}</p>

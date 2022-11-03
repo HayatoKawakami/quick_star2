@@ -13,7 +13,7 @@ export const UserNew = () => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
 
-  const { handleLogin, setUser } = useLoggedInStatusContext();
+  const { setUser } = useLoggedInStatusContext();
 
   const { baseApiURL } = useConstContext();
 
@@ -56,7 +56,6 @@ export const UserNew = () => {
     axios.post(`${baseApiURL}/users`,data, config)
     .then(response =>{
       console.log('ユーザー新規作成完了'+ response.data);
-      handleLogin();
       setUser(response.data.user);
       event.preventDefault();
       // resetValue();

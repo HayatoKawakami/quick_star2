@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       get 'profile', to: 'users#show'
-      get '/edit/profile', to: 'users#edit'
+      get '/profile/edit', to: 'users#edit'
       get 'sign_up', to: 'users#new'
 
       post 'login', to: 'sessions#login'

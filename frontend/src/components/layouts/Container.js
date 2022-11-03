@@ -15,8 +15,8 @@ export const Container = () => {
           <Route path="/" element={<Home />} />
           <Route path="users">
             <Route path="sign_up" element={<UserNew />} />
-            <Route path=":userId" element={<UserProfile />} />
-            <Route path=":userId/edit" element={<UserEdit />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="profile/edit" element={<UserEdit />} />
           </ Route>
             <Route path="login" element={<LoginForm />} />
           <Route path="*" element={<NotFound />} />

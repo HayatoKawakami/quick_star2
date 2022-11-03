@@ -8,8 +8,8 @@ export const useConstContext = () => {
 
 export const ConstContextProvider = ({children}) => {
 
-  const baseURL = "http://localhost:3000/"
-  const baseApiURL = "http://localhost:3000/api/v1/"
+  const baseURL = "http://localhost:3000"
+  const baseApiURL = "http://localhost:3000/api/v1"
 
   const value = {
     baseURL,
