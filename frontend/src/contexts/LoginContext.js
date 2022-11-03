@@ -117,6 +117,8 @@ export const LoggedInStatusProvider = ({ children }) => {
     Login,
     Logout,
     logged_in,
+    saveJSON,
+    loadJSON,
   }
 
   return(

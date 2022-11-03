@@ -1,23 +1,14 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { useConstContext } from "../../../contexts/ConstContext";
+import { useLoggedInStatusContext } from "../../../contexts/LoginContext";
 
 export const UserProfile = () => {
 
-
-  const { baseURL } = useConstContext();
-  const { userId } = useParams();
-  const [ user, setUser ] = useState([]);
-
-  useEffect(()=>{
-    axios.get(`${baseURL}/api/v1/users/${userId}`)
-    .then((response)=>{
-      setUser(response.data);
-    })
-   }, [])
+  const { baseURL, baseApiURL } = useConstContext();
+  const { user } = useLoggedInStatusContext();
 
   const userSex = () => {
     if (user.sex === 1 ) {
