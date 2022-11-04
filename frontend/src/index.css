@@ -21,21 +21,27 @@
   border-radius: 100%;
 }
 
+.menu-box {
+  width: 200px;
+}
 .menu-user-box {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  color: white;
+  background-color: rgb(154, 211, 68);
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-.menu-user-icon { 
-  width: 30px;
-  height: 30px;
+.menu-user-icon {
+  width: 25px;
+  height: 25px;
   border-radius: 100%;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .btn {
-  width: 100px;
   padding: 5px 20px;
   border-radius: 5px;
 
@@ -45,6 +51,11 @@
 }
 
 .blue-btn {
+  color: white;
+  background-color: rgb(3, 103, 217);
+}
+
+.green-btn {
   color: white;
   background-color: rgb(3, 217, 146);
 }

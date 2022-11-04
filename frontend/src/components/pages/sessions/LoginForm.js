@@ -1,12 +1,17 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 
 export const LoginForm = () => {
 
-  const { email, setEmail, password, setPassword, Login } = useLoggedInStatusContext();
+  const { email, setEmail, password, setPassword, Login, loadJSON } = useLoggedInStatusContext();
 
   const handleChangeEmail = (e) => { setEmail(e.target.value); }
   const handleChangePassword = (e) => { setPassword(e.target.value); }
+
+  if (loadJSON("logged_in") === true) {
+    return <Navigate replace to="/users/profile"/>;
+  }
 
   return(
     <>

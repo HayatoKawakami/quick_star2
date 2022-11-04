@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { Navigate } from 'react-router-dom';
 
 export const UserEdit = () => {
 
@@ -11,9 +12,9 @@ export const UserEdit = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(user.password); //初期値がないと警告がでる
+  const [password, setPassword] = useState('0000'); //初期値がないと警告がでる
   const [image, setImage] = useState('')
-  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${loadJSON("user").id}/icon.jpg`);
+  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${loadJSON("user").id}/icon.jpg?20221101`);
 
   useEffect(()=> {
     axios.get(`${baseApiURL}/users/${loadJSON("user").id}`)
@@ -21,7 +22,6 @@ export const UserEdit = () => {
       console.log(response.data);
       setName(response.data.name);
       setEmail(response.data.email);
-      setPassword(response.data.password);
     })
   },[user])
 
@@ -66,6 +66,11 @@ export const UserEdit = () => {
       saveJSON("user", response.data);
       setUser(response.data);
     })
+  }
+
+  // 権限なしのリダイレクト
+  if (loadJSON("logged_in") === false) {
+    return <Navigate replace to="/login"/>
   }
 
   return(
