@@ -1,4 +1,5 @@
 import React, { useState,useEffect, createContext, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 import { useConstContext } from "./ConstContext";
@@ -55,6 +56,10 @@ export const LoggedInStatusProvider = ({ children }) => {
         saveJSON("logged_in", true);
         setUser(response.data.user);
         saveJSON("user", response.data.user);
+        setTimeout(()=>{
+          return <Navigate replace to="/users/profile"/>;
+        },1000)
+        
       } else {
         handleLoginError();
       }
@@ -62,6 +67,7 @@ export const LoggedInStatusProvider = ({ children }) => {
     .catch(error => {
       console.log("ログイン処理エラー", error);
     })
+    
     event.preventDefault();
   }
 
@@ -78,8 +84,9 @@ export const LoggedInStatusProvider = ({ children }) => {
 
   // ログインできなかった時の処理
   const handleLoginError = () => {
-    console.log("ログイン失敗");
+    console.log("メールアドレス、またはパスワードが間違っています");
   }
+
 
   // レンダリングするたびにrailsの「logged_in?」メソッドを使ってログインをしているかのチェックをする
   useEffect(() => {
@@ -117,6 +124,7 @@ export const LoggedInStatusProvider = ({ children }) => {
     Login,
     Logout,
     logged_in,
+    setLogged_in,
     saveJSON,
     loadJSON,
   }

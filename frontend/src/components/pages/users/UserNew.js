@@ -1,4 +1,5 @@
-import React,  { useState } from "react";
+import React,  { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 import { useLoggedInStatusContext } from "../../../contexts/LoginContext";
@@ -13,7 +14,7 @@ export const UserNew = () => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
 
-  const { setUser } = useLoggedInStatusContext();
+  const { setUser, setLogged_in, saveJSON, loadJSON, logged_in } = useLoggedInStatusContext();
 
   const { baseApiURL } = useConstContext();
 
@@ -57,16 +58,25 @@ export const UserNew = () => {
     .then(response =>{
       console.log('ユーザー新規作成完了'+ response.data);
       setUser(response.data.user);
+      setLogged_in(true);
+      saveJSON("logged_in", true)
+      saveJSON("user", response.data.user);
       event.preventDefault();
+      resetValue();
+      
       // resetValue();
     }).catch(error =>{
       console.log("ユーザー新規作成できません", error)
     })
   }
+  // 権限なし時のリダイレクト
+  if (loadJSON("logged_in") === true) {
+    return <Navigate replace to="/users/profile"/>;
+  }
+
 
   return(
     <div>
-
       <label htmlFor="name">名前</label>
       <br/>
       <input
@@ -116,8 +126,7 @@ export const UserNew = () => {
       <br/>
 
       <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
-      
-      
+
       <div className="radio">
         <label htmlFor="sex">性別</label>
         <br/>
