@@ -9,6 +9,7 @@ export const LoginForm = () => {
   const handleChangeEmail = (e) => { setEmail(e.target.value); }
   const handleChangePassword = (e) => { setPassword(e.target.value); }
 
+  // 権限なし時のリダイレクト
   if (loadJSON("logged_in") === true) {
     return <Navigate replace to="/users/profile"/>;
   }

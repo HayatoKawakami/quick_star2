@@ -29,7 +29,6 @@ export const UserEdit = () => {
   const handleChangeEmail = (e) =>{ setEmail(e.target.value); }
 
   const getImage = (event) => {
-    
     if (event.target.files) {
       // ファイル選択がtrueの時の処理
       const img = event.target.files[0];
@@ -65,6 +64,9 @@ export const UserEdit = () => {
       console.log("送信したデータ" + response.data);
       saveJSON("user", response.data);
       setUser(response.data);
+    })
+    .catch(error => {
+      console.log("ユーザー情報更新エラー", error);
     })
   }
 

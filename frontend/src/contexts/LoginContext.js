@@ -56,10 +56,6 @@ export const LoggedInStatusProvider = ({ children }) => {
         saveJSON("logged_in", true);
         setUser(response.data.user);
         saveJSON("user", response.data.user);
-        setTimeout(()=>{
-          return <Navigate replace to="/users/profile"/>;
-        },1000)
-        
       } else {
         handleLoginError();
       }
@@ -67,7 +63,6 @@ export const LoggedInStatusProvider = ({ children }) => {
     .catch(error => {
       console.log("ログイン処理エラー", error);
     })
-    
     event.preventDefault();
   }
 
