@@ -2,6 +2,7 @@
   list-style: none;
   text-decoration: none;
   margin: 0;
+  padding: 0;
 }
 
 .menu {
@@ -21,8 +22,34 @@
   border-radius: 100%;
 }
 
+.menu {
+  
+}
+
+.menu-btn {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  cursor: pointer;
+}
+
 .menu-box {
-  width: 200px;
+  width: 180px;
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 100px;
+  padding: 20px;
+}
+
+.menu-active {
+  transform: translateX(30px);
+  transition: all 0.5s 0s ease;
+}
+.menu-hide {
+  transform: translateX(-220px);
+  transition: all 0.5s 0s ease;
 }
 .menu-user-box {
   display: flex;
@@ -41,10 +68,17 @@
   margin-right: 5px;
 }
 
+.menu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+}
+
 .btn {
   padding: 5px 20px;
   border-radius: 5px;
-
   display: flex;
   justify-content: center;
   cursor: pointer;
