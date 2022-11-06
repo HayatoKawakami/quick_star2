@@ -5,6 +5,7 @@ import { Menu } from "./components/layouts/Menu";
 import { Container } from "./components/layouts/Container";
 import { LoggedInStatusProvider } from "./contexts/LoginContext";
 import { ConstContextProvider } from "./contexts/ConstContext";
+import { ItemContextProvider } from "./contexts/ItemContext";
 
 
 export const App = () => {
@@ -14,7 +15,9 @@ export const App = () => {
             <LoggedInStatusProvider>
                 <Menu />
                 <StatusBar />
-                <Container />
+                <ItemContextProvider>
+                    <Container />
+                </ItemContextProvider>
             </LoggedInStatusProvider>
         </ConstContextProvider>
     );

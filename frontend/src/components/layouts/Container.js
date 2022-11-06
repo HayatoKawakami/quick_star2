@@ -6,6 +6,8 @@ import { UserProfile } from "../pages/users/UserProfile";
 import { UserEdit } from "../pages/users/UserEdit";
 import { NotFound } from "../layouts/NotFound"
 import { LoginForm } from "../pages/sessions/LoginForm";
+import { ItemIndex } from "../pages/items";
+import { ItemShow } from "../pages/items/show";
 
 export const Container = () => {
     return(
@@ -20,6 +22,11 @@ export const Container = () => {
           </ Route>
             <Route path="login" element={<LoginForm />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="items" >
+            <Route path="" element={<ItemIndex/>} />
+            <Route path=":itemId" element={<ItemShow/>}/>
+          </ Route>
+          
         </Routes>
       </div>
     );
