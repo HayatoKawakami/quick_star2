@@ -10,9 +10,9 @@ export const LoginForm = () => {
   const handleChangePassword = (e) => { setPassword(e.target.value); }
 
   // 権限なし時のリダイレクト
-  if (loadJSON("logged_in") === true) {
-    return <Navigate replace to="/users/profile"/>;
-  }
+  // if (loadJSON("logged_in") === true) {
+  //   return <Navigate replace to="/users/profile"/>;
+  // }
 
   return(
     <>

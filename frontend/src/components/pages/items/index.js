@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 
 export const ItemIndex = () => {
   const { items } = useItemContext();
-  console.log(items);
 
   useEffect(()=>{
-  })
 
+  },[items])
 
   return(
     <div>
@@ -23,6 +22,7 @@ export const ItemIndex = () => {
             );
           } )}
       </ul>
+      <Link to="/items/new">欲しいもの追加</Link>
     </div>
   );
 }
