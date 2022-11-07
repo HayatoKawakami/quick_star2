@@ -1,6 +1,7 @@
 module Api
   module V1
     class ItemsController < ApplicationController
+      wrap_parameters :item, only: %i[name price user_id]
       before_action :set_item, only: %i[show update destroy]
       def index
         items = Item.where(user_id: 1)
@@ -14,7 +15,7 @@ module Api
       def create
         @item = Item.new(item_params)
         if @item.save!
-          render json: { status: created, item: @item }
+          render json: { status: :created, item: @item }
         else
           render json: { status: 500 }
         end
@@ -43,7 +44,7 @@ module Api
       end
 
       def item_params
-        params.require(:item).permit(:name, :price)
+        params.require(:item).permit(:name, :price, :user_id)
       end
     end
   end

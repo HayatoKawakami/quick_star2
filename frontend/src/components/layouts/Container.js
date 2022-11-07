@@ -8,6 +8,7 @@ import { NotFound } from "../layouts/NotFound"
 import { LoginForm } from "../pages/sessions/LoginForm";
 import { ItemIndex } from "../pages/items";
 import { ItemShow } from "../pages/items/show";
+import { ItemNew } from "../pages/items/new";
 
 export const Container = () => {
     return(
@@ -25,6 +26,7 @@ export const Container = () => {
           <Route path="items" >
             <Route path="" element={<ItemIndex/>} />
             <Route path=":itemId" element={<ItemShow/>}/>
+            <Route path="new" element={<ItemNew/>}/>
           </ Route>
           
         </Routes>
