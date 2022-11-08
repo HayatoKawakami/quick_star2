@@ -4,7 +4,7 @@ module Api
       wrap_parameters :item, only: %i[name price user_id]
       before_action :set_item, only: %i[show update destroy]
       def index
-        items = Item.where(user_id: 1)
+        items = Item.where(user_id: session[:user_id])
         render json: items
       end
 

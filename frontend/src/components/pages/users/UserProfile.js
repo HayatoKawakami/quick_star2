@@ -26,7 +26,7 @@ export const UserProfile = () => {
   return(
     <div>
       <h2>「{user.name}」の編集画面</h2>
-      <img src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg?20221101`} className="user-icon" alt="" />
+      <img src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} className="user-icon" alt="" />
       <p>名前：{user.name}</p>
       <p>性別：{userSex()}</p>
       <p>誕生日：{user.birthday}</p>

@@ -56,6 +56,7 @@ export const LoggedInStatusProvider = ({ children }) => {
         saveJSON("logged_in", true);
         setUser(response.data.user);
         saveJSON("user", response.data.user);
+        
       } else {
         handleLoginError();
       }
