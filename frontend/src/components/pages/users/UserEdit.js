@@ -14,7 +14,7 @@ export const UserEdit = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('0000'); //初期値がないと警告がでる
   const [image, setImage] = useState('')
-  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${loadJSON("user").id}/icon.jpg?20221101`);
+  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${loadJSON("user").id}/icon.jpg`);
 
   useEffect(()=> {
     axios.get(`${baseApiURL}/users/${loadJSON("user").id}`)
