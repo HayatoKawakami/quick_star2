@@ -1,6 +1,6 @@
 import React, { useState,useEffect, createContext, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../lib/axios";
 
 import { useConstContext } from "./ConstContext";
 
@@ -56,7 +56,6 @@ export const LoggedInStatusProvider = ({ children }) => {
         saveJSON("logged_in", true);
         setUser(response.data.user);
         saveJSON("user", response.data.user);
-        
       } else {
         handleLoginError();
       }
@@ -67,6 +66,7 @@ export const LoggedInStatusProvider = ({ children }) => {
     event.preventDefault();
   }
 
+
   // ログアウト
   const Logout = () => {
     axios.delete(`${baseApiURL}/logout`)
@@ -75,6 +75,7 @@ export const LoggedInStatusProvider = ({ children }) => {
       saveJSON("logged_in", false);
       loadJSON("logged_in");
       setUser({});
+      console.log("ログアウト完了")
     })
   }
 
@@ -104,7 +105,7 @@ export const LoggedInStatusProvider = ({ children }) => {
       }
     })
     .catch(error => {
-      console.log("ログインエラー", error);
+      console.log("ログイン処理エラー", error);
     })
   }
 

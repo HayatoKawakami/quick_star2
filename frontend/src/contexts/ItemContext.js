@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-import axios from "axios";
+import axios from "../../lib/axios";
 import { useConstContext } from "./ConstContext";
+import { useLoggedInStatusContext } from "./LoginContext";
 
 const ItemContext = createContext();
 
@@ -9,9 +10,11 @@ export const useItemContext = () => {
 }
 
 export const ItemContextProvider = ({children}) => {
-  const [items, setItems] = useState({})
+  const [items, setItems] = useState({});
+  const [item, setItem] = useState({});
 
   const { baseApiURL } = useConstContext();
+  const { logged_in } = useLoggedInStatusContext();
 
   const ItemsSet = () => {
     axios.get(`${baseApiURL}/items`)
@@ -26,10 +29,12 @@ export const ItemContextProvider = ({children}) => {
 
   useEffect(() => {
     ItemsSet();
-  },[])
+  },[logged_in, item])
 
   const value = {
     items,
+    item,
+    setItem
   }
 
   return(

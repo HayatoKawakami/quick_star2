@@ -1,6 +1,6 @@
 import React,  { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../../lib/axios";
 
 import { useLoggedInStatusContext } from "../../../contexts/LoginContext";
 import { useConstContext } from "../../../contexts/ConstContext";

@@ -5,10 +5,10 @@ module Api
       def login
         @user = User.find_by(email: session_params[:email].downcase)
         if @user && @user.authenticate(session_params[:password])
-          session[:user_id] = @user.id
+          log_in(@user)
           render json: { logged_in: true, user: @user }
         else
-          render json: { status: 401, errors: ['認証に失敗しました'] }
+          render json: { status: 401, errors: ['メールアドレス、またはパスワードが間違っています'] }
         end
       end
 

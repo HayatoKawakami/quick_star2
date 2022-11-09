@@ -1,6 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from "react-router-dom";
 
 import { useConstContext } from "../../../contexts/ConstContext";
 import { useLoggedInStatusContext } from "../../../contexts/LoginContext";

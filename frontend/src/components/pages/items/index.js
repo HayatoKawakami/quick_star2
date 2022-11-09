@@ -1,13 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 
 export const ItemIndex = () => {
   const { items } = useItemContext();
+  const { loadJSON } = useLoggedInStatusContext();
 
   useEffect(()=>{
+  },[])
 
-  },[items])
+// ログインしていなければログイン画面にリダイレクト
+  if (loadJSON("logged_in") === false) {
+    return <Navigate replace to="/login"/>
+  }
+  
 
   return(
     <div>
