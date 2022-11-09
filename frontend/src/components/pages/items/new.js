@@ -1,12 +1,16 @@
-import axios from 'axios';
+import axios from '../../../../lib/axios';
 import React, { useEffect, useState } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { useItemContext } from '../../../contexts/ItemContext';
+
+import { Navigate } from 'react-router-dom';
 
 export const ItemNew = () => {
 
   const { baseApiURL } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
+  const { item, setItem } = useItemContext();
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -41,6 +45,7 @@ export const ItemNew = () => {
     axios.post(`${baseApiURL}/items`, data, config)
     .then(response => {
       console.log("欲しいもの追加完了",response.data);
+      return <Navigate replace to="items"/>
     })
     .catch(error => {
       console.log("欲しいもの追加処理エラー", error);
@@ -49,7 +54,12 @@ export const ItemNew = () => {
 
   useEffect(()=>{
     setUserId();
-  })
+  },[])
+
+  // ログインしていなければログイン画面にリダイレクト
+  if (loadJSON("logged_in") === false){
+    return <Navigate replace to="login" />
+  }
 
   return(
     <>

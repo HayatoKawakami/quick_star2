@@ -9,6 +9,7 @@ import { LoginForm } from "../pages/sessions/LoginForm";
 import { ItemIndex } from "../pages/items";
 import { ItemShow } from "../pages/items/show";
 import { ItemNew } from "../pages/items/new";
+import { ItemEdit } from "../pages/items/edit";
 
 export const Container = () => {
     return(
@@ -21,11 +22,12 @@ export const Container = () => {
             <Route path="profile" element={<UserProfile />} />
             <Route path="profile/edit" element={<UserEdit />} />
           </ Route>
-            <Route path="login" element={<LoginForm />} />
+          <Route path="login" element={<LoginForm />} />
           <Route path="*" element={<NotFound />} />
           <Route path="items" >
             <Route path="" element={<ItemIndex/>} />
             <Route path=":itemId" element={<ItemShow/>}/>
+            <Route path=":itemId/edit" element={<ItemEdit/>} />
             <Route path="new" element={<ItemNew/>}/>
           </ Route>
           

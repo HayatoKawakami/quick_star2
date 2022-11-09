@@ -1,15 +1,13 @@
 module Api
   module V1
     class ApplicationController < ActionController::API
-      protect_from_forgery with: :expection
-      skip_before_action :verify_authenticity_token
-      # def log_in(user)
-      #   session[:user_id] = user.id
-      # end
+      def log_in(user)
+        session[:user_id] = user.id
+      end
 
-      # def current_user
-      #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
-      # end
+      def current_user
+        @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      end
     end
   end
 end
