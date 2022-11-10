@@ -6,6 +6,7 @@ import { Container } from "./components/layouts/Container";
 import { LoggedInStatusProvider } from "./contexts/LoginContext";
 import { ConstContextProvider } from "./contexts/ConstContext";
 import { ItemContextProvider } from "./contexts/ItemContext";
+import { CostContextProvider } from "./contexts/CostContext";
 
 
 export const App = () => {
@@ -16,7 +17,10 @@ export const App = () => {
                 <Menu />
                 <StatusBar />
                 <ItemContextProvider>
-                    <Container />
+                    <CostContextProvider>
+                        <Container />
+                    </CostContextProvider>
+                    
                 </ItemContextProvider>
             </LoggedInStatusProvider>
         </ConstContextProvider>

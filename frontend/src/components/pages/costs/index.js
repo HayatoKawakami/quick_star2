@@ -1,0 +1,48 @@
+import React, { useState, useEffect } from 'react';
+import { useConstContext } from '../../../contexts/ConstContext';
+import axios from '../../../../lib/axios';
+import { Link } from 'react-router-dom';
+
+
+export const CostIndex = () => {
+  const { baseApiURL } = useConstContext();
+
+  const [costs, setCosts] = useState({});
+
+  const SetCostIndex = () => {
+    axios.get(`${baseApiURL}/costs`)
+    .then(response => {
+      console.log("costs取得完了", response.data);
+      setCosts(response.data)
+    })
+    .catch(error => {
+      console.log("costs取得処理エラー", error);
+    })
+  }
+
+
+
+  useEffect(() => {
+    SetCostIndex();
+
+  }, [])
+
+  return(
+    <>
+      <ul>
+        {Object.values(costs).map((cost, index) => {
+          return( 
+            <li key={index}>
+              <p>{cost.name}</p>
+              <p>{cost.price} 円</p>
+            </li>);
+        })}
+      </ul>
+      <p>合計金額：{Object.values(costs).reduce((sum, value) => {
+      return sum + value.price;
+    },0)} 円</p>
+      <Link to="/costs/new">追加する</Link>
+      <Link to="/costs/edit">変更する</Link>
+    </>
+  )
+} 

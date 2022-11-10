@@ -10,6 +10,9 @@ import { ItemIndex } from "../pages/items";
 import { ItemShow } from "../pages/items/show";
 import { ItemNew } from "../pages/items/new";
 import { ItemEdit } from "../pages/items/edit";
+import { CostIndex } from "../pages/costs";
+import { CostNew } from "../pages/costs/new";
+import { CostEdit } from "../pages/costs/edit";
 
 export const Container = () => {
     return(
@@ -30,6 +33,11 @@ export const Container = () => {
             <Route path=":itemId/edit" element={<ItemEdit/>} />
             <Route path="new" element={<ItemNew/>}/>
           </ Route>
+          <Route path="costs">
+            <Route path="" element={<CostIndex/>}/>
+            <Route path="new" element={<CostNew/>} />
+            <Route path="edit" element={<CostEdit/>}/>
+          </Route>
           
         </Routes>
       </div>
@@ -37,3 +45,4 @@ export const Container = () => {
 }
 
 
+ 
