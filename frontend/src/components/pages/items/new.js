@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 
 export const ItemNew = () => {
 
-  const { baseApiURL } = useConstContext();
+  const { baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
   const { item, setItem } = useItemContext();
 
@@ -45,7 +45,7 @@ export const ItemNew = () => {
     axios.post(`${baseApiURL}/items`, data, config)
     .then(response => {
       console.log("欲しいもの追加完了",response.data);
-      return <Navigate replace to="items"/>
+      navigate(`/items/${response.data.item.id}`);
     })
     .catch(error => {
       console.log("欲しいもの追加処理エラー", error);

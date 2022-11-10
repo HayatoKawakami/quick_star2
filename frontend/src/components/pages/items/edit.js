@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 
 export const ItemEdit = () => {
   const [item, setItem] = useState({});
@@ -10,7 +11,9 @@ export const ItemEdit = () => {
   const [price, setPrice] = useState('');
 
   const { baseApiURL } = useConstContext();
+  const { loadJSON } = useLoggedInStatusContext();
   const { itemId } = useParams();
+  const navigate = useNavigate();
 
 
   const handleChangeName = (e) => {
@@ -29,11 +32,15 @@ export const ItemEdit = () => {
     axios.put(`${baseApiURL}/items/${itemId}`, data)
     .then(response => {
       console.log("欲しいもの情報更新完了", response.data);
+      navigate(`/items/${itemId}`)
     })
     .catch(error => {
       console.log("欲しいもの情報更新処理エラー", error);
     })
+    
   }
+
+  
 
   const SetItem = () => {
     axios.get(`${baseApiURL}/items/${itemId}`)
@@ -48,6 +55,10 @@ export const ItemEdit = () => {
   useEffect(() => {
     SetItem();
   },[])
+
+  if (loadJSON("logged_in") === false){
+    return <Navigate replace to="/login" />
+  }
 
 
   return(

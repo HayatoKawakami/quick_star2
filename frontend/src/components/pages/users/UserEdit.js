@@ -7,23 +7,16 @@ import { Navigate } from 'react-router-dom';
 
 export const UserEdit = () => {
 
-  const { baseURL, baseApiURL } = useConstContext();
-  const { user, setUser, saveJSON, loadJSON } = useLoggedInStatusContext();
+  const { baseURL, baseApiURL, navigate } = useConstContext();
+  const { user, setUser, Logout, saveJSON, loadJSON } = useLoggedInStatusContext();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('0000'); //初期値がないと警告がでる
   const [image, setImage] = useState('')
-  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${loadJSON("user").id}/icon.jpg`);
+  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${user.id}/icon.jpg`);
 
-  useEffect(()=> {
-    axios.get(`${baseApiURL}/users/${loadJSON("user").id}`)
-    .then((response) => {
-      console.log(response.data);
-      setName(response.data.name);
-      setEmail(response.data.email);
-    })
-  },[user])
+  
 
   const handleChangeName = (e) =>{ setName(e.target.value); }
   const handleChangeEmail = (e) =>{ setEmail(e.target.value); }
@@ -64,11 +57,33 @@ export const UserEdit = () => {
       console.log("送信したデータ" + response.data);
       saveJSON("user", response.data);
       setUser(response.data);
+      navigate("users/profile");
     })
     .catch(error => {
       console.log("ユーザー情報更新エラー", error);
     })
   }
+
+  const UserDestroy = () => {
+    axios.delete(`${baseApiURL}/users/${user.id}`)
+    .then(response => {
+      console.log("アカウント削除完了", response.data);
+      Logout();
+      // navigate("users/sign_up");
+    })
+    .catch(error => {
+      console.log("アカウント削除処理エラー", error)
+    })
+  }
+
+  useEffect(()=> {
+    axios.get(`${baseApiURL}/users/${loadJSON("user").id}`)
+    .then((response) => {
+      console.log(response.data);
+      setName(response.data.name);
+      setEmail(response.data.email);
+    })
+  },[])
 
   // 権限なしのリダイレクト
   if (loadJSON("logged_in") === false) {
@@ -107,6 +122,7 @@ export const UserEdit = () => {
       <input type="hidden" name="password" value={password} />
 
       <input type="button" onClick={Send} value="更新する" />
+      <button onClick={UserDestroy}>アカウント削除</button>
     </>
   );
 }
