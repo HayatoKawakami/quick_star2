@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../../lib/axios";
 import { useConstContext } from "./ConstContext";
 import { useLoggedInStatusContext } from "./LoginContext";
@@ -15,6 +16,8 @@ export const ItemContextProvider = ({children}) => {
 
   const { baseApiURL } = useConstContext();
   const { logged_in } = useLoggedInStatusContext();
+
+  const navigate = useNavigate();
 
   const ItemsSet = () => {
     axios.get(`${baseApiURL}/items`)
@@ -34,7 +37,8 @@ export const ItemContextProvider = ({children}) => {
   const value = {
     items,
     item,
-    setItem
+    setItem,
+    navigate,
   }
 
   return(

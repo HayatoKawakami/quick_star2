@@ -1,5 +1,5 @@
 import React, { useState,useEffect, createContext, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "../../lib/axios";
 
 import { useConstContext } from "./ConstContext";
@@ -21,7 +21,7 @@ export const LoggedInStatusProvider = ({ children }) => {
   const [logged_in, setLogged_in] = useState(false);
 
   // ConstCotext
-  const { baseApiURL } = useConstContext();
+  const { baseApiURL, navigate } = useConstContext();
 
   // リロードしてもstateを保持するためのコード
   const saveJSON = (key, value) => {
@@ -36,6 +36,10 @@ export const LoggedInStatusProvider = ({ children }) => {
     } else {
       return data;
     }
+  }
+
+  const removeLocalStorage = (key) => {
+    localStorage.removeItem(key);
   }
 
   // ログイン
@@ -56,6 +60,7 @@ export const LoggedInStatusProvider = ({ children }) => {
         saveJSON("logged_in", true);
         setUser(response.data.user);
         saveJSON("user", response.data.user);
+        navigate("/");
       } else {
         handleLoginError();
       }
@@ -73,9 +78,10 @@ export const LoggedInStatusProvider = ({ children }) => {
     .then(() => {
       setLogged_in(false);
       saveJSON("logged_in", false);
-      loadJSON("logged_in");
-      setUser({});
-      console.log("ログアウト完了")
+      removeLocalStorage("user");
+      console.log("ログアウト完了");
+      setUser('');
+      navigate("/login");
     })
   }
 
@@ -124,6 +130,8 @@ export const LoggedInStatusProvider = ({ children }) => {
     setLogged_in,
     saveJSON,
     loadJSON,
+    removeLocalStorage,
+    navigate,
   }
 
   return(

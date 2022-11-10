@@ -7,7 +7,7 @@ import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 
 export const ItemShow = () => {
 
-  const { baseApiURL } = useConstContext();
+  const { baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
   const { itemId }  = useParams();
 
@@ -21,6 +21,17 @@ export const ItemShow = () => {
     })
     .catch(error => {
       console.log("欲しいものデータ取得エラー", error);
+    })
+  }
+
+  const ItemDestroy = () => {
+    axios.delete(`${baseApiURL}/items/${itemId}}`)
+    .then(response => {
+      console.log("欲しいもの削除完了",response.data);
+      navigate("/items");
+    })
+    .catch(error => {
+      console.log("欲しいもの削除処理エラー", error);
     })
   }
 
@@ -38,6 +49,7 @@ export const ItemShow = () => {
       <p>商品名：{item.name}</p>
       <p>価格；{item.price} 円</p>
       <Link to="edit">変更</Link>
+      <button onClick={ItemDestroy}>削除</button>
     </>
   );
 }

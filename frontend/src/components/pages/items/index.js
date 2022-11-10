@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
 import { Link, Navigate } from 'react-router-dom';
 import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { useConstContext } from '../../../contexts/ConstContext';
 
 export const ItemIndex = () => {
   const { items } = useItemContext();

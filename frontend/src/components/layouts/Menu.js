@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom"
 import { useLoggedInStatusContext } from "../../contexts/LoginContext";
+import { useConstContext } from "../../contexts/ConstContext";
 import classNames from 'classnames';
 
 export const Menu = () => {
 
-  const baseURL = "http://localhost:3000";
+  const { baseURL } = useConstContext();
   const { user, Logout, logged_in } = useLoggedInStatusContext();
 
   const [active, setActive] = useState(false);

@@ -11,7 +11,7 @@ export const LoginForm = () => {
 
   
   if (loadJSON("logged_in") === true) {
-    return <Navigate replace to="/users/profile"/>;
+    return <Navigate replace to="/"/>;
   }
 
   return(

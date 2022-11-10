@@ -37,6 +37,7 @@ module Api
 
       def destroy
         if @user.destroy
+          reset_session
           render json: @user
         else
           render json: @user.errors

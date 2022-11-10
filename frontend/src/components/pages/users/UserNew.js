@@ -16,7 +16,7 @@ export const UserNew = () => {
 
   const { setUser, setLogged_in, saveJSON, loadJSON, logged_in } = useLoggedInStatusContext();
 
-  const { baseApiURL } = useConstContext();
+  const { baseApiURL, navigate } = useConstContext();
 
   const handleChangeName = (e) => { setName(e.target.value); }
   const handleChangeEmail = (e) => { setEmail(e.target.value); }
@@ -28,14 +28,6 @@ export const UserNew = () => {
     if (!e.target.files) return
     const img = e.target.files[0];
     setImage(img)
-  }
-
-  const resetValue = () => {
-    setName('')
-    setEmail('')
-    setPassword('')
-    setPasswordConfirmation('')
-    setSex('1')
   }
 
   const Send = (event) => {
@@ -62,16 +54,14 @@ export const UserNew = () => {
       saveJSON("logged_in", true)
       saveJSON("user", response.data.user);
       event.preventDefault();
-      resetValue();
-      
-      // resetValue();
+      navigate("/");
     }).catch(error =>{
       console.log("ユーザー新規作成できません", error)
     })
   }
   // 権限なし時のリダイレクト
   if (loadJSON("logged_in") === true) {
-    return <Navigate replace to="/users/profile"/>;
+    return <Navigate replace to="/"/>;
   }
 
 
