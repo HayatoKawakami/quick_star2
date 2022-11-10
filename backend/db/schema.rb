@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_04_222012) do
+ActiveRecord::Schema.define(version: 2022_11_10_011720) do
+
+  create_table "costs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_costs_on_user_id"
+  end
 
   create_table "items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -32,5 +41,6 @@ ActiveRecord::Schema.define(version: 2022_11_04_222012) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "costs", "users"
   add_foreign_key "items", "users"
 end

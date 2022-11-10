@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'logged_in', to: 'sessions#logged_in?'
 
       resources :items, only: %i[index show create update destroy]
+      resources :costs, only: %i[index create update destroy]
     end
   end
 end
