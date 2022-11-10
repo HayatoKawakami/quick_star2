@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :items
+  has_many :costs
 
   has_secure_password
   validates :name, presence: true
