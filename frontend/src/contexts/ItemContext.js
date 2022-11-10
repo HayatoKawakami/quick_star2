@@ -14,10 +14,8 @@ export const ItemContextProvider = ({children}) => {
   const [items, setItems] = useState({});
   const [item, setItem] = useState({});
 
-  const { baseApiURL } = useConstContext();
+  const { baseApiURL, navigate } = useConstContext();
   const { logged_in } = useLoggedInStatusContext();
-
-  const navigate = useNavigate();
 
   const ItemsSet = () => {
     axios.get(`${baseApiURL}/items`)

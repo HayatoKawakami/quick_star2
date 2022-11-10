@@ -34,7 +34,7 @@ export const Menu = () => {
           <ul className="menu-list">
             <Link className="menu-item" to={`/`}>ホーム</Link>
             <Link className="menu-item" to={`items`}>欲しいもの一覧</Link>
-            <Link className="menu-item" to={``}>固定費を管理</Link>
+            <Link className="menu-item" to={`costs`}>固定費を管理</Link>
             <Link className="menu-item" to={``}>設定</Link>
             <Link className="menu-item" to={``}>ライト/ダーク</Link>
             <Link className="menu-item" to={``}>ヘルプ</Link>
