@@ -36,7 +36,7 @@ export const Container = () => {
           <Route path="costs">
             <Route path="" element={<CostIndex/>}/>
             <Route path="new" element={<CostNew/>} />
-            <Route path="edit" element={<CostEdit/>}/>
+            <Route path=":costId/edit" element={<CostEdit/>}/>
           </Route>
           
         </Routes>

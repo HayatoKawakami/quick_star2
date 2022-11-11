@@ -1,10 +1,14 @@
 module Api
   module V1
     class CostsController < ApplicationController
-      before_action :set_cost, only: %i[update destroy]
+      before_action :set_cost, only: %i[show update destroy]
       def index
         costs = Cost.where(user_id: session[:user_id])
         render json: costs
+      end
+      
+      def show
+        render json: @cost
       end
 
       def create
