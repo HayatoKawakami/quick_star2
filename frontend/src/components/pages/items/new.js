@@ -15,6 +15,7 @@ export const ItemNew = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [user_id, setUser_id] = useState('');
+  const [image, setImage] = useState('');
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -32,8 +33,14 @@ export const ItemNew = () => {
     }
   }
 
+  const getImage = (e) => {
+    if (!e.target.files) return
+    const img = e.target.files[0];
+    setImage(img)
+  }
+
   const CreateItem = () => {
-    const data = {
+    const itemData = {
       name: name,
       price: price,
       user_id: user_id
@@ -42,7 +49,7 @@ export const ItemNew = () => {
     const config = {
       headers: {  'Content-Type': 'application/json'}
     }
-    axios.post(`${baseApiURL}/items`, data, config)
+    axios.post(`${baseApiURL}/items`, itemData, config)
     .then(response => {
       console.log("欲しいもの追加完了",response.data);
       navigate(`/items/${response.data.item.id}`);
@@ -50,6 +57,21 @@ export const ItemNew = () => {
     .catch(error => {
       console.log("欲しいもの追加処理エラー", error);
     })
+
+    // 新規作成時のitemIdはどうするか？
+    // const imageData = {
+    //   image: image,
+    //   item_id: itemId,
+    // }
+
+    // axios.post(`${baseApiURL}/images`, image)
+    // .then(response => {
+    //   console.log("欲しいもの画像追加完了", response.data);
+    // })
+    // .catch(error => {
+    //   console.log("欲しいもの画像追加処理エラー", error);
+    // })
+
   }
 
   useEffect(()=>{
@@ -78,6 +100,7 @@ export const ItemNew = () => {
               onChange={handleChangePrice}
       />
       <br />
+
 
       <input type="hidden" name="user_id" value={user_id} />
 
