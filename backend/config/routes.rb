@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
       resources :items, only: %i[index show create update destroy]
       resources :costs, only: %i[index show create update destroy]
+      resources :images, only: %i[index create destroy]
     end
   end
 end

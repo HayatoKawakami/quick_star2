@@ -10,6 +10,8 @@ export const ItemEdit = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
 
+  const [image, setImage] = useState('');
+
   const { baseApiURL } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
   const { itemId } = useParams();
@@ -23,13 +25,20 @@ export const ItemEdit = () => {
     setPrice(e.target.value);
   }
 
+  const getImage = (e) => {
+    if (!e.target.files) return
+    const img = e.target.files[0];
+    setImage(img)
+    console.log(img)
+  }
+
   const EditItem = () => {
-    const data = {
+    const itemData = {
       name: name,
       price: price,
     }
 
-    axios.put(`${baseApiURL}/items/${itemId}`, data)
+    axios.put(`${baseApiURL}/items/${itemId}`, itemData)
     .then(response => {
       console.log("欲しいもの情報更新完了", response.data);
       navigate(`/items/${itemId}`)
@@ -38,9 +47,22 @@ export const ItemEdit = () => {
       console.log("欲しいもの情報更新処理エラー", error);
     })
     
+    const imageData = new FormData();
+    imageData.append("image", image);
+    imageData.append("item_id", 3);
+
+    const config = {
+      headers:{'Content-Type': 'multipart/form-data'},
+    }
+    axios.post(`${baseApiURL}/images`, imageData, config)
+    .then(response => {
+      console.log("欲しいもの画像追加完了", response.data);
+    })
+    .catch(error => {
+      console.log("欲しいもの画像追加処理エラー", error);
+    })
   }
 
-  
 
   const SetItem = () => {
     axios.get(`${baseApiURL}/items/${itemId}`)
@@ -79,6 +101,8 @@ export const ItemEdit = () => {
         value={price}
         onChange={handleChangePrice}
       />
+      <br />
+      <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
       <br />
 
       <input type="button" onClick={EditItem} value="変更" />

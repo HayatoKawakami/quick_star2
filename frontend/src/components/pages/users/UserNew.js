@@ -24,6 +24,7 @@ export const UserNew = () => {
   const handleChangePasswordConfirmation = (e) => { setPasswordConfirmation(e.target.value); }
   const handleChangeSex = (e) => { setSex(e.target.value); }
   const handleBirthday = (e) => { setBirthday(e.target.value); }
+  
   const getImage = (e) => {
     if (!e.target.files) return
     const img = e.target.files[0];
