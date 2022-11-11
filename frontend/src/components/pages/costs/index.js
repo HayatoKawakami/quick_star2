@@ -35,6 +35,7 @@ export const CostIndex = () => {
             <li key={index}>
               <p>{cost.name}</p>
               <p>{cost.price} 円</p>
+              <Link to={`/costs/${cost.id}/edit`}>編集</Link>
             </li>);
         })}
       </ul>
@@ -42,7 +43,7 @@ export const CostIndex = () => {
       return sum + value.price;
     },0)} 円</p>
       <Link to="/costs/new">追加する</Link>
-      <Link to="/costs/edit">変更する</Link>
+
     </>
   )
 } 
