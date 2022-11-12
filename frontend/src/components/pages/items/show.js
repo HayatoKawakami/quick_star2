@@ -53,7 +53,7 @@ export const ItemShow = () => {
     ImageSet();
   },[])
 
-  
+  // uploads/image/image/2/icon.jpg
 
   // ログインしていなければログイン画面にリダイレクト
   if (loadJSON("logged_in") === false) {
@@ -62,11 +62,13 @@ export const ItemShow = () => {
 
   return(
     <>
-      <img src={`${baseURL}/uploads/image/image/${image.id}/icon.jpg`} alt="" />
+      <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
       <p>商品名：{item.name}</p>
       <p>価格；{item.price} 円</p>
       <Link to="edit">変更</Link>
       <button onClick={ItemDestroy}>削除</button>
+      <br />
+      <Link to="/items">欲しいもの一覧へ</Link>
     </>
   );
 }

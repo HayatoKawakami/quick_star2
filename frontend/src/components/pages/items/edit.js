@@ -12,7 +12,7 @@ export const ItemEdit = () => {
 
   const [image, setImage] = useState('');
 
-  const { baseApiURL } = useConstContext();
+  const { baseURL, baseApiURL } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
   const { itemId } = useParams();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const ItemEdit = () => {
     console.log(img)
   }
 
-  const EditItem = () => {
+  const EditItem = (e) => {
     const itemData = {
       name: name,
       price: price,
@@ -46,21 +46,23 @@ export const ItemEdit = () => {
     .catch(error => {
       console.log("欲しいもの情報更新処理エラー", error);
     })
-    
-    const imageData = new FormData();
-    imageData.append("image", image);
-    imageData.append("item_id", 3);
 
-    const config = {
-      headers:{'Content-Type': 'multipart/form-data'},
-    }
-    axios.post(`${baseApiURL}/images`, imageData, config)
-    .then(response => {
-      console.log("欲しいもの画像追加完了", response.data);
-    })
-    .catch(error => {
-      console.log("欲しいもの画像追加処理エラー", error);
-    })
+  
+      const imageData = new FormData();
+      imageData.append("image", image);
+      imageData.append("item_id", itemId);
+
+      const config = {
+        headers:{'Content-Type': 'multipart/form-data'},
+      }
+      axios.post(`${baseApiURL}/images`, imageData, config)
+      .then(response => {
+        console.log("欲しいもの画像追加完了", response.data);
+      })
+      .catch(error => {
+        console.log("欲しいもの画像追加処理エラー", error);
+      })
+    
   }
 
 
@@ -86,6 +88,9 @@ export const ItemEdit = () => {
   return(
     <>
 
+      <h2>「{item.name}」の編集画面</h2>
+      <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
+      <br />
       <label htmlFor="">商品名</label>
       <br />
       <input type="text"
