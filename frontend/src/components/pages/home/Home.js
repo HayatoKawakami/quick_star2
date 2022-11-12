@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export const Home = () => {
 
   const { items } = useItemContext();
-  const { logged_in, user } = useLoggedInStatusContext();
+  const { logged_in, user, loadJSON } = useLoggedInStatusContext();
 
   const [date, setDate] = useState('');
 
@@ -34,7 +34,7 @@ export const Home = () => {
       <p>{date}</p>
       <h3>Target</h3>
       <ul>
-      {Object.values(items).map((item, index) => {
+      {Object.values(items).filter(item => {return item.user_id === loadJSON("user").id}).map((item, index) => {
         const itemId = item.id
         return(
           <li key={index}>

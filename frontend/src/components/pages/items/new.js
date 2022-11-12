@@ -4,13 +4,13 @@ import { useConstContext } from '../../../contexts/ConstContext';
 import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 import { useItemContext } from '../../../contexts/ItemContext';
 
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 export const ItemNew = () => {
 
   const { baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
-  const { item, setItem } = useItemContext();
+  const { items, setItem } = useItemContext();
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -39,6 +39,9 @@ export const ItemNew = () => {
     setImage(img)
   }
 
+
+
+
   const CreateItem = () => {
     const itemData = {
       name: name,
@@ -59,18 +62,20 @@ export const ItemNew = () => {
     })
 
     // 新規作成時のitemIdはどうするか？
-    // const imageData = {
-    //   image: image,
-    //   item_id: itemId,
-    // }
+    const imageData = new FormData();
+    imageData.append("image", image);
+    imageData.append("item_id", items.slice(-1)[0].id + 1)
 
-    // axios.post(`${baseApiURL}/images`, image)
-    // .then(response => {
-    //   console.log("欲しいもの画像追加完了", response.data);
-    // })
-    // .catch(error => {
-    //   console.log("欲しいもの画像追加処理エラー", error);
-    // })
+    axios.post(`${baseApiURL}/images`, imageData,
+    {
+      headers: {  'Content-Type': 'multipart/form-data'}
+    })
+    .then(response => {
+      console.log("欲しいもの画像追加完了", response.data);
+    })
+    .catch(error => {
+      console.log("欲しいもの画像追加処理エラー", error);
+    })
 
   }
 
@@ -98,13 +103,16 @@ export const ItemNew = () => {
       <input  type="number"
               value={price}
               onChange={handleChangePrice}
-      />
+      /><br />
+      <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
       <br />
 
 
       <input type="hidden" name="user_id" value={user_id} />
 
       <input type="button" onClick={CreateItem} value="欲しいもの追加"  />
+      <br />
+      <Link to="/items">欲しいもの一覧へ</Link>
     </>
   );
 }
