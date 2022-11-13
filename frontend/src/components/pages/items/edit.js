@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
+import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+
 import { useNavigate, Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { Link } from 'react-router-dom';
 
 export const ItemEdit = () => {
   const [item, setItem] = useState({});
@@ -11,6 +13,8 @@ export const ItemEdit = () => {
   const [price, setPrice] = useState('');
 
   const [image, setImage] = useState('');
+
+  const [ url, setUrl] = useState('');
 
   const { baseURL, baseApiURL } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
@@ -23,6 +27,9 @@ export const ItemEdit = () => {
   }
   const handleChangePrice = (e) => {
     setPrice(e.target.value);
+  }
+  const handleChangeUrl = (e) => {
+    setUrl(e.target.value);
   }
 
   const getImage = (e) => {
@@ -47,7 +54,6 @@ export const ItemEdit = () => {
       console.log("欲しいもの情報更新処理エラー", error);
     })
 
-  
       const imageData = new FormData();
       imageData.append("image", image);
       imageData.append("item_id", itemId);
@@ -63,6 +69,17 @@ export const ItemEdit = () => {
         console.log("欲しいもの画像追加処理エラー", error);
       })
     
+      const videoData = {
+        url: url,
+        item_id: itemId,
+      }
+      axios.post(`${baseApiURL}/videos`, videoData)
+      .then(response => {
+        console.log("動画URL登録完了", response.data);
+      })
+      .catch(error => {
+        console.log("動画URL登録処理エラー", error);
+      })
   }
 
 
@@ -107,10 +124,18 @@ export const ItemEdit = () => {
         onChange={handleChangePrice}
       />
       <br />
+      <label htmlFor="">画像</label>
+      <br />
       <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
+      <br />
+      <label htmlFor="">参考動画URL</label>
+      <br />
+      <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
       <br />
 
       <input type="button" onClick={EditItem} value="変更" />
+      <br />
+      <Link to={`/items/${item.id}`}>戻る</Link>
 
     </>
   );
