@@ -20,7 +20,7 @@ export const ItemContextProvider = ({children}) => {
   const ItemsSet = () => {
     axios.get(`${baseApiURL}/items`)
     .then(response => {
-      console.log(response.data)
+      console.log("欲しいもの一覧取得完了", response.data)
       setItems(response.data)
     })
     .catch(error => {
