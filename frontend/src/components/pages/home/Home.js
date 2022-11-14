@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
 
+  const { baseURL } = useConstContext();
   const { items } = useItemContext();
   const { logged_in, user, loadJSON } = useLoggedInStatusContext();
 
@@ -33,16 +34,18 @@ export const Home = () => {
       <h1>{user.name} さん、こんにちは。</h1>
       <p>{date}</p>
       <h3>Target</h3>
-      <ul>
-      {Object.values(items).filter(item => {return item.user_id === loadJSON("user").id}).map((item, index) => {
+      <ul className="home-item-list">
+      {Object.values(items).filter(item => {
+        return item.user_id === loadJSON("user").id
+      }).map((item, index) => {
         const itemId = item.id
         return(
-          <li key={index}>
+          <li className="home-item" key={index}>
             <Link to={`items/${itemId}`}>
+              <img className="item-index-image" src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
               <p>「{item.name}」が手に入るまであと〇〇日</p>
             </Link>
           </li>
-
         );
       })}
       </ul>

@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+.width100 {
+  width: 100%;
+}
+
 .menu {
   padding: 30px;
 }
@@ -28,7 +32,7 @@
 
 .menu-btn {
   position: fixed;
-  left: 30px;
+  right: 30px;
   bottom: 30px;
   cursor: pointer;
 }
@@ -83,6 +87,7 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .blue-btn {
@@ -100,10 +105,36 @@
   background-color: rgb(225, 47, 47);
 }
 
-.item-index-icon {
-  width: 30px;
+.home-item-list {
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.home-item {
+  width: 240px;
+  margin-bottom: 20px;
+}
+
+.items-list {
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.items-item {
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.item-index-image {
+  width: 200px;
+  height: 120px;
 }
 
 .item-image {
-  width: 200px;
+  width: 400px;
 }
+

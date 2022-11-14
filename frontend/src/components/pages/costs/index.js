@@ -12,11 +12,11 @@ export const CostIndex = () => {
   const SetCostIndex = () => {
     axios.get(`${baseApiURL}/costs`)
     .then(response => {
-      console.log("costs取得完了", response.data);
+      console.log("固定費一覧データ取得完了", response.data);
       setCosts(response.data)
     })
     .catch(error => {
-      console.log("costs取得処理エラー", error);
+      console.log("固定費データ取得処理エラー", error);
     })
   }
 
@@ -24,11 +24,11 @@ export const CostIndex = () => {
 
   useEffect(() => {
     SetCostIndex();
-
   }, [])
 
   return(
     <>
+      <h2>固定費一覧</h2>
       <ul>
         {Object.values(costs).map((cost, index) => {
           return( 
