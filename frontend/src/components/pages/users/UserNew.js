@@ -61,9 +61,9 @@ export const UserNew = () => {
     })
   }
   // 権限なし時のリダイレクト
-  if (loadJSON("logged_in") === true) {
-    return <Navigate replace to="/"/>;
-  }
+  // if (loadJSON("logged_in") === true) {
+  //   return <Navigate replace to="/"/>;
+  // }
 
 
   return(

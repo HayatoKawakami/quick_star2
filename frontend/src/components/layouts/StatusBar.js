@@ -5,7 +5,6 @@ export const StatusBar = () =>{
   const navigate = useNavigate();
   return(
     <div className="status-bar">
-      <h1>Status Bar</h1>
       <Link to="/" onClick={()=> navigate(-1)}>＜</Link>
     </div>
   );

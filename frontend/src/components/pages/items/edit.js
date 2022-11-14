@@ -5,6 +5,7 @@ import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 import { useNavigate, Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useItemContext } from '../../../contexts/ItemContext';
 
 export const ItemEdit = () => {
   const [item, setItem] = useState({});
@@ -18,6 +19,7 @@ export const ItemEdit = () => {
 
   const { baseURL, baseApiURL } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
+  const { destroyVideo, videos } = useItemContext();
   const { itemId } = useParams();
   const navigate = useNavigate();
 
@@ -128,8 +130,20 @@ export const ItemEdit = () => {
       <br />
       <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
       <br />
-      <label htmlFor="">参考動画URL</label>
+      <label htmlFor="">参考動画</label>
       <br />
+      <ul>
+      {Object.values(videos).filter(video => {
+        return video.item_id === Number(itemId);
+      }).map((value, index) => {
+        return(
+          <li key={index}>
+            <iframe width="250" height="155" src={value.url} title="YouTube video player"></iframe>
+            <input type="button" onClick={() => { destroyVideo(value.id) }} value="動画削除" />
+          </li>
+        );
+      })}
+      </ul>
       <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
       <br />
 

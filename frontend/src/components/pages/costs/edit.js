@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useCostContext } from '../../../contexts/CostContext';
 import axios from '../../../../lib/axios';
 import { useParams } from 'react-router-dom';
 
@@ -18,10 +17,10 @@ export const CostEdit = () => {
       setCost(response.data);
       setName(response.data.name);
       setPrice(response.data.price)
-      console.log("コスト情報取得完了", response.data)
+      console.log("固定費情報取得完了", response.data)
     })
     .catch(error => {
-      console.log("コスト情報取得処理エラー", error);
+      console.log("固定費情報取得処理エラー", error);
     })
   }
   const handleChangeName = (e) => {
@@ -38,22 +37,22 @@ export const CostEdit = () => {
     }
     axios.put(`${baseApiURL}/costs/${costId}`, data)
     .then(response => {
-      console.log("コスト情報更新完了", response.data)
+      console.log("固定費情報更新完了", response.data)
       navigate("/costs")
     })
     .catch(error => {
-      console.log("コスト情報更新処理エラー", error)
+      console.log("固定費情報更新処理エラー", error)
     })
   }
 
   const destroyCost = () => {
     axios.delete(`${baseApiURL}/costs/${costId}`)
     .then(response => {
-      console.log("コスト削除完了", response.data)
+      console.log("固定費情報削除完了", response.data)
       navigate("/costs");
     })
     .catch(error => {
-      console.log("コスト削除処理エラー", error)
+      console.log("固定費情報削除処理エラー", error)
     })
   }
 
@@ -63,6 +62,7 @@ export const CostEdit = () => {
 
   return(
     <>
+      <h2>「{cost.name}」の変更</h2>
       <label htmlFor="">コスト名</label>
       <br />
       <input type="text"

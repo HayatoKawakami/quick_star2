@@ -9,13 +9,10 @@ export const ItemShow = () => {
 
   const { baseURL, baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
+  const { videos } = useItemContext();
   const { itemId }  = useParams();
 
   const [item, setItem] = useState({});
-  const [image, setImage] = useState({});
-
-  const [videos, setVideos] = useState({});
-  const [video, setVideo] = useState({});
 
   const ItemSet = () => {
     axios.get(`${baseApiURL}/items/${itemId}`)
@@ -27,45 +24,6 @@ export const ItemShow = () => {
       console.log("欲しいものデータ取得エラー", error);
     })
   }
-
-  const ImageSet = () => {
-    axios.get(`${baseApiURL}/images`)
-    .then(response => {
-      console.log("画像取得完了",response.data)
-      setImage(response.data.filter(res =>{
-        if (res.item_id === itemId){
-          return res
-        }
-      }))
-    })
-    .catch(error => {
-      console.log("画像取得処理エラー", error);
-    })
-  }
-
-  const VideosSet = () => {
-    axios.get(`${baseApiURL}/videos`)
-    .then(response => {
-      setVideos(response.data);
-      console.log("動画情報一覧取得完了", response.data);
-    })
-    .catch(error => {
-      console.log("動画情報取得処理エラー", error)
-    })
-  }
-
-  console.log("videos",videos);
-
-  const destroyVideo = () => {
-    axios.delete(`${baseApiURL}/videos/`)
-    .then(response => {
-      console.log("動画URL削除完了", response.data);
-    })
-    .catch(error => {
-      console.log("動画URL削除処理エラー", error)
-    })
-  }
-
 
   const ItemDestroy = () => {
     axios.delete(`${baseApiURL}/items/${itemId}}`)
@@ -80,8 +38,6 @@ export const ItemShow = () => {
 
   useEffect(() => {
     ItemSet();
-    ImageSet();
-    VideosSet();
   },[])
 
 
@@ -92,9 +48,12 @@ export const ItemShow = () => {
 
   return(
     <>
+      <h2>「{item.name}」</h2>
       <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
       <p>商品名：{item.name}</p>
       <p>価格；{item.price} 円</p>
+      <br />
+      <h3>参考動画</h3>
       <ul>
       {Object.values(videos).filter(video => {
         return video.item_id === Number(itemId);
@@ -102,7 +61,6 @@ export const ItemShow = () => {
         return(
           <li key={index}>
             <iframe width="400" height="255" src={value.url} title="YouTube video player"></iframe>
-            <input type="button" onClick={destroyVideo} value="削除" />
           </li>
         );
       })}

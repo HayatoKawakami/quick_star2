@@ -17,7 +17,6 @@ import { CostEdit } from "../pages/costs/edit";
 export const Container = () => {
     return(
       <div className="container">
-        <h1>Container</h1>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="users">

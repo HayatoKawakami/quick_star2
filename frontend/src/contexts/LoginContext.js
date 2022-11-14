@@ -54,7 +54,7 @@ export const LoggedInStatusProvider = ({ children }) => {
 
     axios.post(`${baseApiURL}/login`, data)
     .then(response => {
-      console.log("res", response);
+      console.log("ログイン完了", response.data);
       if (response.data.logged_in){
         setLogged_in(true);
         saveJSON("logged_in", true);
@@ -75,13 +75,16 @@ export const LoggedInStatusProvider = ({ children }) => {
   // ログアウト
   const Logout = () => {
     axios.delete(`${baseApiURL}/logout`)
-    .then(() => {
+    .then(response => {
+      console.log("ログアウト完了", response.data);
       setLogged_in(false);
       saveJSON("logged_in", false);
       removeLocalStorage("user");
-      console.log("ログアウト完了");
       setUser('');
       navigate("/login");
+    })
+    .catch(error => {
+      console.log("ログイン処理エラー", error);
     })
   }
 
@@ -101,11 +104,13 @@ export const LoggedInStatusProvider = ({ children }) => {
     {
       withCredentials: true
     })
-    .then(() => {
+    .then(response => {
       if (loadJSON("logged_in") === true){
+        console.log("ログインチェックOK", response.data);
         setLogged_in(true);
         setUser(loadJSON("user"));
       } else if (loadJSON("logged_in") === false) {
+        console.log("ログインチェックNG", response.data);
         setLogged_in(false);
         setUser({})
       }
