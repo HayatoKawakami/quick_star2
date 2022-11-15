@@ -60,7 +60,7 @@ export const ItemShow = () => {
       }).map((value, index) => {
         return(
           <li key={index}>
-            <iframe width="400" height="255" src={value.url} title="YouTube video player"></iframe>
+            <iframe width="400" height="255" src={`https://www.youtube.com/embed/${value.url.split(/[= &]/).slice(1,2)}`} title="YouTube video player"></iframe>
           </li>
         );
       })}
