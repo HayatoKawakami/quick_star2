@@ -138,12 +138,14 @@ export const ItemEdit = () => {
       }).map((value, index) => {
         return(
           <li key={index}>
-            <iframe width="250" height="155" src={value.url} title="YouTube video player"></iframe>
+            <iframe width="250" height="155" src={`https://www.youtube.com/embed/${value.url.split(/[= &]/).slice(1,2)}`} title="YouTube video player"></iframe>
             <input type="button" onClick={() => { destroyVideo(value.id) }} value="動画削除" />
           </li>
         );
       })}
       </ul>
+      <label htmlFor="">参考動画追加</label>
+      <br />
       <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
       <br />
 

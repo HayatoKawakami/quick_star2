@@ -51,26 +51,24 @@ export const ItemNew = () => {
       user_id: user_id
     }
 
-    // 新規作成時のitemIdはどうするか？
-    const imageData = new FormData();
-    imageData.append("image", image);
-    imageData.append("item_id", items.slice(-1)[0].id + 1)
-
-    // const videoData = {
-    //   url: url,
-    //   item_id: items.slice(-1)[0].id + 1,
-    // }
-
     const config = {
       headers: {  'Content-Type': 'application/json'}
     }
     axios.post(`${baseApiURL}/items`, itemData, config)
     .then(response => {
       console.log("欲しいもの追加完了",response.data);
+      createImage();
+      createVideo(response.data.item);
     })
     .catch(error => {
       console.log("欲しいもの追加処理エラー", error);
     })
+  }
+
+  const createImage = () => {
+    const imageData = new FormData();
+    imageData.append("image", image);
+    imageData.append("item_id", items.slice(-1)[0].id + 1)
 
     axios.post(`${baseApiURL}/images`, imageData,
     {
@@ -78,20 +76,27 @@ export const ItemNew = () => {
     })
     .then(response => {
       console.log("欲しいもの画像追加完了", response.data);
-      navigate(`/items/${response.data.item.id}`);
+      // navigate(`/items/${response.data.item.id}`);
     })
     .catch(error => {
       console.log("欲しいもの画像追加処理エラー", error);
     })
+  }
 
-    // axios.post(`${baseApiURL}/videos`, videoData)
-    // .then(response => {
-    //   console.log("欲しいもの参考動画登録完了", response.data)
-    // })
-    // .catch(error => {
-    //   console.log("欲しいもの参考動画登録処理エラー", error);
-    // })
+  const createVideo = (item) => {
+    const videoData = {
+      url: url,
+      item_id: items.slice(-1)[0].id + 1,
+    }
 
+    axios.post(`${baseApiURL}/videos`, videoData)
+    .then(response => {
+      console.log("欲しいもの参考動画登録完了", response.data)
+      navigate(`/items/${item.id}`)
+    })
+    .catch(error => {
+      console.log("欲しいもの参考動画登録処理エラー", error);
+    })
   }
 
   useEffect(()=>{
@@ -124,10 +129,10 @@ export const ItemNew = () => {
       <br />
       <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
       <br />
-      {/* <label htmlFor="">参考動画URL</label>
+      <label htmlFor="">参考動画URL</label>
       <br />
       <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
-      <br /> */}
+      <br />
 
 
       <input type="hidden" name="user_id" value={user_id} />
