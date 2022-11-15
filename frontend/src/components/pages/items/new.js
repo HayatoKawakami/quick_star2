@@ -5,6 +5,7 @@ import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 import { useItemContext } from '../../../contexts/ItemContext';
 
 import { Navigate, Link } from 'react-router-dom';
+import Select from 'react-select';
 
 export const ItemNew = () => {
 
@@ -17,6 +18,8 @@ export const ItemNew = () => {
   const [user_id, setUser_id] = useState('');
   const [image, setImage] = useState('');
   const [url, setUrl] = useState('');
+  const [site_name, setSite_name] = useState('');
+  const [site_url, setSite_url] = useState('');
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -28,6 +31,21 @@ export const ItemNew = () => {
 
   const handleChangeUrl = (e) => {
     setUrl(e.target.value);
+  }
+
+  const options = [
+    {value: "amazon", label: "Amazon"},
+    {value: "rakuten", label: "楽天ショッピング"},
+    {value: "bic", label: "ビックカメラ"},
+    {value: "mercari", label: "メルカリ"},
+  ]
+
+  const handleChangeSiteName = (e) => {
+    setSite_name(e.value);
+  }
+
+  const handleChangeSiteUrl = (e) => {
+    setSite_url(e.target.value);
   }
 
   const setUserId = () => {
@@ -57,18 +75,19 @@ export const ItemNew = () => {
     axios.post(`${baseApiURL}/items`, itemData, config)
     .then(response => {
       console.log("欲しいもの追加完了",response.data);
-      createImage();
+      createImage(response.data.item);
       createVideo(response.data.item);
+      createSite(response.data.item)
     })
     .catch(error => {
       console.log("欲しいもの追加処理エラー", error);
     })
   }
 
-  const createImage = () => {
+  const createImage = (item) => {
     const imageData = new FormData();
     imageData.append("image", image);
-    imageData.append("item_id", items.slice(-1)[0].id + 1)
+    imageData.append("item_id", item.id)
 
     axios.post(`${baseApiURL}/images`, imageData,
     {
@@ -76,7 +95,6 @@ export const ItemNew = () => {
     })
     .then(response => {
       console.log("欲しいもの画像追加完了", response.data);
-      // navigate(`/items/${response.data.item.id}`);
     })
     .catch(error => {
       console.log("欲しいもの画像追加処理エラー", error);
@@ -86,16 +104,32 @@ export const ItemNew = () => {
   const createVideo = (item) => {
     const videoData = {
       url: url,
-      item_id: items.slice(-1)[0].id + 1,
+      item_id: item.id,
     }
 
     axios.post(`${baseApiURL}/videos`, videoData)
     .then(response => {
       console.log("欲しいもの参考動画登録完了", response.data)
-      navigate(`/items/${item.id}`)
     })
     .catch(error => {
       console.log("欲しいもの参考動画登録処理エラー", error);
+    })
+  }
+
+  const createSite = (item) => {
+
+    const siteData = {
+      site_name: site_name,
+      url: site_url,
+      item_id: item.id,
+    }
+    axios.post(`${baseApiURL}/sites`, siteData)
+    .then(response => {
+      console.log("購入サイト登録完了", response.data);
+      navigate(`/items/${item.id}`)
+    })
+    .catch(error => {
+      console.log("購入サイト登録処理エラー", error)
     })
   }
 
@@ -133,6 +167,9 @@ export const ItemNew = () => {
       <br />
       <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
       <br />
+      <label htmlFor="">購入サイト候補</label>
+      <Select options={options} onChange={handleChangeSiteName}/>
+      <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
 
 
       <input type="hidden" name="user_id" value={user_id} />

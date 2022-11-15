@@ -9,7 +9,7 @@ export const ItemShow = () => {
 
   const { baseURL, baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
-  const { videos } = useItemContext();
+  const { videos, sites } = useItemContext();
   const { itemId }  = useParams();
 
   const [item, setItem] = useState({});
@@ -66,6 +66,46 @@ export const ItemShow = () => {
       })}
       </ul>
       <br />
+      <label htmlFor="">購入サイト候補</label>
+      <ul className='sites-list'>
+        {Object.values(sites).filter(site => {
+          return site.item_id === Number(itemId);
+        }).map((value, index) => {
+          if (value.site_name === "amazon"){
+            return(
+              <li key={index}>
+                <a href={value.url} target="_blank">
+                  <img className='site-image' src={`${baseURL}/sites/amazon.png`} alt="" />
+                </a>
+              </li>
+            );
+          } else if(value.site_name === "rakuten") {
+            return(
+              <li key={index}>
+                <a href={value.url} target="_blank">
+                  <img className='site-image' src={`${baseURL}/sites/rakuten.png`} alt="" />
+                </a>
+              </li>
+            );
+          } else if(value.site_name === "bic") {
+            return(
+              <li key={index}>
+                <a href={value.url} target="_blank">
+                  <img className='site-image' src={`${baseURL}/sites/bic.png`} alt="" />
+                </a>
+              </li>
+            );
+          } else if(value.site_name === "mercari") {
+            return(
+              <li key={index}>
+                <a href={value.url} target="_blank">
+                  <img className='site-image' src={`${baseURL}/sites/mercari.png`} alt="" />
+                </a>
+              </li>
+            );
+          }
+        })}
+      </ul>
       <Link to="edit">変更</Link>
       <button onClick={ItemDestroy}>削除</button>
       <br />

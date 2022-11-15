@@ -138,3 +138,25 @@
   width: 400px;
 }
 
+.sites-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0px;
+}
+
+.sites-item {
+  position: relative;
+}
+
+.site-item-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+.site-item-delete {
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
