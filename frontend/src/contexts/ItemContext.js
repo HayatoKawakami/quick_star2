@@ -13,6 +13,7 @@ export const ItemContextProvider = ({children}) => {
   const [item, setItem] = useState({});
   const [videos, setVideos] = useState({});
   const [video, setVideo] = useState({});
+  const [sites, setSites] = useState({});
 
   const { baseApiURL, navigate } = useConstContext();
 
@@ -48,9 +49,31 @@ export const ItemContextProvider = ({children}) => {
     })
   }
 
+  const SitesSet = () => {
+    axios.get(`${baseApiURL}/sites`)
+    .then(response => {
+      setSites(response.data);
+      console.log("購入サイト候補情報一覧取得", response.data);
+    })
+    .catch(error => {
+      console.log("購入サイト候補情報一覧取得処理エラー", error)
+    })
+  }
+
+  const destroySite = (siteId) => {
+    axios.delete(`${baseApiURL}/sites/${siteId}`)
+    .then(response => {
+      console.log("購入サイト情報削除完了", response.data);
+    })
+    .catch(error => {
+      console.log("購入サイト情報削除処理エラー", error);
+    })
+  }
+
   useEffect(() => {
     ItemsSet();
     VideosSet();
+    SitesSet();
   },[])
 
 
@@ -61,10 +84,13 @@ export const ItemContextProvider = ({children}) => {
     setItem,
     navigate,
     destroyVideo,
+    destroySite,
     videos,
     setVideos,
     video,
-    setVideo
+    setVideo,
+    sites,
+    setSites,
   }
 
   return(

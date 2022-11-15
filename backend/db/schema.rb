@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_13_001653) do
+ActiveRecord::Schema.define(version: 2022_11_15_041241) do
 
   create_table "costs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2022_11_13_001653) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "sites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "site_name", null: false
+    t.text "url", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_sites_on_item_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -60,5 +69,6 @@ ActiveRecord::Schema.define(version: 2022_11_13_001653) do
   add_foreign_key "costs", "users"
   add_foreign_key "images", "items"
   add_foreign_key "items", "users"
+  add_foreign_key "sites", "items"
   add_foreign_key "videos", "items"
 end
