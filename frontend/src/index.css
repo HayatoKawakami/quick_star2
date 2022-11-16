@@ -45,14 +45,16 @@
   position: fixed;
   bottom: 100px;
   padding: 20px;
+  right: 0;
+  z-index: 1000000000;
 }
 
 .menu-active {
-  transform: translateX(30px);
+  transform: translateX(-30px);
   transition: all 0.5s 0s ease;
 }
 .menu-hide {
-  transform: translateX(-220px);
+  transform: translateX(220px);
   transition: all 0.5s 0s ease;
 }
 .menu-user-box {
@@ -64,6 +66,7 @@
   background-color: rgb(154, 211, 68);
   padding: 5px 10px;
   border-radius: 5px;
+  
 }
 
 .menu-user-icon {

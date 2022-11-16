@@ -11,7 +11,6 @@ export const ItemNew = () => {
 
   const { baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
-  const { items } = useItemContext();
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');

@@ -1,5 +1,4 @@
-import React,  { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import React,  { useState } from "react";
 import axios from "../../../../lib/axios";
 
 import { useLoggedInStatusContext } from "../../../contexts/LoginContext";
@@ -14,7 +13,7 @@ export const UserNew = () => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
 
-  const { setUser, setLogged_in, saveJSON, loadJSON, logged_in } = useLoggedInStatusContext();
+  const { setUser, setLogged_in, saveJSON } = useLoggedInStatusContext();
 
   const { baseApiURL, navigate } = useConstContext();
 
