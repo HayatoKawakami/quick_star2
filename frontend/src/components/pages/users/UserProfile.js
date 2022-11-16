@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
 
@@ -32,7 +31,6 @@ export const UserProfile = () => {
       <p>誕生日：{user.birthday}</p>
       <p>メールアドレス：{user.email}</p>
       <Link to="edit">編集</Link>
-      
     </div>
   );
 }

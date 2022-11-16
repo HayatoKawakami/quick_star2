@@ -17,10 +17,9 @@ export const ItemIndex = () => {
   return(
     <div>
       <h2>欲しいもの一覧</h2>
-      
       <ul className='items-list'>
         <Link className='btn green-btn width100' to="/items/new">欲しいもの追加</Link>
-         {Object.values(items).filter(item => {return item.user_id === loadJSON("user").id}).map((value, index) => {
+          {Object.values(items).filter(item => {return item.user_id === loadJSON("user").id}).map((value, index) => {
             return(
               <li className='items-item' key={index}>
                 <Link to={`/items/${value.id}`}>
@@ -30,9 +29,8 @@ export const ItemIndex = () => {
                 </Link>
               </li>
             );
-          } )}
+          })}
       </ul>
-      
     </div>
   );
 }

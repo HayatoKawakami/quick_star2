@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 import { useLoggedInStatusContext } from "./LoginContext";
 import axios from "../../lib/axios";
@@ -13,7 +13,7 @@ export const CostContextProvider = ({children}) => {
   const { baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoggedInStatusContext();
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState(' ');
   const [price, setPrice] = useState('');
   const [user_id, setUser_id] = useState('');
 
