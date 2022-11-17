@@ -62,7 +62,7 @@ export const CostEdit = () => {
 
   return(
     <>
-      <h2>「{cost.name}」の変更</h2>
+
       <label htmlFor="">コスト名</label>
       <br />
       <input type="text"

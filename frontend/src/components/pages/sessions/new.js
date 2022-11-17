@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { useLoginContext } from '../../../contexts/LoginContext';
 
 export const LoginForm = () => {
 
-  const { email, setEmail, password, setPassword, Login, loadJSON, ItemSet } = useLoggedInStatusContext();
+  const { email, setEmail, password, setPassword, Login, loadJSON, ItemSet } = useLoginContext();
 
   const handleChangeEmail = (e) => { setEmail(e.target.value); }
   const handleChangePassword = (e) => { setPassword(e.target.value); }
@@ -16,7 +16,6 @@ export const LoginForm = () => {
 
   return(
     <>
-      <h2>ログイン</h2>
       <label htmlFor="email">メールアドレス</label>
       <input type="email"
       name='email'

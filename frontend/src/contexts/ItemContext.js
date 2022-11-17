@@ -11,11 +11,44 @@ export const useItemContext = () => {
 export const ItemContextProvider = ({children}) => {
   const [items, setItems] = useState({});
   const [item, setItem] = useState({});
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState('');
   const [videos, setVideos] = useState({});
   const [video, setVideo] = useState({});
   const [sites, setSites] = useState({});
+  
+  const [ url, setUrl] = useState('');
+
+  const [ site_name, setSite_name] = useState('');
+  const [ site_url, setSite_url] = useState('');
 
   const { baseApiURL, navigate } = useConstContext();
+
+  const options = [
+    {value: "amazon", label: "Amazon"},
+    {value: "rakuten", label: "楽天ショッピング"},
+    {value: "bic", label: "ビックカメラ"},
+    {value: "mercari", label: "メルカリ"},
+  ]
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  }
+  const handleChangePrice = (e) => {
+    setPrice(e.target.value);
+  }
+  const handleChangeUrl = (e) => {
+    setUrl(e.target.value);
+  }
+
+  const handleChangeSiteName = (e) => {
+    setSite_name(e.value);
+  }
+
+  const handleChangeSiteUrl = (e) => {
+    setSite_url(e.target.value);
+  }
 
   const ItemsSet = () => {
     axios.get(`${baseApiURL}/items`)
@@ -83,6 +116,12 @@ export const ItemContextProvider = ({children}) => {
     item,
     setItem,
     navigate,
+    name,
+    setName,
+    price,
+    setPrice,
+    image,
+    setImage,
     destroyVideo,
     destroySite,
     videos,
@@ -91,6 +130,15 @@ export const ItemContextProvider = ({children}) => {
     setVideo,
     sites,
     setSites,
+    options,
+    url,
+    site_name,
+    site_url,
+    handleChangeName,
+    handleChangePrice,
+    handleChangeUrl,
+    handleChangeSiteName,
+    handleChangeSiteUrl,
   }
 
   return(

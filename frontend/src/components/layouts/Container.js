@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "../pages/home/Home";
-import { UserNew } from "../pages/users/UserNew";
-import { UserProfile } from "../pages/users/UserProfile";
-import { UserEdit } from "../pages/users/UserEdit";
+import { UserNew } from "../pages/users/new";
+import { UserProfile } from "../pages/users/show";
+import { UserEdit } from "../pages/users/edit";
 import { NotFound } from "../layouts/NotFound"
-import { LoginForm } from "../pages/sessions/LoginForm";
+import { LoginForm } from "../pages/sessions/new";
 import { ItemIndex } from "../pages/items";
 import { ItemShow } from "../pages/items/show";
 import { ItemNew } from "../pages/items/new";

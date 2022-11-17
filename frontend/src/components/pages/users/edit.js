@@ -2,21 +2,19 @@ import React, {useState, useEffect} from 'react';
 import axios from '../../../../lib/axios';
 
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { useLoginContext } from '../../../contexts/LoginContext';
 import { Navigate } from 'react-router-dom';
 
 export const UserEdit = () => {
 
   const { baseURL, baseApiURL, navigate } = useConstContext();
-  const { user, setUser, Logout, saveJSON, loadJSON } = useLoggedInStatusContext();
+  const { user, setUser, Logout, saveJSON, loadJSON } = useLoginContext();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('0000'); //初期値がないと警告がでる
   const [image, setImage] = useState('')
   const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${user.id}/icon.jpg`);
-
-  
 
   const handleChangeName = (e) =>{ setName(e.target.value); }
   const handleChangeEmail = (e) =>{ setEmail(e.target.value); }
@@ -92,7 +90,6 @@ export const UserEdit = () => {
 
   return(
     <>
-      <h2>「{user.name}」の編集</h2>
       <img src={previewImage} alt="" className='user-icon' />
       <br />
       <label htmlFor="image">画像</label>
