@@ -37,11 +37,7 @@ export const Container = () => {
             <Route path="new" element={<CostNew/>} />
             <Route path=":costId/edit" element={<CostEdit/>}/>
           </Route>
-          
         </Routes>
       </div>
     );
 }
-
-
- 

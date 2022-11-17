@@ -15,6 +15,9 @@ export const CostNew = () => {
     {value: "電気代", label: "電気代"},
     {value: "ガス代", label: "ガス代"},
     {value: "水道代", label: "水道代"},
+    {value: "ネット代", label: "ネット代"},
+    {value: "交通費", label: "交通費"},
+    {value: "貯蓄", label: "貯蓄"},
     {value: "", label: "その他"},
   ]
   const handleChangeName = (e) => {

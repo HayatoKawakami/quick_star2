@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 export const CostIndex = () => {
-  const { baseApiURL } = useConstContext();
+  const { baseURL, baseApiURL } = useConstContext();
 
   const [costs, setCosts] = useState({});
 
@@ -20,6 +20,30 @@ export const CostIndex = () => {
     })
   }
 
+  const CostImage = (name) => {
+    if(name === "家賃"){
+      return `${baseURL}/costs/home.png`
+    } else if (name === "電気代"){
+      return `${baseURL}/costs/bolt.png`
+    } else if (name === "食費"){
+      return `${baseURL}/costs/eat.png`
+    } else if (name === "ガス代"){
+      return `${baseURL}/costs/gas.png`
+    } else if (name === "水道代"){
+      return `${baseURL}/costs/water.png`
+    } else if (name === "携帯代"){
+      return `${baseURL}/costs/mobile.png`
+    } else if (name === "ネット代"){
+      return `${baseURL}/costs/internet.png`
+    } else if (name === "交通費"){
+      return `${baseURL}/costs/bus.png`
+    }else if (name === "貯蓄"){
+      return `${baseURL}/costs/coins.png`
+    } else {
+      return `${baseURL}/costs/others.png`
+    }
+  }
+
 
 
   useEffect(() => {
@@ -29,19 +53,23 @@ export const CostIndex = () => {
   return(
     <>
       <h2>固定費一覧</h2>
-      <ul>
+      <ul className='costs-list'>
         {Object.values(costs).map((cost, index) => {
           return( 
-            <li key={index}>
-              <p>{cost.name}</p>
-              <p>{cost.price} 円</p>
-              <Link to={`/costs/${cost.id}/edit`}>編集</Link>
+            <li className='costs-item' key={index}>
+              <a href={`/costs/${cost.id}/edit`}>
+                <p className='costs-item-name'>{cost.name}</p>
+                <div className='costs-item-img' >
+                  <img src={CostImage(cost.name)} alt="" />
+                </div>
+                <p className='costs-item-price'>{cost.price}円</p>
+              </a>
             </li>);
         })}
       </ul>
       <p>合計金額：{Object.values(costs).reduce((sum, value) => {
       return sum + value.price;
-    },0)} 円</p>
+    },0)}円</p>
       <Link to="/costs/new">追加する</Link>
 
     </>
