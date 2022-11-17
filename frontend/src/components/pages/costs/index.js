@@ -52,7 +52,6 @@ export const CostIndex = () => {
 
   return(
     <>
-      <h2>固定費一覧</h2>
       <ul className='costs-list'>
         {Object.values(costs).map((cost, index) => {
           return( 

@@ -1,17 +1,16 @@
 import React, { useState,useEffect, createContext, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import axios from "../../lib/axios";
 
 import { useConstContext } from "./ConstContext";
 
 // <<<<<<<<< ログイン状態の確認
-const LoggedStatus = createContext();
+const LoginContext = createContext();
 
-export const useLoggedInStatusContext = () => {
-  return useContext(LoggedStatus);
+export const useLoginContext = () => {
+  return useContext(LoginContext);
 }
 
-export const LoggedInStatusProvider = ({ children }) => {
+export const LoginContextProvider = ({ children }) => {
 
   // state
   const [user, setUser] = useState({});
@@ -140,8 +139,8 @@ export const LoggedInStatusProvider = ({ children }) => {
   }
 
   return(
-    <LoggedStatus.Provider value={value}>
+    <LoginContext.Provider value={value}>
       {children}
-    </LoggedStatus.Provider>
+    </LoginContext.Provider>
   );
 }

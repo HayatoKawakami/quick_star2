@@ -1,7 +1,7 @@
 import axios from '../../../../lib/axios';
 import React, { useEffect, useState } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { useLoginContext } from '../../../contexts/LoginContext';
 import { useItemContext } from '../../../contexts/ItemContext';
 
 import { Navigate, Link } from 'react-router-dom';
@@ -10,7 +10,8 @@ import Select from 'react-select';
 export const ItemNew = () => {
 
   const { baseApiURL, navigate } = useConstContext();
-  const { loadJSON } = useLoggedInStatusContext();
+  const { loadJSON } = useLoginContext();
+  const { options } = useItemContext();
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -31,13 +32,6 @@ export const ItemNew = () => {
   const handleChangeUrl = (e) => {
     setUrl(e.target.value);
   }
-
-  const options = [
-    {value: "amazon", label: "Amazon"},
-    {value: "rakuten", label: "楽天ショッピング"},
-    {value: "bic", label: "ビックカメラ"},
-    {value: "mercari", label: "メルカリ"},
-  ]
 
   const handleChangeSiteName = (e) => {
     setSite_name(e.value);

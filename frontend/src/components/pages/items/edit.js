@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
+import { useLoginContext } from '../../../contexts/LoginContext';
 
-import { useNavigate, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useItemContext } from '../../../contexts/ItemContext';
@@ -10,23 +10,35 @@ import { useItemContext } from '../../../contexts/ItemContext';
 import Select from 'react-select'
 
 export const ItemEdit = () => {
-  const [item, setItem] = useState({});
 
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const { baseURL, baseApiURL, navigate } = useConstContext();
+  const { loadJSON } = useLoginContext();
+  const {
+    item,
+    name,
+    price,
+    image,
+    videos,
+    sites,
+    url,
+    site_name,
+    site_url,
+    setItem,
+    setName,
+    setPrice,
+    setImage,
+    options,
+    handleChangeName,
+    handleChangePrice,
+    handleChangeUrl,
+    handleChangeSiteName,
+    handleChangeSiteUrl,
+    destroyVideo,
+    destroySite,
+  } = useItemContext();
 
-  const [image, setImage] = useState('');
-
-  const [ url, setUrl] = useState('');
-
-  const [ site_name, setSite_name] = useState('');
-  const [ site_url, setSite_url] = useState('');
-
-  const { baseURL, baseApiURL } = useConstContext();
-  const { loadJSON } = useLoggedInStatusContext();
-  const { destroyVideo,destroySite, videos, sites } = useItemContext();
   const { itemId } = useParams();
-  const navigate = useNavigate();
+
 
   const SetItem = () => {
     axios.get(`${baseApiURL}/items/${itemId}`)
@@ -43,31 +55,6 @@ export const ItemEdit = () => {
     const img = e.target.files[0];
     setImage(img)
     console.log(img)
-  }
-
-  const options = [
-    { value: "amazon", label: "Amazon" },
-    { value: "rakuten", label: "楽天ショッピング" },
-    { value: "bic", label: "ビックカメラ" },
-    { value: "mercari", label: "メルカリ" },
-  ]
-
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  }
-  const handleChangePrice = (e) => {
-    setPrice(e.target.value);
-  }
-  const handleChangeUrl = (e) => {
-    setUrl(e.target.value);
-  }
-
-  const handleChangeSiteName = (e) => {
-    setSite_name(e.value);
-  }
-
-  const handleChangeSiteUrl = (e) => {
-    setSite_url(e.target.value);
   }
 
   const EditItem = () => {
@@ -139,7 +126,6 @@ export const ItemEdit = () => {
 
   return(
     <>
-      <h2>「{item.name}」の編集画面</h2>
       <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
       <br />
       <label htmlFor="">商品名</label>

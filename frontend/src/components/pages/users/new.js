@@ -1,7 +1,7 @@
 import React,  { useState } from "react";
 import axios from "../../../../lib/axios";
 
-import { useLoggedInStatusContext } from "../../../contexts/LoginContext";
+import { useLoginContext } from "../../../contexts/LoginContext";
 import { useConstContext } from "../../../contexts/ConstContext";
 
 export const UserNew = () => {
@@ -13,7 +13,7 @@ export const UserNew = () => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
 
-  const { setUser, setLogged_in, saveJSON } = useLoggedInStatusContext();
+  const { setUser, setLogged_in, saveJSON } = useLoginContext();
 
   const { baseApiURL, navigate } = useConstContext();
 

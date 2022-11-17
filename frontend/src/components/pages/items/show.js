@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
 import { useConstContext } from '../../../contexts/ConstContext';
+import { useLoginContext } from '../../../contexts/LoginContext';
 import axios from '../../../../lib/axios';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { useLoggedInStatusContext } from '../../../contexts/LoginContext';
 
 export const ItemShow = () => {
 
   const { baseURL, baseApiURL, navigate } = useConstContext();
-  const { loadJSON } = useLoggedInStatusContext();
+  const { loadJSON } = useLoginContext();
   const { videos, sites } = useItemContext();
   const { itemId }  = useParams();
 
@@ -48,7 +48,7 @@ export const ItemShow = () => {
 
   return(
     <>
-      <h2>「{item.name}」</h2>
+
       <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
       <p>商品名：{item.name}</p>
       <p>価格；{item.price} 円</p>
