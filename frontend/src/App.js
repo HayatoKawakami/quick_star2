@@ -20,7 +20,6 @@ export const App = () => {
                     <CostContextProvider>
                         <Container />
                     </CostContextProvider>
-                    
                 </ItemContextProvider>
             </LoggedInStatusProvider>
         </ConstContextProvider>
