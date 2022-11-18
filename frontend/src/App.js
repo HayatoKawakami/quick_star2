@@ -10,14 +10,13 @@ import { CostContextProvider } from "./contexts/CostContext";
 
 
 export const App = () => {
-
     return(
         <ConstContextProvider>
             <LoginContextProvider>
-                <Menu />
-                <StatusBar />
                 <ItemContextProvider>
                     <CostContextProvider>
+                        <Menu />
+                        <StatusBar />
                         <Container />
                     </CostContextProvider>
                 </ItemContextProvider>

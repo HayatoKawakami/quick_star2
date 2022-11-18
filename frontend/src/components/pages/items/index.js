@@ -15,21 +15,23 @@ export const ItemIndex = () => {
   }
 
   return(
-    <div>
+    <>
       <ul className='items-list'>
-        <Link className='btn green-btn width100' to="/items/new">欲しいもの追加</Link>
           {Object.values(items).filter(item => {return item.user_id === loadJSON("user").id}).map((value, index) => {
             return(
               <li className='items-item' key={index}>
                 <Link to={`/items/${value.id}`}>
                   <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
-                  <p>商品名：{value.name}</p>
-                  <p>価格：{value.price} 円</p>
+                  <div className='item-index-words-box'>
+                    <p className='item-index-words1'>「{value.name}」</p>
+                    <p className='item-index-words2'>が手に入るまであと<span className='get-day'>21</span>日</p>
+                  </div>
                 </Link>
               </li>
             );
           })}
       </ul>
-    </div>
+      <Link className='btn green-btn width100' to="/items/new">欲しいもの追加</Link>
+    </>
   );
 }

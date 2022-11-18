@@ -9,21 +9,8 @@ export const ItemShow = () => {
 
   const { baseURL, baseApiURL, navigate } = useConstContext();
   const { loadJSON } = useLoginContext();
-  const { videos, sites } = useItemContext();
+  const { videos, sites, ItemSet,item } = useItemContext();
   const { itemId }  = useParams();
-
-  const [item, setItem] = useState({});
-
-  const ItemSet = () => {
-    axios.get(`${baseApiURL}/items/${itemId}`)
-    .then(response => {
-      console.log("欲しいもの情報取得完了", response.data);
-      setItem(response.data);
-    })
-    .catch(error => {
-      console.log("欲しいものデータ取得エラー", error);
-    })
-  }
 
   const ItemDestroy = () => {
     axios.delete(`${baseApiURL}/items/${itemId}}`)
@@ -37,7 +24,7 @@ export const ItemShow = () => {
   }
 
   useEffect(() => {
-    ItemSet();
+    ItemSet(itemId);
   },[])
 
 

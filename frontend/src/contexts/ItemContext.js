@@ -61,6 +61,19 @@ export const ItemContextProvider = ({children}) => {
     })
   }
 
+  const ItemSet = (id) => {
+    axios.get(`${baseApiURL}/items/${id}`)
+    .then(response => {
+      console.log("欲しいもの情報取得完了", response.data);
+      setItem(response.data);
+      setName(response.data.name);
+      setPrice(response.data.price);
+    })
+    .catch(error => {
+      console.log("欲しいものデータ取得エラー", error);
+    })
+  }
+
   const VideosSet = () => {
     axios.get(`${baseApiURL}/videos`)
     .then(response => {
@@ -122,6 +135,7 @@ export const ItemContextProvider = ({children}) => {
     setPrice,
     image,
     setImage,
+    ItemSet,
     destroyVideo,
     destroySite,
     videos,
