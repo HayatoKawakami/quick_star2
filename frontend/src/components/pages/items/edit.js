@@ -21,13 +21,14 @@ export const ItemEdit = () => {
     videos,
     sites,
     url,
+    options,
     site_name,
     site_url,
     setItem,
     setName,
     setPrice,
     setImage,
-    options,
+    ItemSet,
     handleChangeName,
     handleChangePrice,
     handleChangeUrl,
@@ -39,16 +40,6 @@ export const ItemEdit = () => {
 
   const { itemId } = useParams();
 
-
-  const SetItem = () => {
-    axios.get(`${baseApiURL}/items/${itemId}`)
-    .then(response => {
-      console.log(response.data);
-      setItem(response.data);
-      setName(response.data.name);
-      setPrice(response.data.price);
-    })
-  }
 
   const getImage = (e) => {
     if (!e.target.files) return
@@ -116,7 +107,7 @@ export const ItemEdit = () => {
 
 
   useEffect(() => {
-    SetItem();
+    ItemSet(itemId);
   },[])
 
   if (loadJSON("logged_in") === false){
