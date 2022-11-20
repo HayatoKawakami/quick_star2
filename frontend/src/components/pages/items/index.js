@@ -3,9 +3,10 @@ import { useItemContext } from '../../../contexts/ItemContext';
 import { Link, Navigate } from 'react-router-dom';
 import { useLoginContext } from '../../../contexts/LoginContext';
 import { useConstContext } from '../../../contexts/ConstContext';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
-  const { baseURL } = useConstContext();
+  const { baseURL, FontAwesomeIcon } = useConstContext();
   const { items } = useItemContext();
   const { loadJSON } = useLoginContext();
 
@@ -24,14 +25,18 @@ export const ItemIndex = () => {
                   <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
                   <div className='item-index-words-box'>
                     <p className='item-index-words1'>「{value.name}」</p>
-                    <p className='item-index-words2'>が手に入るまであと<span className='get-day'>21</span>日</p>
+                    <p className='item-index-words2'>が手に入るまであと<span className='big-number'>21</span>日</p>
                   </div>
                 </Link>
               </li>
             );
           })}
       </ul>
-      <Link className='btn green-btn width100' to="/items/new">欲しいもの追加</Link>
+      
+      <Link className='btn cyan-btn' to="/items/new">
+        <FontAwesomeIcon className='awesome-icon' icon={faCirclePlus}/>
+        <p>欲しいもの追加</p>
+      </Link>
     </>
   );
 }

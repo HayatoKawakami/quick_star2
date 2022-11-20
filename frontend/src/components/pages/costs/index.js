@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
 import axios from '../../../../lib/axios';
 import { Link } from 'react-router-dom';
-
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const CostIndex = () => {
-  const { baseURL, baseApiURL } = useConstContext();
+  const { baseURL, baseApiURL, FontAwesomeIcon } = useConstContext();
 
   const [costs, setCosts] = useState({});
 
@@ -52,6 +52,11 @@ export const CostIndex = () => {
 
   return(
     <>
+      <p>
+        合計金額：{Object.values(costs).reduce((sum, value) => {
+        return sum + value.price;
+        },0)}円
+      </p>
       <ul className='costs-list'>
         {Object.values(costs).map((cost, index) => {
           return( 
@@ -61,15 +66,16 @@ export const CostIndex = () => {
                 <div className='costs-item-img' >
                   <img src={CostImage(cost.name)} alt="" />
                 </div>
-                <p className='costs-item-price'>{cost.price}円</p>
+                <p className='costs-item-price'>{Number(cost.price).toLocaleString()}円</p>
               </a>
             </li>);
         })}
       </ul>
-      <p>合計金額：{Object.values(costs).reduce((sum, value) => {
-      return sum + value.price;
-    },0)}円</p>
-      <Link to="/costs/new">追加する</Link>
+      
+      <Link className='btn cyan-btn' to="/costs/new">
+        <FontAwesomeIcon className="awesome-icon" icon={faCirclePlus} />
+        <p>追加する</p>
+      </Link>
 
     </>
   )

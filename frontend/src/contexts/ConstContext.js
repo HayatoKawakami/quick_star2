@@ -1,5 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const ConstContext = createContext();
 
@@ -21,6 +23,7 @@ export const ConstContextProvider = ({children}) => {
     baseURL,
     baseApiURL,
     navigate,
+    FontAwesomeIcon,
   }
 
   return(
