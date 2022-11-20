@@ -137,7 +137,6 @@ export const ItemNew = () => {
 
   return(
     <>
-      <h2>欲しいもの追加</h2>
       <label htmlFor="name">商品名</label>
       <br />
       <input type="text"

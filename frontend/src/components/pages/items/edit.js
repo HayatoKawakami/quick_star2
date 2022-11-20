@@ -34,8 +34,9 @@ export const ItemEdit = () => {
     handleChangeUrl,
     handleChangeSiteName,
     handleChangeSiteUrl,
-    destroyVideo,
-    destroySite,
+    VideoDestroy,
+    SiteDestroy,
+    ItemDestroy,
   } = useItemContext();
 
   const { itemId } = useParams();
@@ -148,7 +149,7 @@ export const ItemEdit = () => {
         return(
           <li key={index}>
             <iframe width="250" height="155" src={`https://www.youtube.com/embed/${value.url.split(/[= &]/).slice(1,2)}`} title="YouTube video player"></iframe>
-            <input type="button" onClick={() => { destroyVideo(value.id) }} value="動画削除" />
+            <input type="button" onClick={() => { VideoDestroy(value.id) }} value="動画削除" />
           </li>
         );
       })}
@@ -167,28 +168,28 @@ export const ItemEdit = () => {
             return(
               <li className='sites-item' key={index}>
                 <img className='site-item-image' src={`${baseURL}/sites/amazon.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{destroySite(value.id)}} alt="" />
+                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
               </li>
             );
           } else if(value.site_name === "rakuten") {
             return(
               <li className='sites-item' key={index}>
                 <img className='site-item-image' src={`${baseURL}/sites/rakuten.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{destroySite(value.id)}} alt="" />
+                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
               </li>
             );
           } else if(value.site_name === "bic") {
             return(
               <li className='sites-item' key={index}>
                 <img className='site-item-image' src={`${baseURL}/sites/bic.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{destroySite(value.id)}} alt="" />
+                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
               </li>
             );
           } else if(value.site_name === "mercari") {
             return(
-              <li className='sites-item' key={index}>
+              <li className='edit-sites-item' key={index}>
                 <img className='site-item-image' src={`${baseURL}/sites/mercari.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{destroySite(value.id)}} alt="" />
+                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
               </li>
             );
           }

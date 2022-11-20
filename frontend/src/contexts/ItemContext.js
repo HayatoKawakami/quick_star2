@@ -85,7 +85,7 @@ export const ItemContextProvider = ({children}) => {
     })
   }
 
-  const destroyVideo = (videoId) => {
+  const VideoDestroy = (videoId) => {
     axios.delete(`${baseApiURL}/videos/${videoId}`)
     .then(response => {
       console.log("動画URL削除完了", response.data);
@@ -106,13 +106,24 @@ export const ItemContextProvider = ({children}) => {
     })
   }
 
-  const destroySite = (siteId) => {
+  const SiteDestroy = (siteId) => {
     axios.delete(`${baseApiURL}/sites/${siteId}`)
     .then(response => {
       console.log("購入サイト情報削除完了", response.data);
     })
     .catch(error => {
       console.log("購入サイト情報削除処理エラー", error);
+    })
+  }
+
+  const ItemDestroy = (id) => {
+    axios.delete(`${baseApiURL}/items/${id}}`)
+    .then(response => {
+      console.log("欲しいもの削除完了",response.data);
+      navigate("/items");
+    })
+    .catch(error => {
+      console.log("欲しいもの削除処理エラー", error);
     })
   }
 
@@ -136,8 +147,9 @@ export const ItemContextProvider = ({children}) => {
     image,
     setImage,
     ItemSet,
-    destroyVideo,
-    destroySite,
+    VideoDestroy,
+    SiteDestroy,
+    ItemDestroy,
     videos,
     setVideos,
     video,
