@@ -2,13 +2,27 @@ import React, {useState} from "react";
 import { Link,useParams, useLocation, useNavigate } from "react-router-dom";
 import { useConstContext } from "../../contexts/ConstContext";
 import { useItemContext } from "../../contexts/ItemContext";
+import { useLoginContext } from "../../contexts/LoginContext";
 
 export const StatusBar = () =>{
   const { baseURL, navigate } = useConstContext();
+  const { loadJSON } = useLoginContext();
   const { item } = useItemContext();
   const location = useLocation();
 
   console.log(location)
+
+  const ActiveBackBtn = () => {
+    if(loadJSON("logged_in") === true){
+      return(
+        <a className="back-btn" onClick={()=>{navigateStatusBar()}}>
+          <img src={`${baseURL}/layouts/left.png`} alt="" />
+        </a>
+      );
+    } else if(loadJSON("logged_in") === false){
+      return null;
+    }
+  }
 
   const navigateStatusBar = () => {
     if(location.pathname === "/"){
@@ -25,6 +39,8 @@ export const StatusBar = () =>{
       navigate(`/items/${Number(location.pathname.split("/").slice(2,3))}`)
     } else if (location.pathname === `/costs/${Number(location.pathname.split("/").slice(2,3))}/edit`) {
       navigate("/costs")
+    } else if (location.pathname === "/items/new") {
+      navigate("/items")
     } else if (location.pathname === "/costs/new") {
       navigate("/costs")
     } else if (location.pathname === "/users/profile") {
@@ -83,9 +99,7 @@ export const StatusBar = () =>{
   }
   return(
     <div className="status-bar">
-      <a className="back-btn" onClick={()=>{navigateStatusBar()}}>
-        <img src={`${baseURL}/layouts/left.png`} alt="" />
-      </a>
+      <ActiveBackBtn/>
       <p className="status-word">{statusWord()}</p>
     </div>
   );

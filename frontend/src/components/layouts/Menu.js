@@ -4,7 +4,8 @@ import { useLoginContext } from "../../contexts/LoginContext";
 import { useConstContext } from "../../contexts/ConstContext";
 import classNames from 'classnames';
 
-import { faHouse, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faChevronRight, faCoins, faCog, faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 
 export const Menu = () => {
 
@@ -44,24 +45,27 @@ export const Menu = () => {
               <FontAwesomeIcon className='menu-icon-chevron' icon={faChevronRight}/>
             </Link>
             <Link className="menu-item" to={`items`} onClick={activeMenuBox}>
-              <FontAwesomeIcon className='menu-icon' icon={faHouse}/>
+              <FontAwesomeIcon className='menu-icon' icon={faCheckSquare}/>
               <p>欲しいもの一覧</p>
               <FontAwesomeIcon className='menu-icon-chevron' icon={faChevronRight}/>
             </Link>
             <Link className="menu-item" to={`costs`} onClick={activeMenuBox}>
-              <FontAwesomeIcon className='menu-icon' icon={faHouse}/>
+              <FontAwesomeIcon className='menu-icon' icon={faCoins}/>
               <p>固定費を管理</p>
               <FontAwesomeIcon className='menu-icon-chevron' icon={faChevronRight}/>
             </Link>
             <Link className="menu-item" to={``} onClick={activeMenuBox}>
-              <FontAwesomeIcon className='menu-icon' icon={faHouse}/>
+              <FontAwesomeIcon className='menu-icon' icon={faCog}/>
               <p>設定</p>
               <FontAwesomeIcon className='menu-icon-chevron' icon={faChevronRight}/>
             </Link>
-            <Link className="menu-item" to={``} onClick={activeMenuBox}>ライト/ダーク</Link>
-            <Link className="menu-item" to={``} onClick={activeMenuBox}>ヘルプ</Link>
           </ul>
-          <p className="btn red-btn" onClick={Logout}>ログアウト</p>
+          <Link className="menu-item menu-bottom-left" to={``} onClick={activeMenuBox}>
+            <FontAwesomeIcon className='menu-bottom-icon' icon={faAdjust}/>
+          </Link>
+          <Link className="menu-item menu-bottom-right" to={``} onClick={activeMenuBox}>
+            <FontAwesomeIcon className='menu-bottom-icon' icon={faQuestionCircle}/>
+          </Link>
         </div>
       )
     } else {
