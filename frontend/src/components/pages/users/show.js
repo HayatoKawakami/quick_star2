@@ -7,7 +7,7 @@ import { useLoginContext } from "../../../contexts/LoginContext";
 export const UserProfile = () => {
 
   const { baseURL} = useConstContext();
-  const { user, loadJSON } = useLoginContext();
+  const { user, Logout, loadJSON } = useLoginContext();
 
   const userSex = () => {
     if (user.sex === 1 ) {
@@ -30,6 +30,8 @@ export const UserProfile = () => {
       <p>誕生日：{user.birthday}</p>
       <p>メールアドレス：{user.email}</p>
       <Link to="edit">編集</Link>
+
+      <p className="btn red-btn" onClick={Logout}>ログアウト</p>
     </div>
   );
 }
