@@ -20,6 +20,32 @@ body {
   margin-bottom: 100px;
 }
 
+.shadow-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #222222;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -10000;
+  transition: all 0.5s 0s ease;
+}
+
+.shadow-container-active {
+  width: 100vw;
+  height: 100vh;
+  background-color: #222222;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
+  z-index: 10000;
+  transition: all 0.5s 0s ease;
+}
+
+
+
 .width100 {
   width: 100%;
 }
@@ -37,7 +63,7 @@ body {
   position: fixed;
   top: 0;
   box-shadow: -3px 2px 8px rgba(214, 214, 214, 0.414);
-  z-index: 2000000;
+  z-index: 1000;
 }
 
 .status-word {
@@ -66,7 +92,6 @@ body {
 }
 
 .menu {
-  
 }
 
 .menu-btn {
@@ -112,6 +137,7 @@ body {
   align-items: center;
   padding: 5px 0px;
   border-radius: 5px;
+  position: relative;
 }
 
 .menu-user-icon {
@@ -132,6 +158,13 @@ body {
   letter-spacing: 0.5px;
 }
 
+.menu-user-dot {
+  font-size: 16px;
+  color: #222222;
+  position: absolute;
+  right: 10px;
+}
+
 .menu-list {
   display: flex;
   flex-direction: column;
@@ -143,9 +176,9 @@ body {
   display: flex;
   align-items: center;
   color: #222222;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
-  padding: 15px 0px;
+  padding: 20px 0px;
   position: relative;
 }
 
@@ -162,13 +195,13 @@ body {
 
 
 .menu-icon {
-  width: 20px;
-  font-size: 20px;
+  width: 34px;
+  font-size: 25px;
   margin-right: 15px;
 }
 
 .menu-bottom-icon {
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .menu-icon-chevron {
@@ -217,15 +250,19 @@ body {
   background-color: rgb(225, 47, 47);
 }
 
+.home-header {
+  width: 100%;
+}
+
 .home-item-list {
-  width: 500px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .home-item {
-  width: 240px;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -238,7 +275,7 @@ body {
 
 .item-index-image {
   width: 100%;
-  transform: translateY(-90px);
+  transform: translateY(-50px);
 }
 
 .item-image {
@@ -280,7 +317,7 @@ iframe {
 
 .item-index-words-box {
   position: absolute;
-  top: 14px;
+  top: 0;
   margin: 0 auto;
   width: 100%;
   height: 100%;
@@ -295,21 +332,21 @@ iframe {
   font-weight: bold;
   text-shadow: 1px 1px 5px black;
   position: absolute;
-  top: 0;
+  top: 10px;
   
 }
 .item-index-words2 {
   color: white;
-  font-size: 5vw;
+  font-size: 5.5vw;
   font-weight: bold;
   text-align: center;
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   right: 20px;
 
 }
 .big-number {
-  font-size: 11vw;
+  font-size: 12vw;
   margin: 10px;
   font-weight: bold;
 }

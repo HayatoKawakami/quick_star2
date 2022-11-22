@@ -1295,7 +1295,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.8.0.tgz#f580f9beb67176fa57aae70b08ed510e1b18980f"
   integrity sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==
 
-"@emotion/react@^11.8.1":
+"@emotion/react@^11.10.5", "@emotion/react@^11.8.1":
   version "11.10.5"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.10.5.tgz#95fff612a5de1efa9c0d535384d3cfa115fe175d"
   integrity sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A==
@@ -8362,7 +8362,16 @@ react-select@^5.6.1:
     react-transition-group "^4.3.0"
     use-isomorphic-layout-effect "^1.1.2"
 
-react-transition-group@^4.3.0, react-transition-group@^4.4.0:
+react-slide-routes@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-slide-routes/-/react-slide-routes-2.2.0.tgz#5584aeb0a50ec4fc350e8b80883f52f47a8faa38"
+  integrity sha512-0vn/rHGebygp2XFv7SOtl/Z0zeHTnf5RpWCfbzGYM7TvuSS4hB5rmGMyJI15t3GpQQID3beBBpYld6PxlRfZMA==
+  dependencies:
+    "@emotion/react" "^11.10.5"
+    react-transition-group "^4.4.5"
+    tslib "^2.4.1"
+
+react-transition-group@^4.3.0, react-transition-group@^4.4.0, react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
   integrity sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==
@@ -9476,6 +9485,11 @@ tslib@^2.0.3:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
+tslib@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
+  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
 
 tsutils@^3.21.0:
   version "3.21.0"

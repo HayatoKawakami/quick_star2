@@ -4,7 +4,7 @@ import { useLoginContext } from "../../contexts/LoginContext";
 import { useConstContext } from "../../contexts/ConstContext";
 import classNames from 'classnames';
 
-import { faHouse, faChevronRight, faCoins, faCog, faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faChevronRight, faCoins, faCog, faAdjust, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { faQuestionCircle, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 
 export const Menu = () => {
@@ -25,19 +25,25 @@ export const Menu = () => {
     }
   }
 
+
   const LoginAndLogoutBox = () => {
     if (logged_in === true) {
       // ログイン時のメニュー
       return (
         <div className={classNames("menu-box", active ? "menu-active" : "menu-hide")}>
           <div className="menu-box-after" onClick={activeMenuBox}></div>
-          <Link className="menu-user-box" to={`users/profile`} onClick={activeMenuBox}>
-            <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
-            <div className="menu-user-text">
+          <div className="menu-user-box">
+            <Link to={`users/profile`} onClick={activeMenuBox}>
+              <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
+            </Link>
+            <Link className="menu-user-text" to={`users/profile`} onClick={activeMenuBox}>
               <p className="">{user.name}</p>
               <p className="">{user.email}</p>
-            </div>
-          </Link>
+            </Link>
+            <Link className='menu-user-dot' to={`users/profile`} onClick={activeMenuBox}>
+              <FontAwesomeIcon icon={faEllipsisH}/>
+            </Link>
+          </div>
           <ul className="menu-list">
             <Link className="menu-item" to={`/`} onClick={activeMenuBox}>
               <FontAwesomeIcon className='menu-icon' icon={faHouse}/>
@@ -83,6 +89,7 @@ export const Menu = () => {
     <>
       <p className="menu-btn" onClick={activeMenuBox}>{menuBtnImg}</p>
       {LoginAndLogoutBox()}
+      <div className={classNames(active ? 'shadow-container-active' : 'shadow-container')} ></div>
     </>
   );
 }
