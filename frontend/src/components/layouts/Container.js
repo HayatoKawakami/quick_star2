@@ -14,10 +14,11 @@ import { CostIndex } from "../pages/costs";
 import { CostNew } from "../pages/costs/new";
 import { CostEdit } from "../pages/costs/edit";
 
+
 export const Container = () => {
     return(
       <div className="container">
-        <Routes>
+        <Routes >
           <Route path="/" element={<Home />} />
           <Route path="users">
             <Route path="sign_up" element={<UserNew />} />

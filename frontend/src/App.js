@@ -18,6 +18,7 @@ export const App = () => {
                         <Menu />
                         <StatusBar />
                         <Container />
+                        
                     </CostContextProvider>
                 </ItemContextProvider>
             </LoginContextProvider>

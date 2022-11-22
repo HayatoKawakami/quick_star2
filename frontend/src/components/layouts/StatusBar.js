@@ -13,14 +13,14 @@ export const StatusBar = () =>{
   console.log(location)
 
   const ActiveBackBtn = () => {
-    if(loadJSON("logged_in") === true){
+    if (loadJSON("logged_in") === false || location.pathname === "/") {
+      return null;
+    } else if(loadJSON("logged_in") === true){
       return(
         <a className="back-btn" onClick={()=>{navigateStatusBar()}}>
           <img src={`${baseURL}/layouts/left.png`} alt="" />
         </a>
       );
-    } else if(loadJSON("logged_in") === false){
-      return null;
     }
   }
 
@@ -30,7 +30,7 @@ export const StatusBar = () =>{
     } else if (location.pathname === "/usres/profile"){
       navigate("/")
     } else if (location.pathname === "/items"){
-      navigate("/costs");
+      navigate("/");
     } else if (location.pathname === "/costs"){
       navigate("/");
     } else if (location.pathname === `/items/${Number(location.pathname.split("/items/").slice(1,2))}`) {

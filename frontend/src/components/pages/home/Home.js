@@ -30,26 +30,31 @@ export const Home = () => {
   },[date])
 
   return(
-    <div>
-      <h1>{user.name} さん、こんにちは。</h1>
-      <p>{date}</p>
+    <>
+      <div className="home-header">
+        <h3>{user.name} さん、こんにちは。</h3>
+        <p>{date}</p>
+      </div>
       <h3>Target</h3>
-      <ul className="home-item-list">
+      <ul className="items-list">
       {Object.values(items).filter(item => {
         return item.user_id === loadJSON("user").id
       }).map((item, index) => {
         const itemId = item.id
         return(
-          <li className="home-item" key={index}>
+          <li className="items-item" key={index}>
             <Link to={`items/${itemId}`}>
               <img className="item-index-image" src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
-              <p>「{item.name}」が手に入るまであと〇〇日</p>
+              <div className='item-index-words-box'>
+                <p className='item-index-words1'>「{item.name}」</p>
+                <p className='item-index-words2'>が手に入るまであと<span className='big-number'>21</span>日</p>
+              </div>
             </Link>
           </li>
         );
       })}
       </ul>
       <Link to="items">欲しいもの一覧へ</Link>
-    </div>
+    </>
   );
 }
