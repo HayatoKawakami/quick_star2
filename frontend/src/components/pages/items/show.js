@@ -85,7 +85,9 @@ export const ItemShow = () => {
       <Link className='btn green-btn' to="edit">
         <p>商品情報変更</p>
       </Link>
-      <button onClick={()=>{ ItemDestroy(itemId)}}>削除</button>
+      <Link className='btn gray-btn' to={`/items/`}>
+        <p>戻る</p>
+      </Link>
       <br />
       <Link to="/items">欲しいもの一覧へ</Link>
     </>

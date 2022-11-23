@@ -67,7 +67,7 @@ export const UserNew = () => {
 
   return(
     <div>
-      <label htmlFor="name">名前</label>
+      <label className=" essencial" htmlFor="name">名前</label>
       <br/>
       <input
       id="name"
@@ -79,7 +79,7 @@ export const UserNew = () => {
       />
       <br/>
 
-      <label htmlFor="email">メールアドレス</label>
+      <label className=" essencial" htmlFor="email">メールアドレス</label>
       <br/>
       <input
       id="email"
@@ -91,7 +91,7 @@ export const UserNew = () => {
       />
       <br/>
 
-      <label htmlFor="password">パスワード</label>
+      <label className=" essencial" htmlFor="password">パスワード</label>
       <br/>
       <input
       id="password"
@@ -103,7 +103,7 @@ export const UserNew = () => {
       />
       <br/>
 
-      <label htmlFor="passwordConfirmation">パスワード確認</label>
+      <label className=" essencial" htmlFor="passwordConfirmation">パスワード確認</label>
       <br/>
       <input
       id="passwordConfirmation"
@@ -118,7 +118,7 @@ export const UserNew = () => {
       <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
 
       <div className="radio">
-        <label htmlFor="sex">性別</label>
+        <label className=" essencial" htmlFor="sex">性別</label>
         <br/>
         <label>
           <input
@@ -141,7 +141,7 @@ export const UserNew = () => {
         </label>
       </div>
 
-      <label htmlFor="birthday">生年月日</label>
+      <label className=" essencial" htmlFor="birthday">生年月日</label>
       <br/>
       <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       <br/>
