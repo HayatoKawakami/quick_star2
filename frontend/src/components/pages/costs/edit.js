@@ -78,8 +78,12 @@ export const CostEdit = () => {
       />
       <br />
 
-      <input type="button" onClick={updateCost} value="変更" />
-      <input type="button" onClick={destroyCost} value="削除" />
+      <button className='btn green-btn' onClick={updateCost}>
+        <p>変更</p>
+      </button>
+      <button className='btn red-btn' onClick={destroyCost}>
+        <p>削除</p>
+      </button>
     </>
   );
 }

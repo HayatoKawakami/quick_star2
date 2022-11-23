@@ -120,89 +120,94 @@ export const ItemEdit = () => {
     <>
       <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
       <br />
-      <label htmlFor="">商品名</label>
-      <br />
-      <input type="text"
-              name="name"
-              value={name}
-              onChange={handleChangeName}
-      />
-      <br />
-      <label htmlFor="">価格</label>
-      <br />
-      <input type="number"
-        name="price"
-        value={price}
-        onChange={handleChangePrice}
-      />
-      <br />
-      <label htmlFor="">画像</label>
-      <br />
-      <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
-      <br />
-      <label htmlFor="">参考動画</label>
-      <br />
-      <ul>
-      {Object.values(videos).filter(video => {
-        return video.item_id === Number(itemId);
-      }).map((value, index) => {
-        return(
-          <li key={index}>
-            <iframe width="250" height="155" src={`https://www.youtube.com/embed/${value.url.split(/[= &]/).slice(1,2)}`} title="YouTube video player"></iframe>
-            <input type="button" onClick={() => { VideoDestroy(value.id) }} value="動画削除" />
-          </li>
-        );
-      })}
-      </ul>
-      <label htmlFor="">参考動画追加</label>
-      <br />
-      <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
-      <br />
-      <label htmlFor="">購入サイト候補</label>
-      <br />
-      <ul className='sites-list'>
-        {Object.values(sites).filter(site => {
-          return site.item_id === Number(itemId);
-        }).map((value, index) => {
-          if (value.site_name === "amazon"){
-            return(
-              <li className='sites-item' key={index}>
-                <img className='site-item-image' src={`${baseURL}/sites/amazon.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
-              </li>
-            );
-          } else if(value.site_name === "rakuten") {
-            return(
-              <li className='sites-item' key={index}>
-                <img className='site-item-image' src={`${baseURL}/sites/rakuten.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
-              </li>
-            );
-          } else if(value.site_name === "bic") {
-            return(
-              <li className='sites-item' key={index}>
-                <img className='site-item-image' src={`${baseURL}/sites/bic.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
-              </li>
-            );
-          } else if(value.site_name === "mercari") {
-            return(
-              <li className='edit-sites-item' key={index}>
-                <img className='site-item-image' src={`${baseURL}/sites/mercari.png`} alt="" />
-                <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
-              </li>
-            );
-          }
-        })}
-      </ul>
-      <Select options={options} onChange={handleChangeSiteName} />
+      <div className='form-block'>
+        <label htmlFor="">商品名</label>
+        <input type="text"
+                name="name"
+                value={name}
+                onChange={handleChangeName}
+        />
+      </div>
+      <div className='form-block'>
+        <label htmlFor="">価格</label>
+        <input type="number"
+          name="price"
+          value={price}
+          onChange={handleChangePrice}
+        />
+      </div>
 
-      <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
-      <br />
-      <br />
-      <input type="button" onClick={EditItem} value="変更" />
-      <br />
-      <Link to={`/items/${item.id}`}>戻る</Link>
+      <div className='form-block'>
+        <label htmlFor="">画像</label>
+        <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
+
+      </div>
+      <div className='form-block'>
+        <label htmlFor="">参考動画追加</label>
+        <br />
+        <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
+        <ul>
+        {Object.values(videos).filter(video => {
+          return video.item_id === Number(itemId);
+        }).map((value, index) => {
+          return(
+            <li key={index}>
+              <iframe width="250" height="155" src={`https://www.youtube.com/embed/${value.url.split(/[= &]/).slice(1,2)}`} title="YouTube video player"></iframe>
+              <input type="button" onClick={() => { VideoDestroy(value.id) }} value="動画削除" />
+            </li>
+          );
+        })}
+        </ul>
+      </div>
+
+      <div className='form-block'>
+        <label htmlFor="">購入サイト候補</label>
+        <br />
+        <ul className='sites-list'>
+          {Object.values(sites).filter(site => {
+            return site.item_id === Number(itemId);
+          }).map((value, index) => {
+            if (value.site_name === "amazon"){
+              return(
+                <li className='sites-item' key={index}>
+                  <img className='site-item-image' src={`${baseURL}/sites/amazon.png`} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                </li>
+              );
+            } else if(value.site_name === "rakuten") {
+              return(
+                <li className='sites-item' key={index}>
+                  <img className='site-item-image' src={`${baseURL}/sites/rakuten.png`} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                </li>
+              );
+            } else if(value.site_name === "bic") {
+              return(
+                <li className='sites-item' key={index}>
+                  <img className='site-item-image' src={`${baseURL}/sites/bic.png`} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                </li>
+              );
+            } else if(value.site_name === "mercari") {
+              return(
+                <li className='sites-item' key={index}>
+                  <img className='site-item-image' src={`${baseURL}/sites/mercari.png`} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                </li>
+              );
+            }
+          })}
+        </ul>
+        <Select options={options} onChange={handleChangeSiteName} />
+        <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
+      </div>
+
+      <button className='btn green-btn' onClick={EditItem}>
+        <p>変更</p>
+      </button>
+      <button className='btn red-btn' onClick={() =>{ItemDestroy(itemId)}}>
+        <p>削除</p>
+      </button>
 
     </>
   );
