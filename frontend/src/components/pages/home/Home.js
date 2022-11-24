@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useConstContext } from "../../../contexts/ConstContext";
-import { useLoginContext } from "../../../contexts/LoginContext";
+import { useUserContext } from "../../../contexts/UserContext";
 import { useItemContext } from "../../../contexts/ItemContext";
 
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ export const Home = () => {
 
   const { baseURL } = useConstContext();
   const { items } = useItemContext();
-  const { logged_in, user, loadJSON } = useLoginContext();
+  const { user, loadJSON } = useUserContext();
 
   const [date, setDate] = useState('');
 

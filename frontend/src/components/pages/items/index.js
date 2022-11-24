@@ -1,16 +1,15 @@
 import React from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
 import { Link, Navigate } from 'react-router-dom';
-import { useLoginContext } from '../../../contexts/LoginContext';
+import { useUserContext } from '../../../contexts/UserContext';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
   const { baseURL, FontAwesomeIcon } = useConstContext();
   const { items } = useItemContext();
-  const { loadJSON } = useLoginContext();
+  const { loadJSON } = useUserContext();
 
-// ログインしていなければログイン画面にリダイレクト
   if (loadJSON("logged_in") === false) {
     return <Navigate replace to="/login"/>
   }
@@ -32,7 +31,7 @@ export const ItemIndex = () => {
             );
           })}
       </ul>
-      
+
       <Link className='btn cyan-btn' to="/items/new">
         <FontAwesomeIcon className='awesome-icon' icon={faCirclePlus}/>
         <p>欲しいもの追加</p>

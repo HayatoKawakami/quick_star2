@@ -1,15 +1,15 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useLoginContext } from '../../../contexts/LoginContext';
+import { useUserContext } from '../../../contexts/UserContext';
 
 export const LoginForm = () => {
 
-  const { email, setEmail, password, setPassword, Login, loadJSON, ItemSet } = useLoginContext();
-
-  const handleChangeEmail = (e) => { setEmail(e.target.value); }
-  const handleChangePassword = (e) => { setPassword(e.target.value); }
-
+  const { handleChangeEmail, handleChangePassword, email, password, Login, loadJSON } = useUserContext();
   
+  const data = {
+    email: email,
+    password: password
+  }
   if (loadJSON("logged_in") === true) {
     return <Navigate replace to="/"/>;
   }
@@ -34,7 +34,7 @@ export const LoginForm = () => {
       />
       <br />
 
-      <input type="button" onClick={Login} value="ログイン" />
+      <input type="button" onClick={()=>{Login(data)}} value="ログイン" />
     </>
   )
 }

@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useLoginContext } from '../../../contexts/LoginContext';
-import axios from '../../../../lib/axios';
+import { useUserContext } from '../../../contexts/UserContext';
 import { Link, useParams, Navigate } from 'react-router-dom';
 
 export const ItemShow = () => {
 
-  const { baseURL, baseApiURL, navigate, FontAwesomeIcon } = useConstContext();
-  const { loadJSON } = useLoginContext();
-  const { videos, sites, ItemSet, item, ItemDestroy } = useItemContext();
+  const { baseURL } = useConstContext();
+  const { loadJSON } = useUserContext();
+  const { videos, sites, itemSet, item } = useItemContext();
   const { itemId }  = useParams();
 
   useEffect(() => {
-    ItemSet(itemId);
+    itemSet(itemId);
   },[])
 
-
-  // ログインしていなければログイン画面にリダイレクト
   if (loadJSON("logged_in") === false) {
     return <Navigate replace to="/login" />
   }
 
   return(
     <>
-
-      <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
-      <p className='item-name'>{item.name}</p>
+      <div className='item-image-name-box'>
+        <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
+        <p className='item-name'>{item.name}</p>
+      </div>
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
       <br />
       <h3>参考動画</h3>
@@ -89,7 +87,6 @@ export const ItemShow = () => {
         <p>戻る</p>
       </Link>
       <br />
-      <Link to="/items">欲しいもの一覧へ</Link>
     </>
   );
 }

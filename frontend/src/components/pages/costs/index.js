@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
-import axios from '../../../../lib/axios';
+import { useCostContext } from '../../../contexts/CostContext';
 import { Link } from 'react-router-dom';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const CostIndex = () => {
-  const { baseURL, baseApiURL, FontAwesomeIcon } = useConstContext();
-
-  const [costs, setCosts] = useState({});
-
-  const SetCostIndex = () => {
-    axios.get(`${baseApiURL}/costs`)
-    .then(response => {
-      console.log("固定費一覧データ取得完了", response.data);
-      setCosts(response.data)
-    })
-    .catch(error => {
-      console.log("固定費データ取得処理エラー", error);
-    })
-  }
+  const { baseURL, FontAwesomeIcon } = useConstContext();
+  const { costs, setCostIndex } = useCostContext();
 
   const CostImage = (name) => {
     if(name === "家賃"){
@@ -44,10 +32,8 @@ export const CostIndex = () => {
     }
   }
 
-
-
   useEffect(() => {
-    SetCostIndex();
+    setCostIndex();
   }, [])
 
   return(

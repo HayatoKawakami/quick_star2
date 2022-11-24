@@ -1,38 +1,29 @@
-import React,  { useState } from "react";
-import axios from "../../../../lib/axios";
-
-import { useLoginContext } from "../../../contexts/LoginContext";
-import { useConstContext } from "../../../contexts/ConstContext";
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useUserContext } from "../../../contexts/UserContext";
 
 export const UserNew = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [image, setImage] = useState('')
-  const [sex, setSex] = useState(1);
-  const [birthday, setBirthday] = useState('');
 
-  const { setUser, setLogged_in, saveJSON } = useLoginContext();
+  const {
+    handleChangeName,
+    handleChangeEmail,
+    handleChangePassword,
+    handleChangePasswordConfirmation,
+    handleChangeSex,
+    handleBirthday,
+    getImage,
+    name,
+    email,
+    password,
+    passwordConfirmation,
+    image,
+    sex,
+    birthday,
+    loadJSON,
+    createUser
+  } = useUserContext();
 
-  const { baseApiURL, navigate } = useConstContext();
-
-  const handleChangeName = (e) => { setName(e.target.value); }
-  const handleChangeEmail = (e) => { setEmail(e.target.value); }
-  const handleChangePassword = (e) => { setPassword(e.target.value); }
-  const handleChangePasswordConfirmation = (e) => { setPasswordConfirmation(e.target.value); }
-  const handleChangeSex = (e) => { setSex(e.target.value); }
-  const handleBirthday = (e) => { setBirthday(e.target.value); }
-  
-  const getImage = (e) => {
-    if (!e.target.files) return
-    const img = e.target.files[0];
-    setImage(img)
-  }
-
-  const Send = (event) => {
-
-    const data = new FormData()
+  const data = new FormData()
     data.append("name", name);
     data.append("email", email);
     data.append("password", password);
@@ -42,28 +33,9 @@ export const UserNew = () => {
     data.append("birthday", birthday);
     console.log([...data.entries()]);
 
-    const config = {
-      headers:{'Content-Type': 'multipart/form-data'},
-    }
-    
-    axios.post(`${baseApiURL}/users`,data, config)
-    .then(response =>{
-      console.log('ユーザー新規作成完了'+ response.data);
-      setUser(response.data.user);
-      setLogged_in(true);
-      saveJSON("logged_in", true)
-      saveJSON("user", response.data.user);
-      event.preventDefault();
-      navigate("/");
-    }).catch(error =>{
-      console.log("ユーザー新規作成できません", error)
-    })
+  if (loadJSON("logged_in") === true) {
+    return <Navigate replace to="/"/>;
   }
-  // 権限なし時のリダイレクト
-  // if (loadJSON("logged_in") === true) {
-  //   return <Navigate replace to="/"/>;
-  // }
-
 
   return(
     <div>
@@ -146,7 +118,7 @@ export const UserNew = () => {
       <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       <br/>
 
-      <input type="button" onClick={Send} value="新規登録" />
+      <input type="button" onClick={()=> {createUser(data)}} value="新規登録" />
     </div>
   );
 }

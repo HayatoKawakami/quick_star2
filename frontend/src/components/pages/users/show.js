@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
-
 import { useConstContext } from "../../../contexts/ConstContext";
-import { useLoginContext } from "../../../contexts/LoginContext";
+import { useUserContext } from "../../../contexts/UserContext";
 
 export const UserProfile = () => {
 
   const { baseURL} = useConstContext();
-  const { user, Logout, loadJSON } = useLoginContext();
+  const { user, Logout, loadJSON } = useUserContext();
 
   const userSex = () => {
     if (user.sex === 1 ) {
@@ -17,7 +16,6 @@ export const UserProfile = () => {
     }
   }
 
-  // 権限なし時のリダイレクト
   if (loadJSON("logged_in") === false) {
     return <Navigate replace to="/login"/>;
   }

@@ -3,7 +3,7 @@ import React from "react";
 import { StatusBar } from "./components/layouts/StatusBar";
 import { Menu } from "./components/layouts/Menu";
 import { Container } from "./components/layouts/Container";
-import { LoginContextProvider } from "./contexts/LoginContext";
+import { UserContextProvider } from "./contexts/UserContext";
 import { ConstContextProvider } from "./contexts/ConstContext";
 import { ItemContextProvider } from "./contexts/ItemContext";
 import { CostContextProvider } from "./contexts/CostContext";
@@ -12,16 +12,15 @@ import { CostContextProvider } from "./contexts/CostContext";
 export const App = () => {
     return(
         <ConstContextProvider>
-            <LoginContextProvider>
+            <UserContextProvider>
                 <ItemContextProvider>
                     <CostContextProvider>
                         <Menu />
                         <StatusBar />
                         <Container />
-                        
                     </CostContextProvider>
                 </ItemContextProvider>
-            </LoginContextProvider>
+            </UserContextProvider>
         </ConstContextProvider>
     );
 }
