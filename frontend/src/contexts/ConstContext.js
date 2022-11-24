@@ -2,14 +2,11 @@ import React, { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 const ConstContext = createContext();
 
 export const useConstContext = () => {
   return useContext(ConstContext);
 }
-
-
 
 export const ConstContextProvider = ({children}) => {
 

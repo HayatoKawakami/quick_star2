@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import { Link,useParams, useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import { useConstContext } from "../../contexts/ConstContext";
 import { useItemContext } from "../../contexts/ItemContext";
-import { useLoginContext } from "../../contexts/LoginContext";
+import { useUserContext } from "../../contexts/UserContext";
 
 export const StatusBar = () =>{
   const { baseURL, navigate } = useConstContext();
-  const { loadJSON } = useLoginContext();
+  const { loadJSON } = useUserContext();
   const { item } = useItemContext();
   const location = useLocation();
 

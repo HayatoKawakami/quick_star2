@@ -1,120 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
-import { useLoginContext } from '../../../contexts/LoginContext';
-
+import { useUserContext } from '../../../contexts/UserContext';
 import { Navigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useItemContext } from '../../../contexts/ItemContext';
-
 import Select from 'react-select'
 
 export const ItemEdit = () => {
 
-  const { baseURL, baseApiURL, navigate } = useConstContext();
-  const { loadJSON } = useLoginContext();
+  const { baseURL } = useConstContext();
+  const { loadJSON } = useUserContext();
   const {
     item,
     name,
     price,
-    image,
     videos,
     sites,
     url,
     options,
-    site_name,
     site_url,
-    setItem,
-    setName,
-    setPrice,
-    setImage,
-    ItemSet,
+    itemSet,
+    getImage,
     handleChangeName,
     handleChangePrice,
     handleChangeUrl,
     handleChangeSiteName,
     handleChangeSiteUrl,
-    VideoDestroy,
-    SiteDestroy,
-    ItemDestroy,
+    videoDestroy,
+    siteDestroy,
+    itemDestroy,
+    editItem,
   } = useItemContext();
 
   const { itemId } = useParams();
 
-
-  const getImage = (e) => {
-    if (!e.target.files) return
-    const img = e.target.files[0];
-    setImage(img)
-    console.log(img)
-  }
-
-  const EditItem = () => {
-    const itemData = {
-      name: name,
-      price: price,
-    }
-
-    axios.put(`${baseApiURL}/items/${itemId}`, itemData)
-    .then(response => {
-      console.log("欲しいもの情報更新完了", response.data);
-      navigate(`/items/${itemId}`)
-    })
-    .catch(error => {
-      console.log("欲しいもの情報更新処理エラー", error);
-    })
-
-    const imageData = new FormData();
-    imageData.append("image", image);
-    imageData.append("item_id", itemId);
-
-    const config = {
-      headers:{'Content-Type': 'multipart/form-data'},
-    }
-    axios.post(`${baseApiURL}/images`, imageData, config)
-    .then(response => {
-      console.log("欲しいもの画像追加完了", response.data);
-    })
-    .catch(error => {
-      console.log("欲しいもの画像追加処理エラー", error);
-    })
-
-    const videoData = {
-      url: url,
-      item_id: itemId,
-    }
-    axios.post(`${baseApiURL}/videos`, videoData)
-    .then(response => {
-      console.log("動画URL登録完了", response.data);
-    })
-    .catch(error => {
-      console.log("動画URL登録処理エラー", error);
-    })
-
-    const siteData = {
-      site_name: site_name,
-      url: site_url,
-      item_id: itemId,
-    }
-
-    axios.post(`${baseApiURL}/sites`, siteData)
-    .then(response => {
-      console.log("購入サイト情報追加完了", response.data);
-    })
-    .catch(error => {
-      console.log("購入サイト情報追加処理エラー", error);
-    })
-  }
-
-
   useEffect(() => {
-    ItemSet(itemId);
+    itemSet(itemId);
   },[])
 
   if (loadJSON("logged_in") === false){
     return <Navigate replace to="/login" />
   }
-
 
   return(
     <>
@@ -153,7 +78,7 @@ export const ItemEdit = () => {
           return(
             <li key={index}>
               <iframe width="250" height="155" src={`https://www.youtube.com/embed/${value.url.split(/[= &]/).slice(1,2)}`} title="YouTube video player"></iframe>
-              <input type="button" onClick={() => { VideoDestroy(value.id) }} value="動画削除" />
+              <input type="button" onClick={() => { videoDestroy(value.id) }} value="動画削除" />
             </li>
           );
         })}
@@ -171,28 +96,28 @@ export const ItemEdit = () => {
               return(
                 <li className='sites-item' key={index}>
                   <img className='site-item-image' src={`${baseURL}/sites/amazon.png`} alt="" />
-                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{siteDestroy(value.id)}} alt="" />
                 </li>
               );
             } else if(value.site_name === "rakuten") {
               return(
                 <li className='sites-item' key={index}>
                   <img className='site-item-image' src={`${baseURL}/sites/rakuten.png`} alt="" />
-                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{siteDestroy(value.id)}} alt="" />
                 </li>
               );
             } else if(value.site_name === "bic") {
               return(
                 <li className='sites-item' key={index}>
                   <img className='site-item-image' src={`${baseURL}/sites/bic.png`} alt="" />
-                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{siteDestroy(value.id)}} alt="" />
                 </li>
               );
             } else if(value.site_name === "mercari") {
               return(
                 <li className='sites-item' key={index}>
                   <img className='site-item-image' src={`${baseURL}/sites/mercari.png`} alt="" />
-                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{SiteDestroy(value.id)}} alt="" />
+                  <img className='site-item-delete' src={`${baseURL}/sites/delete.png`} onClick={()=>{siteDestroy(value.id)}} alt="" />
                 </li>
               );
             }
@@ -202,10 +127,10 @@ export const ItemEdit = () => {
         <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
       </div>
 
-      <button className='btn green-btn' onClick={EditItem}>
+      <button className='btn green-btn' onClick={()=>{editItem(itemId)}}>
         <p>変更</p>
       </button>
-      <button className='btn red-btn' onClick={() =>{ItemDestroy(itemId)}}>
+      <button className='btn red-btn' onClick={() =>{itemDestroy(itemId)}}>
         <p>削除</p>
       </button>
 

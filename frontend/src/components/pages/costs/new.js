@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useCostContext } from '../../../contexts/CostContext';
 import Select from 'react-select';
@@ -7,9 +7,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 export const CostNew = () => {
 
   const { FontAwesomeIcon } = useConstContext();
-  const {createCost, name, setName, price, setPrice } = useCostContext();
-  const [ label, setLabel ] = useState('');
-
+  const { name, price, label, handleChangeName, handleChangePrice, handleChangeOtherName,createCost  } = useCostContext();
 
   const costsSelect = [
     {value: "家賃", label: "家賃"},
@@ -23,17 +21,6 @@ export const CostNew = () => {
     {value: "貯蓄", label: "貯蓄"},
     {value: "", label: "その他"},
   ]
-  const handleChangeName = (e) => {
-    setName(e.value);
-    setLabel(e.label);
-  }
-  const handleChangePrice = (e) => {
-    setPrice(e.target.value);
-  }
-
-  const handleChangeOtherName = (e) => {
-    setName(e.target.value);
-  }
 
   return(
     <>

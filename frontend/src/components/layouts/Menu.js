@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom"
-import { useLoginContext } from "../../contexts/LoginContext";
+import { useUserContext } from "../../contexts/UserContext";
 import { useConstContext } from "../../contexts/ConstContext";
 import classNames from 'classnames';
 
@@ -10,18 +10,15 @@ import { faQuestionCircle, faCheckSquare } from '@fortawesome/free-regular-svg-i
 export const Menu = () => {
 
   const { baseURL, FontAwesomeIcon } = useConstContext();
-  const { user, Logout, logged_in } = useLoginContext();
+  const { user, logged_in } = useUserContext();
 
   const [active, setActive] = useState(false);
-  const [menuBtnImg, setMenuBtnImg] = useState('OPEN')
 
   const activeMenuBox = () => {
     if (active === true) {
       setActive(false);
-      setMenuBtnImg('OPEN');
     } else if (active === false) {
       setActive(true);
-      setMenuBtnImg('CLOSE');
     }
   }
 
@@ -87,7 +84,7 @@ export const Menu = () => {
 
   return(
     <>
-      <p className="menu-btn" onClick={activeMenuBox}>{menuBtnImg}</p>
+      <button className={classNames(active ? 'btn_menu_active' : 'btn_menu')} href="" onClick={activeMenuBox}></button>
       {LoginAndLogoutBox()}
       <div className={classNames(active ? 'shadow-container-active' : 'shadow-container')} ></div>
     </>
