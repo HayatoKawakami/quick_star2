@@ -12,9 +12,7 @@ export const ConstContextProvider = ({children}) => {
 
   const baseURL = "http://localhost:3000"
   const baseApiURL = "http://localhost:3000/api/v1"
-
   const navigate = useNavigate();
-
 
   const value = {
     baseURL,

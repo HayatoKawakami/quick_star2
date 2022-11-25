@@ -42,12 +42,16 @@ export const UserContextProvider = ({ children }) => {
     }
   }
 
+  const removeLocalStorage = (key) => {
+    localStorage.removeItem(key);
+  }
+
   const getImage = (e) => {
     if (!e.target.files) return
     const img = e.target.files[0];
     setImage(img)
   }
-
+  console.log(user)
   const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${user.id}/icon.jpg`);
 
   const getPreviewImage = (event) => {
@@ -64,10 +68,6 @@ export const UserContextProvider = ({ children }) => {
     } else if (!event.target.files) {
       return
     }
-  }
-
-  const removeLocalStorage = (key) => {
-    localStorage.removeItem(key);
   }
 
   const createUser = (data) => {
@@ -93,7 +93,6 @@ export const UserContextProvider = ({ children }) => {
     .then(response => {
       setName(response.data.name);
       setEmail(response.data.email);
-      setPassword(response.data.password);
       console.log("ユーザー情報取得完了",response.data)
     })
     .catch(error => {
@@ -107,7 +106,7 @@ export const UserContextProvider = ({ children }) => {
     }
     axios.put(`${baseApiURL}/users/${user.id}`, data, config )
     .then(response => {
-      console.log("送信したデータ" + response.data);
+      console.log("送信したデータ", response.data);
       saveJSON("user", response.data);
       setUser(response.data);
       navigate("users/profile");
@@ -133,6 +132,7 @@ export const UserContextProvider = ({ children }) => {
     console.log("ログイン入力",data);
     axios.post(`${baseApiURL}/login`, data)
     .then(response => {
+      console.log(response.data)
       if (response.data.logged_in){
         console.log("ログイン完了", response.data);
         setLogged_in(true);
