@@ -9,7 +9,6 @@ export const UserEdit = () => {
     user,
     name,
     email,
-    password,
     image,
     getPreviewImage,
     previewImage,
