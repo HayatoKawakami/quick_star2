@@ -52,7 +52,7 @@ export const UserContextProvider = ({ children }) => {
     setImage(img)
   }
   console.log(user)
-  const [previewImage, setPreviewImage] = useState(`${baseURL}/uploads/user/image/${user.id}/icon.jpg`);
+  const [previewImage, setPreviewImage] = useState('');
 
   const getPreviewImage = (event) => {
     if (event.target.files) {
@@ -71,7 +71,6 @@ export const UserContextProvider = ({ children }) => {
   }
 
   const createUser = (data) => {
-
     const config = {
       headers:{'Content-Type': 'multipart/form-data'},
     }
@@ -94,6 +93,7 @@ export const UserContextProvider = ({ children }) => {
       setName(response.data.name);
       setEmail(response.data.email);
       console.log("ユーザー情報取得完了",response.data)
+      setPreviewImage(response.data.image.url)
     })
     .catch(error => {
       console.log("ユーザー情報取得処理エラー", error)
