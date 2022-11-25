@@ -4,12 +4,20 @@ import { useUserContext } from '../../../contexts/UserContext';
 
 export const LoginForm = () => {
 
-  const { handleChangeEmail, handleChangePassword, email, password, Login, loadJSON } = useUserContext();
-  
+  const {
+    handleChangeEmail,
+    handleChangePassword,
+    email,
+    password,
+    Login,
+    loadJSON
+  } = useUserContext();
+
   const data = {
     email: email,
     password: password
   }
+
   if (loadJSON("logged_in") === true) {
     return <Navigate replace to="/"/>;
   }

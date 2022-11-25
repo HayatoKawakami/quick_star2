@@ -6,6 +6,7 @@ export const UserEdit = () => {
   const {
     handleChangeName,
     handleChangeEmail,
+    user,
     name,
     email,
     password,
@@ -21,7 +22,7 @@ export const UserEdit = () => {
   const data = new FormData();
     data.append("name", name );
     data.append("email", email);
-    data.append("password", password);
+    // data.append("password", password);
     if (image) {
       data.append("image", image);
     }
@@ -64,7 +65,7 @@ export const UserEdit = () => {
         />
       </div>
 
-      <input type="hidden" name="password" value={password} />
+      {/* <input type="hidden" name="password" value={password} /> */}
 
       <input type="button" onClick={()=>{editUser(data)}} value="更新する" />
       <button onClick={userDestroy}>アカウント削除</button>
