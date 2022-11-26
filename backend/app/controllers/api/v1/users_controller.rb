@@ -44,10 +44,18 @@ module Api
         end
       end
 
+      def take_home_pay
+        user = User.find(session[:user_id])
+        income = user.income
+        # 　take_home_pay　=　income　-　健康保険料　-　厚生年金保険料　-　雇用保険料　-　源泉所得税　の順
+        take_home_pay = income - (income * 0.0981 / 2) - (income * 0.183 / 2) - (income * 0.005) - 6750
+        render json: { status: 200, income: income, take_home_pay: take_home_pay }
+      end
+
       private
 
       def user_params
-        params.permit(:id, :name, :email, :password, :password_confirmation, :sex, :birthday, :image)
+        params.permit(:id, :name, :email, :password, :password_confirmation, :sex, :birthday, :image, :income)
       end
 
       def set_user

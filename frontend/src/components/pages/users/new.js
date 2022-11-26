@@ -11,6 +11,7 @@ export const UserNew = () => {
     handleChangePasswordConfirmation,
     handleChangeSex,
     handleBirthday,
+    handleChangeIncome,
     getImage,
     name,
     email,
@@ -19,6 +20,7 @@ export const UserNew = () => {
     image,
     sex,
     birthday,
+    income,
     loadJSON,
     createUser
   } = useUserContext();
@@ -31,6 +33,7 @@ export const UserNew = () => {
     data.append("image", image);
     data.append("sex", sex);
     data.append("birthday", birthday);
+    data.append("income", income)
     console.log([...data.entries()]);
 
   if (loadJSON("logged_in") === true) {
@@ -113,10 +116,20 @@ export const UserNew = () => {
         </label>
       </div>
 
-      <label className=" essencial" htmlFor="birthday">生年月日</label>
-      <br/>
-      <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
-      <br/>
+      <div className='form-block'>
+        <label className=" essencial" htmlFor="birthday">生年月日</label>
+        <br/>
+        <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
+      </div>
+
+      <div className='form-block'>
+        <label htmlFor="email">収入※額面</label>
+        <input type="number"
+        name="income"
+        onChange={handleChangeIncome}
+        value={income}
+        />
+      </div>
 
       <input type="button" onClick={()=> {createUser(data)}} value="新規登録" />
     </div>

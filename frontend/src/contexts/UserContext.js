@@ -17,8 +17,10 @@ export const UserContextProvider = ({ children }) => {
   const [image, setImage] = useState('')
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
+  const [income, setIncome] = useState('');
+  const [take_home_pay, setTake_home_pay] = useState('');
 
-  const { baseURL, baseApiURL, navigate } = useConstContext();
+  const { baseApiURL, navigate } = useConstContext();
   const [logged_in, setLogged_in] = useState(false);
 
   const handleChangeName = (e) => { setName(e.target.value); }
@@ -27,6 +29,7 @@ export const UserContextProvider = ({ children }) => {
   const handleChangePasswordConfirmation = (e) => { setPasswordConfirmation(e.target.value); }
   const handleChangeSex = (e) => { setSex(e.target.value); }
   const handleBirthday = (e) => { setBirthday(e.target.value); }
+  const handleChangeIncome = (e) => { setIncome(e.target.value); }
 
   const saveJSON = (key, value) => {
     localStorage.setItem( key, JSON.stringify(value) );
@@ -100,6 +103,17 @@ export const UserContextProvider = ({ children }) => {
     })
   }
 
+  const takeHomePay = () => {
+    axios.get(`${baseApiURL}/take_home_pay`)
+    .then(response => {
+      console.log("手取り収入情報取得完了", response.data.take_home_pay);
+      setTake_home_pay(response.data.take_home_pay);
+    })
+    .catch(error => {
+      console.log("手取り収入情報取得処理エラー", error);
+    })
+  }
+
   const editUser = (data) => {
     const config = {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -138,6 +152,7 @@ export const UserContextProvider = ({ children }) => {
         setLogged_in(true);
         saveJSON("logged_in", true);
         setUser(response.data.user);
+        takeHomePay();
         saveJSON("user", response.data.user);
         navigate("/");
       } else {
@@ -166,6 +181,7 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     checkLoginStatus();
+    takeHomePay();
   },[])
 
   const checkLoginStatus = () => {
@@ -196,6 +212,7 @@ export const UserContextProvider = ({ children }) => {
     handleChangePasswordConfirmation,
     handleChangeSex,
     handleBirthday,
+    handleChangeIncome,
     getImage,
     getPreviewImage,
     previewImage,
@@ -207,6 +224,8 @@ export const UserContextProvider = ({ children }) => {
     sex,
     image,
     birthday,
+    income,
+    take_home_pay,
     Login,
     Logout,
     logged_in,
@@ -215,6 +234,7 @@ export const UserContextProvider = ({ children }) => {
     removeLocalStorage,
     navigate,
     userSet,
+    takeHomePay,
     createUser,
     editUser,
     userDestroy,

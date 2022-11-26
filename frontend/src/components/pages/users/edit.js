@@ -6,10 +6,11 @@ export const UserEdit = () => {
   const {
     handleChangeName,
     handleChangeEmail,
-    user,
+    handleChangeIncome,
     name,
     email,
     image,
+    income,
     getPreviewImage,
     previewImage,
     loadJSON,
@@ -25,6 +26,7 @@ export const UserEdit = () => {
     if (image) {
       data.append("image", image);
     }
+    data.append("income", income)
 
   useEffect(()=> {
     userSet();
@@ -61,6 +63,15 @@ export const UserEdit = () => {
         name="email"
         onChange={handleChangeEmail}
         value={email}
+        />
+      </div>
+
+      <div className='form-block'>
+        <label htmlFor="email">収入※額面</label>
+        <input type="number"
+        name="income"
+        onChange={handleChangeIncome}
+        value={income}
         />
       </div>
 

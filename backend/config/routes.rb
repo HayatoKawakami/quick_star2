@@ -5,10 +5,12 @@ Rails.application.routes.draw do
       get 'profile', to: 'users#show'
       get '/profile/edit', to: 'users#edit'
       get 'sign_up', to: 'users#new'
+      get 'take_home_pay', to: 'users#take_home_pay'
 
       post 'login', to: 'sessions#login'
       delete 'logout', to: 'sessions#logout'
       get 'logged_in', to: 'sessions#logged_in?'
+      
 
       resources :items, only: %i[index show create update destroy]
       resources :costs, only: %i[index show create update destroy]
