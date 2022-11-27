@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 import { useUserContext } from "./UserContext";
 import axios from "../../lib/axios";
@@ -16,6 +16,7 @@ export const CostContextProvider = ({children}) => {
   const [costs, setCosts] = useState('');
   const [name, setName] = useState(' ');
   const [price, setPrice] = useState('');
+  const [totalCostPrice, setTotalCostPrice] = useState('');
   
   const [user_id, setUser_id] = useState('');
   const [ label, setLabel ] = useState('');
@@ -32,6 +33,17 @@ export const CostContextProvider = ({children}) => {
     })
     .catch(error => {
       console.log("固定費データ取得処理エラー", error);
+    })
+  }
+
+  const totalCostPriceSet = () => {
+    axios.get(`${baseApiURL}/calc_all_costs`)
+    .then(response => {
+      console.log("固定費合計額取得完了", response.data);
+      setTotalCostPrice(response.data);
+    })
+    .catch(error => {
+      console.log("固定費合計額取得処理エラー", error);
     })
   }
 
@@ -86,6 +98,10 @@ export const CostContextProvider = ({children}) => {
     })
   }
 
+  useEffect(()=> {
+    totalCostPriceSet();
+  },[])
+
   const value = {
     costs,
     name,
@@ -93,10 +109,12 @@ export const CostContextProvider = ({children}) => {
     label,
     setName,
     setPrice,
+    totalCostPrice,
     handleChangeName,
     handleChangePrice,
     handleChangeOtherName,
     setCostIndex,
+    totalCostPriceSet,
     costSet,
     createCost,
     updateCost,

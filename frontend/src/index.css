@@ -450,8 +450,17 @@ input {
   transform: translateY(-6px);
 }
 
+.item-get-day {
+  width: 100%;
+  font-size: 5vw;
+  font-weight: bold;
+  text-align: center;
+  transform: translateY(-20px);
+}
+
 .item-price {
   width: 100%;
+  font-size: 5vw;
   font-weight: bold;
   text-align: center;
 }
@@ -508,7 +517,7 @@ iframe {
 }
 .big-number {
   font-size: 12vw;
-  margin: 10px;
+  margin: 5px;
   font-weight: bold;
 }
 

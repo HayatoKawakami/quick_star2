@@ -18,7 +18,7 @@ export const UserContextProvider = ({ children }) => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
   const [income, setIncome] = useState('');
-  const [take_home_pay, setTake_home_pay] = useState('');
+  const [takeHomePay, setTakeHomePay] = useState('');
 
   const { baseApiURL, navigate } = useConstContext();
   const [logged_in, setLogged_in] = useState(false);
@@ -54,7 +54,6 @@ export const UserContextProvider = ({ children }) => {
     const img = e.target.files[0];
     setImage(img)
   }
-  console.log(user)
   const [previewImage, setPreviewImage] = useState('');
 
   const getPreviewImage = (event) => {
@@ -95,6 +94,7 @@ export const UserContextProvider = ({ children }) => {
     .then(response => {
       setName(response.data.name);
       setEmail(response.data.email);
+      setIncome(response.data.income)
       console.log("ユーザー情報取得完了",response.data)
       setPreviewImage(response.data.image.url)
     })
@@ -103,11 +103,11 @@ export const UserContextProvider = ({ children }) => {
     })
   }
 
-  const takeHomePay = () => {
+  const takeHomePaySet = () => {
     axios.get(`${baseApiURL}/take_home_pay`)
     .then(response => {
       console.log("手取り収入情報取得完了", response.data.take_home_pay);
-      setTake_home_pay(response.data.take_home_pay);
+      setTakeHomePay(response.data.take_home_pay);
     })
     .catch(error => {
       console.log("手取り収入情報取得処理エラー", error);
@@ -181,7 +181,7 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     checkLoginStatus();
-    takeHomePay();
+    takeHomePaySet();
   },[])
 
   const checkLoginStatus = () => {
@@ -225,7 +225,7 @@ export const UserContextProvider = ({ children }) => {
     image,
     birthday,
     income,
-    take_home_pay,
+    takeHomePay,
     Login,
     Logout,
     logged_in,
@@ -234,7 +234,7 @@ export const UserContextProvider = ({ children }) => {
     removeLocalStorage,
     navigate,
     userSet,
-    takeHomePay,
+    takeHomePaySet,
     createUser,
     editUser,
     userDestroy,
