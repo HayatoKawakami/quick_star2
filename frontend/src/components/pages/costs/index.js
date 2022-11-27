@@ -6,7 +6,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const CostIndex = () => {
   const { baseURL, FontAwesomeIcon } = useConstContext();
-  const { costs, setCostIndex } = useCostContext();
+  const { costs, setCostIndex, totalCostPrice, totalCostPriceSet } = useCostContext();
 
   const CostImage = (name) => {
     if(name === "家賃"){
@@ -34,14 +34,13 @@ export const CostIndex = () => {
 
   useEffect(() => {
     setCostIndex();
+    totalCostPriceSet();
   }, [])
 
   return(
     <>
       <p>
-        合計金額：{Object.values(costs).reduce((sum, value) => {
-        return sum + value.price;
-        },0)}円
+        合計金額：{totalCostPrice}円
       </p>
       <ul className='costs-list'>
         {Object.values(costs).map((cost, index) => {

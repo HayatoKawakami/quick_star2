@@ -3,16 +3,20 @@ import { useItemContext } from '../../../contexts/ItemContext';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import { Link, useParams, Navigate } from 'react-router-dom';
+import { useCostContext } from '../../../contexts/CostContext';
 
 export const ItemShow = () => {
 
   const { baseURL } = useConstContext();
-  const { loadJSON } = useUserContext();
+  const { loadJSON, takeHomePaySet, takeHomePay } = useUserContext();
   const { videos, sites, itemSet, item } = useItemContext();
+  const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
   useEffect(() => {
     itemSet(itemId);
+    totalCostPriceSet();
+    takeHomePaySet();
   },[])
 
   if (loadJSON("logged_in") === false) {
@@ -21,12 +25,17 @@ export const ItemShow = () => {
 
   return(
     <>
+      
       <div className='item-image-name-box'>
         <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
         <p className='item-name'>{item.name}</p>
       </div>
+      <p className='item-get-day'>
+        <span className='big-number'>{Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))}</span>
+        日後
+      </p>
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
-      <br />
+      
       <h3>参考動画</h3>
       <ul className="youtube-video">
       {Object.values(videos).filter(video => {

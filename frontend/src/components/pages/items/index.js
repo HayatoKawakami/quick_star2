@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
 import { Link, Navigate } from 'react-router-dom';
 import { useUserContext } from '../../../contexts/UserContext';
 import { useConstContext } from '../../../contexts/ConstContext';
+import { useCostContext } from '../../../contexts/CostContext';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
   const { baseURL, FontAwesomeIcon } = useConstContext();
-  const { items } = useItemContext();
-  const { loadJSON } = useUserContext();
+  const { items,  } = useItemContext();
+  const { loadJSON, takeHomePay } = useUserContext();
+  const { totalCostPriceSet, totalCostPrice } = useCostContext();
 
+  
   if (loadJSON("logged_in") === false) {
     return <Navigate replace to="/login"/>
   }
@@ -24,7 +27,7 @@ export const ItemIndex = () => {
                   <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
                   <div className='item-index-words-box'>
                     <p className='item-index-words1'>「{value.name}」</p>
-                    <p className='item-index-words2'>が手に入るまであと<span className='big-number'>21</span>日</p>
+                    <p className='item-index-words2'>が手に入るまであと<span className='big-number'>{Math.round(value.price / ((takeHomePay - totalCostPrice) / 30 ))}</span>日</p>
                   </div>
                 </Link>
               </li>

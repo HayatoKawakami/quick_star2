@@ -10,8 +10,6 @@ export const StatusBar = () =>{
   const { item } = useItemContext();
   const location = useLocation();
 
-  console.log(location)
-
   const ActiveBackBtn = () => {
     if (loadJSON("logged_in") === false || location.pathname === "/") {
       return null;

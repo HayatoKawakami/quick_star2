@@ -10,10 +10,10 @@ Rails.application.routes.draw do
       post 'login', to: 'sessions#login'
       delete 'logout', to: 'sessions#logout'
       get 'logged_in', to: 'sessions#logged_in?'
-      
 
       resources :items, only: %i[index show create update destroy]
       resources :costs, only: %i[index show create update destroy]
+      get 'calc_all_costs', to: 'costs#calc_all_costs'
       resources :images, only: %i[index create destroy]
       resources :videos, only: %i[index create destroy]
       resources :sites, only: %i[index create update destroy]

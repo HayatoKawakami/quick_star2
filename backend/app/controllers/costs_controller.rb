@@ -6,7 +6,7 @@ module Api
         costs = Cost.where(user_id: session[:user_id])
         render json: costs
       end
-      
+
       def show
         render json: @cost
       end
@@ -34,6 +34,15 @@ module Api
         else
           render json: @cost.errors
         end
+      end
+
+      def calc_all_costs
+        costs = Cost.where(user_id: session[:user_id])
+        price = 0
+        costs.each do |cost|
+          price += cost.price
+        end
+        render json: price
       end
 
       private
