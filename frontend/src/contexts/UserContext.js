@@ -18,6 +18,11 @@ export const UserContextProvider = ({ children }) => {
   const [sex, setSex] = useState(1);
   const [birthday, setBirthday] = useState('');
   const [income, setIncome] = useState('');
+  const [healthInsurance, setHealthInsurance] = useState('');
+  const [welfarePensionInsurance, setWelfarePensionInsurance] = useState('');
+  const [employmentInsurance, setEmploymentInsurance] = useState('');
+  const [socialInsurance, setSocialInsurance] = useState('');
+  const [incomeTax, setincomeTax] = useState('');
   const [takeHomePay, setTakeHomePay] = useState('');
 
   const { baseApiURL, navigate } = useConstContext();
@@ -106,7 +111,12 @@ export const UserContextProvider = ({ children }) => {
   const takeHomePaySet = () => {
     axios.get(`${baseApiURL}/take_home_pay`)
     .then(response => {
-      console.log("手取り収入情報取得完了", response.data.take_home_pay);
+      console.log("手取り収入情報取得完了", response.data);
+      setHealthInsurance(response.data.health_insurance);
+      setWelfarePensionInsurance(response.data.welfare_pension_insurance);
+      setEmploymentInsurance(response.data.employment_insurance);
+      setSocialInsurance(response.data.social_insurance);
+      setincomeTax(response.data.income_tax);
       setTakeHomePay(response.data.take_home_pay);
     })
     .catch(error => {
@@ -225,6 +235,11 @@ export const UserContextProvider = ({ children }) => {
     image,
     birthday,
     income,
+    healthInsurance,
+    welfarePensionInsurance,
+    employmentInsurance,
+    socialInsurance,
+    incomeTax,
     takeHomePay,
     Login,
     Logout,
