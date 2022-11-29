@@ -10,7 +10,7 @@ import { faQuestionCircle, faCheckSquare } from '@fortawesome/free-regular-svg-i
 export const Menu = () => {
 
   const { baseURL, FontAwesomeIcon } = useConstContext();
-  const { user, logged_in } = useUserContext();
+  const { user, loggedIn } = useUserContext();
 
   const [active, setActive] = useState(false);
 
@@ -22,9 +22,8 @@ export const Menu = () => {
     }
   }
 
-
   const LoginAndLogoutBox = () => {
-    if (logged_in === true) {
+    if (loggedIn === true) {
       // ログイン時のメニュー
       return (
         <div className={classNames("menu-box", active ? "menu-active" : "menu-hide")}>

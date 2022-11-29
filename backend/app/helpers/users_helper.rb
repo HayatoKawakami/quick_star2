@@ -382,6 +382,8 @@ module UsersHelper
       16_510
     elsif cidp > 401_001 && cidp < 404_000
       16_750
+    else
+      20_000
     end
   end
 end

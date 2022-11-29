@@ -21,7 +21,7 @@ export const UserNew = () => {
     sex,
     birthday,
     income,
-    loadJSON,
+    loggedIn,
     createUser
   } = useUserContext();
 
@@ -36,7 +36,7 @@ export const UserNew = () => {
     data.append("income", income)
     console.log([...data.entries()]);
 
-  if (loadJSON("logged_in") === true) {
+  if (loggedIn === true) {
     return <Navigate replace to="/"/>;
   }
 

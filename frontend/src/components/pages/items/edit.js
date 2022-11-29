@@ -8,7 +8,7 @@ import Select from 'react-select'
 export const ItemEdit = () => {
 
   const { baseURL } = useConstContext();
-  const { loadJSON } = useUserContext();
+  const { loggedIn } = useUserContext();
   const {
     item,
     name,
@@ -36,10 +36,6 @@ export const ItemEdit = () => {
   useEffect(() => {
     itemSet(itemId);
   },[])
-
-  if (loadJSON("logged_in") === false){
-    return <Navigate replace to="/login" />
-  }
 
   return(
     <>

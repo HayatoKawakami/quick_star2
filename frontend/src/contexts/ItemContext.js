@@ -1,5 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
-import axios from "../../lib/axios";
+import React, { useState, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 import { useUserContext } from "./UserContext";
 
@@ -22,18 +21,14 @@ export const ItemContextProvider = ({children}) => {
 
   const [ site_name, setSite_name] = useState('');
   const [ site_url, setSite_url] = useState('');
-  const { baseApiURL, navigate } = useConstContext();
-  const { loadJSON } = useUserContext();
+  const { 
+    navigate,
+    axiosGet,
+    axiosPost,
+    axiosPut,
+    axiosDelete, } = useConstContext();
+  const { loggedIn, user, userId } = useUserContext();
 
-  const [user_id, setUser_id] = useState('');
-
-  const setUserId = () => {
-    if (loadJSON("logged_in") === true) {
-      setUser_id(loadJSON("user").id);
-    } else {
-      return;
-    }
-  }
 
   const options = [
     {value: "amazon", label: "Amazon"},
@@ -55,115 +50,111 @@ export const ItemContextProvider = ({children}) => {
     console.log(img)
   }
 
-  const itemsSet = () => {
-    axios.get(`${baseApiURL}/items`)
-    .then(response => {
-      setItems(response.data);
-      console.log("欲しいもの一覧取得完了", response.data);
-    })
-    .catch(error => {
+  const itemsSet = async () => {
+    try {
+      const res = await axiosGet("items")
+      setItems(res.data);
+      console.log("欲しいもの一覧取得完了", res.data);
+    } catch (error) {
       console.log("欲しいもの一覧データ取得エラー", error)
-    })
+    }
   }
 
-  const itemSet = (id) => {
-    axios.get(`${baseApiURL}/items/${id}`)
-    .then(response => {
-      console.log("欲しいもの情報取得完了", response.data);
-      setItem(response.data);
-      setName(response.data.name);
-      setPrice(response.data.price);
-    })
-    .catch(error => {
+  const itemSet = async (id) => {
+    try {
+      const res = await axiosGet("items", id)
+      console.log("欲しいもの情報取得完了", res.data);
+      setItem(res.data);
+      setName(res.data.name);
+      setPrice(res.data.price);
+    } catch (error) {
       console.log("欲しいものデータ取得エラー", error);
-    })
+    }
   }
 
-  const createItem = (user_id) => {
+  const createItem = async (user_id) => {
     const itemData = {
       name: name,
       price: price,
-      user_id: user_id
+      user_id: userId
     }
 
     const config = {
       headers: {  'Content-Type': 'application/json'}
     }
-    axios.post(`${baseApiURL}/items`, itemData, config)
-    .then(response => {
-      console.log("欲しいもの追加完了",response.data);
-      createImage(response.data.item);
-      createVideo(response.data.item);
-      createSite(response.data.item)
-    })
-    .catch(error => {
+
+    try {
+      const res = await axiosPost("items", itemData, config)
+      console.log("欲しいもの追加完了",res.data);
+      createImage(res.data.item);
+      createVideo(res.data.item);
+      createSite(res.data.item)
+    } catch (error) {
       console.log("欲しいもの追加処理エラー", error);
-    })
+    }
   }
 
-  const createImage = (item) => {
+  const createImage = async (item) => {
     const imageData = new FormData();
     imageData.append("image", image);
     imageData.append("item_id", item.id)
 
-    axios.post(`${baseApiURL}/images`, imageData,
-    {
+    const config = {
       headers: { 'Content-Type': 'multipart/form-data'}
-    })
-    .then(response => {
-      console.log("欲しいもの画像追加完了", response.data);
-    })
-    .catch(error => {
+    }
+
+    try {
+      const res = await axiosPost("images", imageData, config);
+      console.log("欲しいもの画像追加完了", res.data);
+    } catch (error) {
       console.log("欲しいもの画像追加処理エラー", error);
-    })
+    }
   }
 
-  const createVideo = (item) => {
+  const createVideo = async (item) => {
     const videoData = {
       url: url,
       item_id: item.id,
     }
 
-    axios.post(`${baseApiURL}/videos`, videoData)
-    .then(response => {
-      console.log("欲しいもの参考動画登録完了", response.data)
-    })
-    .catch(error => {
+    try {
+      const res = await axiosPost("videos", videoData);
+      console.log("欲しいもの参考動画登録完了", res.data)
+    } catch (error) {
       console.log("欲しいもの参考動画登録処理エラー", error);
-    })
+    }
   }
 
-  const createSite = (item) => {
+  const createSite = async (item) => {
 
     const siteData = {
       site_name: site_name,
       url: site_url,
       item_id: item.id,
     }
-    axios.post(`${baseApiURL}/sites`, siteData)
-    .then(response => {
-      console.log("購入サイト登録完了", response.data);
+
+    try {
+      const res = await axiosPost("sites", siteData);
+      console.log("購入サイト登録完了", res.data);
       navigate(`/items/${item.id}`)
-    })
-    .catch(error => {
+    } catch (error) {
       console.log("購入サイト登録処理エラー", error)
-    })
+    }
   }
 
-  const editItem = (itemId) => {
+  const editItem = async (itemId) => {
     const itemData = {
       name: name,
       price: price,
     }
 
-    axios.put(`${baseApiURL}/items/${itemId}`, itemData)
-    .then(response => {
-      console.log("欲しいもの情報更新完了", response.data);
+    try {
+      const res = await axiosPut("items", itemData, itemId)
+      console.log("欲しいもの情報更新完了", res.data);
       navigate(`/items/${itemId}`)
-    })
-    .catch(error => {
+    } catch (error) {
       console.log("欲しいもの情報更新処理エラー", error);
-    })
+    }
 
     const imageData = new FormData();
     imageData.append("image", image);
@@ -172,25 +163,25 @@ export const ItemContextProvider = ({children}) => {
     const config = {
       headers:{'Content-Type': 'multipart/form-data'},
     }
-    axios.post(`${baseApiURL}/images`, imageData, config)
-    .then(response => {
-      console.log("欲しいもの画像追加完了", response.data);
-    })
-    .catch(error => {
+
+    try {
+      const res = await axiosPost("images", imageData, config);
+      console.log("欲しいもの画像追加完了", res.data);
+    } catch (error) {
       console.log("欲しいもの画像追加処理エラー", error);
-    })
+    }
 
     const videoData = {
       url: url,
       item_id: itemId,
     }
-    axios.post(`${baseApiURL}/videos`, videoData)
-    .then(response => {
-      console.log("動画URL登録完了", response.data);
-    })
-    .catch(error => {
+
+    try {
+      const res = await axiosPost("videos", videoData);
+      console.log("動画URL登録完了", res.data);
+    } catch (error) {
       console.log("動画URL登録処理エラー", error);
-    })
+    }
 
     const siteData = {
       site_name: site_name,
@@ -198,95 +189,80 @@ export const ItemContextProvider = ({children}) => {
       item_id: itemId,
     }
 
-    axios.post(`${baseApiURL}/sites`, siteData)
-    .then(response => {
-      console.log("購入サイト情報追加完了", response.data);
-    })
-    .catch(error => {
+    try {
+      const res = await axiosPost("sites", siteData)
+      console.log("購入サイト情報追加完了", res.data);
+    } catch (error) {
       console.log("購入サイト情報追加処理エラー", error);
-    })
+    }
   }
 
-  const itemDestroy = (id) => {
-    axios.delete(`${baseApiURL}/items/${id}}`)
-    .then(response => {
-      console.log("欲しいもの削除完了",response.data);
+  const itemDestroy = async (id) => {
+    try {
+      const res = await axiosDelete("items", id);
+      console.log("欲しいもの削除完了",res.data);
       navigate("/items");
-    })
-    .catch(error => {
+    } catch (error) {
       console.log("欲しいもの削除処理エラー", error);
-    })
+    }
   }
 
-  const videosSet = () => {
-    axios.get(`${baseApiURL}/videos`)
-    .then(response => {
-      setVideos(response.data);
-      console.log("動画情報一覧取得完了", response.data);
-    })
-    .catch(error => {
+  const videosSet = async () => {
+    try {
+      const res = await axiosGet("videos");
+      setVideos(res.data);
+      console.log("動画情報一覧取得完了", res.data);
+    } catch (error) {
       console.log("動画情報取得処理エラー", error)
-    })
+    }
   }
 
-  const videoDestroy = (videoId) => {
-    axios.delete(`${baseApiURL}/videos/${videoId}`)
-    .then(response => {
-      console.log("動画URL削除完了", response.data);
-    })
-    .catch(error => {
+  const videoDestroy = async (videoId) => {
+    try {
+      const res = await axiosDelete("videos", videoId)
+      console.log("動画URL削除完了", res.data);
+    } catch (error) {
       console.log("動画URL削除処理エラー", error)
-    })
+    }
   }
 
-  const sitesSet = () => {
-    axios.get(`${baseApiURL}/sites`)
-    .then(response => {
-      setSites(response.data);
-      console.log("購入サイト候補情報一覧取得", response.data);
-    })
-    .catch(error => {
+  const sitesSet = async () => {
+    try {
+      const res = await axiosGet("sites");
+      setSites(res.data);
+      console.log("購入サイト候補情報一覧取得", res.data);
+    } catch (error) {
       console.log("購入サイト候補情報一覧取得処理エラー", error)
-    })
+    }
   }
 
-  const siteDestroy = (siteId) => {
-    axios.delete(`${baseApiURL}/sites/${siteId}`)
-    .then(response => {
-      console.log("購入サイト情報削除完了", response.data);
-    })
-    .catch(error => {
+  const siteDestroy = async (siteId) => {
+    try {
+      const res = await axiosDelete("sites", siteId);
+      console.log("購入サイト情報削除完了", res.data);
+    } catch (error) {
       console.log("購入サイト情報削除処理エラー", error);
-    })
+    }
   }
 
-  useEffect(() => {
-    itemsSet();
-    videosSet();
-    sitesSet();
-  },[])
 
   const value = {
+    itemsSet,
+    videosSet,
+    sitesSet,
     items,
     item,
-    setItem,
     navigate,
     name,
-    setName,
     price,
-    setPrice,
     image,
-    setImage,
     itemSet,
     videoDestroy,
     siteDestroy,
     itemDestroy,
     videos,
-    setVideos,
     video,
-    setVideo,
     sites,
-    setSites,
     options,
     url,
     site_name,
@@ -297,8 +273,6 @@ export const ItemContextProvider = ({children}) => {
     handleChangeUrl,
     handleChangeSiteName,
     handleChangeSiteUrl,
-    user_id,
-    setUserId,
     createItem,
     editItem,
   }

@@ -8,8 +8,8 @@ import { useCostContext } from '../../../contexts/CostContext';
 export const ItemShow = () => {
 
   const { baseURL } = useConstContext();
-  const { loadJSON, takeHomePaySet, takeHomePay } = useUserContext();
-  const { videos, sites, itemSet, item } = useItemContext();
+  const { takeHomePaySet, takeHomePay, loggedIn } = useUserContext();
+  const { videosSet, videos, sitesSet, sites, itemSet, item } = useItemContext();
   const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
@@ -17,15 +17,13 @@ export const ItemShow = () => {
     itemSet(itemId);
     totalCostPriceSet();
     takeHomePaySet();
+    videosSet();
+    sitesSet();
   },[])
 
-  if (loadJSON("logged_in") === false) {
-    return <Navigate replace to="/login" />
-  }
 
   return(
     <>
-      
       <div className='item-image-name-box'>
         <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
         <p className='item-name'>{item.name}</p>
