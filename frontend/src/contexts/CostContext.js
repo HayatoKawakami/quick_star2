@@ -1,7 +1,6 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 import { useUserContext } from "./UserContext";
-import axios from "../../lib/axios";
 
 const CostContext = createContext();
 
@@ -10,103 +9,111 @@ export const useCostContext = () => {
 }
 
 export const CostContextProvider = ({children}) => {
-  const { baseApiURL, navigate } = useConstContext();
-  const { loadJSON } = useUserContext();
+  const {
+    navigate,
+    axiosGet,
+    axiosPost,
+    axiosPut,
+    axiosDelete,
+  } = useConstContext();
+  const { userId, loggedIn } = useUserContext();
 
   const [costs, setCosts] = useState('');
   const [name, setName] = useState(' ');
   const [price, setPrice] = useState('');
   const [totalCostPrice, setTotalCostPrice] = useState('');
-  
-  const [user_id, setUser_id] = useState('');
+
   const [ label, setLabel ] = useState('');
+
+  const costsSelect = [
+    {value: "家賃", label: "家賃"},
+    {value: "食費", label: "食費"},
+    {value: "携帯代", label: "携帯代"},
+    {value: "電気代", label: "電気代"},
+    {value: "ガス代", label: "ガス代"},
+    {value: "水道代", label: "水道代"},
+    {value: "ネット代", label: "ネット代"},
+    {value: "交通費", label: "交通費"},
+    {value: "貯蓄", label: "貯蓄"},
+    {value: "", label: "その他"},
+  ]
 
   const handleChangeName = (e) => {setName(e.value); setLabel(e.label);}
   const handleChangePrice = (e) => {setPrice(e.target.value);}
   const handleChangeOtherName = (e) => {setName(e.target.value);}
 
-  const setCostIndex = () => {
-    axios.get(`${baseApiURL}/costs`)
-    .then(response => {
-      console.log("固定費一覧データ取得完了", response.data);
-      setCosts(response.data)
-    })
-    .catch(error => {
-      console.log("固定費データ取得処理エラー", error);
-    })
+  const setCostIndex = async () => {
+    try {
+      const response = await axiosGet("/costs")
+      console.log("固定費一覧データ取得完了", response.data)
+      setCosts(response.data);
+    } catch(error) {
+      console.log("固定費データ取得処理エラー", error)
+    }
   }
 
-  const totalCostPriceSet = () => {
-    axios.get(`${baseApiURL}/calc_all_costs`)
-    .then(response => {
-      console.log("固定費合計額取得完了", response.data);
-      setTotalCostPrice(response.data);
-    })
-    .catch(error => {
-      console.log("固定費合計額取得処理エラー", error);
-    })
+  const totalCostPriceSet = async () => {
+    try {
+      const res = await axiosGet("calc_all_costs")
+      console.log("固定費合計額取得完了", res.data)
+      setTotalCostPrice(res.data)
+    } catch(error) {
+      console.log("固定費合計額取得処理エラー", error)
+    }
   }
 
-  const costSet = (costId) => {
-    axios.get(`${baseApiURL}/costs/${costId}`)
-    .then(response => {
-      setName(response.data.name);
-      setPrice(response.data.price)
-      console.log("固定費情報取得完了", response.data)
-    })
-    .catch(error => {
+  const costSet = async (costId) => {
+    try {
+      const res = await axiosGet("costs", costId)
+      console.log("固定費情報取得完了", res.data);
+      setName(res.data.name);
+      setPrice(res.data.price);
+    } catch(error){
       console.log("固定費情報取得処理エラー", error);
-    })
+    }
   }
 
-  const createCost = () =>{
-    setUser_id(loadJSON("user").id)
+  const createCost = async () =>{
     const data = {
       name: name,
       price: price,
-      user_id: user_id,
+      user_id: userId,
     }
-    axios.post(`${baseApiURL}/costs`, data)
-    .then(response => {
-      console.log("コスト登録完了", response.data);
+    try {
+      const res = await axiosPost("costs", data)
+      console.log("固定費登録完了", res.data);
       navigate("/costs");
-    })
-    .catch(error => {
-      console.log("コスト登録処理エラー", error);
-    })
+    } catch(error){
+      console.log("固定費登録処理エラー", error);
+    }
   }
 
-  const updateCost = (costId,data) => {
-    axios.put(`${baseApiURL}/costs/${costId}`, data)
-    .then(response => {
-      console.log("固定費情報更新完了", response.data)
+  const updateCost = async (costId,data) => {
+    try {
+      const res = await axiosPut("costs", costId, data);
+      console.log("固定費情報更新完了", res.data)
       navigate("/costs")
-    })
-    .catch(error => {
+    } catch(error) {
       console.log("固定費情報更新処理エラー", error)
-    })
+    }
   }
 
-  const destroyCost = (costId) => {
-    axios.delete(`${baseApiURL}/costs/${costId}`)
-    .then(response => {
-      console.log("固定費情報削除完了", response.data)
+  const destroyCost = async (costId) => {
+    try {
+      const res = await axiosDelete("costs", costId);
+      console.log("固定費情報削除完了", res.data);
       navigate("/costs");
-    })
-    .catch(error => {
-      console.log("固定費情報削除処理エラー", error)
-    })
+    } catch (error) {
+      console.log("固定費情報削除処理エラー", error);
+    }
   }
-
-  useEffect(()=> {
-    totalCostPriceSet();
-  },[])
 
   const value = {
     costs,
     name,
     price,
     label,
+    costsSelect,
     setName,
     setPrice,
     totalCostPrice,

@@ -10,7 +10,7 @@ export const LoginForm = () => {
     email,
     password,
     Login,
-    loadJSON
+    loggedIn,
   } = useUserContext();
 
   const data = {
@@ -18,7 +18,7 @@ export const LoginForm = () => {
     password: password
   }
 
-  if (loadJSON("logged_in") === true) {
+  if (loggedIn === true) {
     return <Navigate replace to="/"/>;
   }
 

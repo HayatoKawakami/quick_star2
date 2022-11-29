@@ -7,20 +7,21 @@ import { useCostContext } from '../../../contexts/CostContext';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
-  const { baseURL, FontAwesomeIcon } = useConstContext();
-  const { items,  } = useItemContext();
-  const { loadJSON, takeHomePay } = useUserContext();
+  const { baseURL, FontAwesomeIcon, navigate } = useConstContext();
+  const { items, itemsSet,  } = useItemContext();
+  const { user, loggedIn, takeHomePay, takeHomePaySet } = useUserContext();
   const { totalCostPriceSet, totalCostPrice } = useCostContext();
 
-  
-  if (loadJSON("logged_in") === false) {
-    return <Navigate replace to="/login"/>
-  }
+  useEffect(() => {
+    itemsSet();
+    takeHomePaySet();
+    totalCostPriceSet();
+  },[])
 
   return(
     <>
       <ul className='items-list'>
-          {Object.values(items).filter(item => {return item.user_id === loadJSON("user").id}).map((value, index) => {
+          {Object.values(items).filter(item => {return item.user_id === user.id}).map((value, index) => {
             return(
               <li className='items-item' key={index}>
                 <Link to={`/items/${value.id}`}>

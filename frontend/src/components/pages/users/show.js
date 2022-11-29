@@ -9,13 +9,15 @@ export const UserProfile = () => {
   const {
     user,
     Logout,
-    loadJSON,
+    loggedIn,
     healthInsurance,
     welfarePensionInsurance,
     employmentInsurance,
     socialInsurance,
-    incomeTax, 
-    takeHomePay } = useUserContext();
+    incomeTax,
+    takeHomePaySet,
+    takeHomePay,
+   } = useUserContext();
 
   const userSex = () => {
     if (user.sex === 1 ) {
@@ -25,10 +27,9 @@ export const UserProfile = () => {
     }
   }
 
-
-  if (loadJSON("logged_in") === false) {
-    return <Navigate replace to="/login"/>;
-  }
+  useEffect(()=> {
+    takeHomePaySet();
+  },[])
 
   return(
     <div>

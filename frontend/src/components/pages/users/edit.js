@@ -13,7 +13,6 @@ export const UserEdit = () => {
     income,
     getPreviewImage,
     previewImage,
-    loadJSON,
     userSet,
     editUser,
     userDestroy
@@ -32,9 +31,7 @@ export const UserEdit = () => {
     userSet();
   },[])
 
-  if (loadJSON("logged_in") === false) {
-    return <Navigate replace to="/login"/>
-  }
+
 
   return(
     <>

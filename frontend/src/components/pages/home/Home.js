@@ -9,9 +9,9 @@ import { useCostContext } from "../../../contexts/CostContext";
 export const Home = () => {
 
   const { baseURL } = useConstContext();
-  const { items } = useItemContext();
-  const { user, loadJSON, takeHomePay } = useUserContext();
-  const { totalCostPrice } = useCostContext();
+  const { itemsSet, items } = useItemContext();
+  const { user, loggedIn, takeHomePaySet, takeHomePay } = useUserContext();
+  const { totalCostPriceSet, totalCostPrice } = useCostContext();
 
   const [date, setDate] = useState('');
 
@@ -29,7 +29,10 @@ export const Home = () => {
 
   useEffect(() => {
     getDate();
-  },[date])
+    itemsSet();
+    takeHomePaySet();
+    totalCostPriceSet();
+  },[])
 
   return(
     <>
@@ -40,7 +43,7 @@ export const Home = () => {
       <h3>Target</h3>
       <ul className="items-list">
       {Object.values(items).filter(item => {
-        return item.user_id === loadJSON("user").id
+        return item.user_id === user.id
       }).map((item, index) => {
         const itemId = item.id
         return(

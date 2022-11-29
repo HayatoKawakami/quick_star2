@@ -8,7 +8,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemNew = () => {
   const { FontAwesomeIcon } = useConstContext();
-  const { loadJSON } = useUserContext();
+  const { user, userId, loggedIn } = useUserContext();
   const { name,
           price,
           url,
@@ -20,19 +20,11 @@ export const ItemNew = () => {
           handleChangeUrl,
           options,
           getImage,
-          user_id,
-          setUserId,
           createItem,
         } = useItemContext();
 
-  useEffect(()=>{
-    setUserId();
-  },[])
 
-  // ログインしていなければログイン画面にリダイレクト
-  if (loadJSON("logged_in") === false){
-    return <Navigate replace to="login" />
-  }
+
 
   return(
     <>
@@ -53,9 +45,9 @@ export const ItemNew = () => {
       <label className='input-label' htmlFor="">購入サイト候補</label>
       <Select className='select-input' options={options} onChange={handleChangeSiteName}/>
       <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
-      <input type="hidden" name="user_id" value={user_id} />
+      <input type="hidden" name="user_id" value={userId} />
 
-      <button className='btn cyan-btn' onClick={()=>{createItem(user_id)}} >
+      <button className='btn cyan-btn' onClick={()=>{createItem(userId)}} >
         <FontAwesomeIcon className='awesome-icon' icon={faCirclePlus}/>
         <p>欲しいもの追加</p>
       </button>

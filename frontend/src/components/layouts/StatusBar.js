@@ -6,14 +6,14 @@ import { useUserContext } from "../../contexts/UserContext";
 
 export const StatusBar = () =>{
   const { baseURL, navigate } = useConstContext();
-  const { loadJSON } = useUserContext();
+  const { loggedIn } = useUserContext();
   const { item } = useItemContext();
   const location = useLocation();
 
   const ActiveBackBtn = () => {
-    if (loadJSON("logged_in") === false || location.pathname === "/") {
+    if (loggedIn === false || location.pathname === "/") {
       return null;
-    } else if(loadJSON("logged_in") === true){
+    } else if(loggedIn === true){
       return(
         <a className="back-btn" onClick={()=>{navigateStatusBar()}}>
           <img src={`${baseURL}/layouts/left.png`} alt="" />
