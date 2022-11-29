@@ -49,14 +49,113 @@ module Api
 
         # 額面収入
         income = user.income
-        # 健康保険料
-        health_insurance = income * 0.0981 / 2
-        # 厚生年金保険料
-        welfare_pension_insurance = income * 0.183 / 2
+        # 健康保険料（health） ＆　厚生年金保険料(welfare)
+        if income > 0 && income < 63_000
+          health_welfare_insurance(2844.9, 8052.00)
+        elsif income > 63_001 && income < 73_000
+          health_welfare_insurance(3335.4, 8052.00)
+        elsif income > 73_001 && income < 83_000
+          health_welfare_insurance(3825.9, 8052.00)
+        elsif income > 83_001 && income < 93_000
+          health_welfare_insurance(4316.4, 8052.00)
+        elsif income > 93_001 && income < 101_000
+          health_welfare_insurance(4806.9, 8967.00)
+        elsif income > 101_001 && income < 107_000
+          health_welfare_insurance(5101.2, 9516.00)
+        elsif income > 107_001 && income < 114_000
+          health_welfare_insurance(5395.5, 10_065.00)
+        elsif income > 114_001 && income < 122_000
+          health_welfare_insurance(5787.9, 10_797.00)
+        elsif income > 122_001 && income < 130_000
+          health_welfare_insurance(6180.3, 11_529.00)
+        elsif income > 130_001 && income < 138_000
+          health_welfare_insurance(6572.7, 12_261.00)
+        elsif income > 138_001 && income < 146_000
+          health_welfare_insurance(6965.1, 12_993.00)
+        elsif income > 146_001 && income < 155_000
+          health_welfare_insurance(7357.5, 13_725.00)
+        elsif income > 155_001 && income < 165_000
+          health_welfare_insurance(7848.0, 14_640.00)
+        elsif income > 165_001 && income < 175_000
+          health_welfare_insurance(8338.5, 15_555.00)
+        elsif income > 175_001 && income < 185_000
+          health_welfare_insurance(8829.0, 16_470.00)
+        elsif income > 185_001 && income < 195_000
+          health_welfare_insurance(9319.5, 17_385.00)
+        elsif income > 195_001 && income < 210_000
+          health_welfare_insurance(9810.0, 18_300.00)
+        elsif income > 210_001 && income < 230_000
+          health_welfare_insurance(10_791.0, 20_130.00)
+        elsif income > 230_001 && income < 250_000
+          health_welfare_insurance(11_772.0, 21_960.00)
+        elsif income > 250_001 && income < 270_000
+          health_welfare_insurance(12_753.0, 23_790.00)
+        elsif income > 270_001 && income < 290_000
+          health_welfare_insurance(13_734.0, 25_620.00)
+        elsif income > 290_001 && income < 310_000
+          health_welfare_insurance(14_715.0, 27_450.00)
+        elsif income > 310_001 && income < 330_000
+          health_welfare_insurance(15_696.0, 29_280.00)
+        elsif income > 330_001 && income < 350_000
+          health_welfare_insurance(16_677.0, 31_110.00)
+        elsif income > 350_001 && income < 370_000
+          health_welfare_insurance(17_658.0, 32_940.00)
+        elsif income > 370_001 && income < 395_000
+          health_welfare_insurance(18_639.0, 34_770.00)
+        elsif income > 395_001 && income < 425_000
+          health_welfare_insurance(20_110.5, 37_515.00)
+        elsif income > 425_001 && income < 455_000
+          health_welfare_insurance(21_582.0, 40_260.00)
+        elsif income > 455_001 && income < 485_000
+          health_welfare_insurance(23_053.5, 43_005.00)
+        elsif income > 485_001 && income < 515_000
+          health_welfare_insurance(24_525.0, 45_750.00)
+        elsif income > 515_001 && income < 545_000
+          health_welfare_insurance(25_996.5, 48_495.00)
+        elsif income > 545_001 && income < 575_000
+          health_welfare_insurance(27_468.0, 51_240.00)
+        elsif income > 575_001 && income < 605_000
+          health_welfare_insurance(28_939.5, 53_985.00)
+        elsif income > 605_001 && income < 635_000
+          health_welfare_insurance(30_411.0, 56_730.00)
+        elsif income > 635_001 && income < 665_000
+          health_welfare_insurance(31_882.5, 59_475.00)
+        elsif income > 665_001 && income < 695_000
+          health_welfare_insurance(33_354.0, 59_475.00)
+        elsif income > 695_001 && income < 730_000
+          health_welfare_insurance(34_825.5, 59_475.00)
+        elsif income > 730_001 && income < 770_000
+          health_welfare_insurance(36_787.5, 59_475.00)
+        elsif income > 770_001 && income < 810_000
+          health_welfare_insurance(38_749.5, 59_475.00)
+        elsif income > 815_001 && income < 855_000
+          health_welfare_insurance(40_711.5, 59_475.00)
+        elsif income > 855_001 && income < 905_000
+          health_welfare_insurance(43_164.0, 59_475.00)
+        elsif income > 905_001 && income < 955_000
+          health_welfare_insurance(45_616.5, 59_475.00)
+        elsif income > 955_001 && income < 1_005_000
+          health_welfare_insurance(48_069.0, 59_475.00)
+        elsif income > 1_005_001 && income < 1_055_000
+          health_welfare_insurance(50_521.5, 59_475.00)
+        elsif income > 1_055_001 && income < 1_115_000
+          health_welfare_insurance(53_464.5, 59_475.00)
+        elsif income > 1_115_001 && income < 1_175_000
+          health_welfare_insurance(56_407.5, 59_475.00)
+        elsif income > 1_175_001 && income < 1_235_000
+          health_welfare_insurance(59_350.5, 59_475.00)
+        elsif income > 1_235_001 && income < 1_295_000
+          health_welfare_insurance(62_293.5, 59_475.00)
+        elsif income > 1_295_001 && income < 1_355_000
+          health_welfare_insurance(65_236.5, 59_475.00)
+        elsif income > 1_355_001 && income < 10_000_000_000
+          health_welfare_insurance(68_179.5, 59_475.00)
+        end
         # 雇用保険料
         employment_insurance = income * 0.005
         # 社会保険料　
-        social_insurance = health_insurance + welfare_pension_insurance + employment_insurance
+        social_insurance = @health_insurance + @welfare_pension_insurance + employment_insurance
+        # 社保控除後計(Company insurance deduction poster)　cidp
         cidp = income - social_insurance
         # 源泉所得税
         income_tax =
@@ -331,8 +430,8 @@ module Api
         take_home_pay = income - social_insurance - income_tax
         render json: {
           income: income,
-          health_insurance: health_insurance,
-          welfare_pension_insurance: welfare_pension_insurance,
+          health_insurance: @health_insurance,
+          welfare_pension_insurance: @welfare_pension_insurance,
           employment_insurance: employment_insurance,
           social_insurance: social_insurance,
           income_tax: income_tax,

@@ -203,9 +203,11 @@ export const UserContextProvider = ({ children }) => {
       if (loadJSON("logged_in") === true){
         console.log("ログインチェックOK", response.data);
         setLogged_in(true);
+        saveJSON("user", response.data.user)
         setUser(loadJSON("user"));
       } else if (loadJSON("logged_in") === false) {
         console.log("ログインチェックNG", response.data);
+        removeLocalStorage("user")
         setLogged_in(false);
         setUser({})
       }
