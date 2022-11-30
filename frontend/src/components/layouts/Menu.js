@@ -74,8 +74,9 @@ export const Menu = () => {
       // ログアウト時のメニュー
       return(
         <div className={classNames("menu-box", active ? "menu-active" : "menu-hide")}>
-          <Link className="btn blue-btn" to="users/sign_up">新規登録</Link>
-          <Link className="btn green-btn" to="login">ログイン</Link>
+          <div className="menu-box-after" onClick={activeMenuBox}></div>
+          <Link className="btn blue-btn" to="users/sign_up" onClick={activeMenuBox}>新規登録</Link>
+          <Link className="btn green-btn" to="login" onClick={activeMenuBox}>ログイン</Link>
         </div>
       );
     }

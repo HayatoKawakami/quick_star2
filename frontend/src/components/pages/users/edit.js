@@ -35,7 +35,9 @@ export const UserEdit = () => {
 
   return(
     <>
-      <img src={previewImage} alt="" className='user-icon' />
+      <div className='user-icon' >
+        <img src={previewImage} alt=""/>
+      </div>
       <div className='form-block'>
         <label htmlFor="image">画像</label>
         <input type="file"

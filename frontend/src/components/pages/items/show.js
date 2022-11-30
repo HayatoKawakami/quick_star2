@@ -1,26 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useItemContext } from '../../../contexts/ItemContext';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useCostContext } from '../../../contexts/CostContext';
+import { format, addDays } from 'date-fns';
 
 export const ItemShow = () => {
 
   const { baseURL } = useConstContext();
   const { takeHomePaySet, takeHomePay, loggedIn } = useUserContext();
-  const { videosSet, videos, sitesSet, sites, itemSet, item } = useItemContext();
+  const {
+    videosSet,
+    videos,
+    sitesSet,
+    sites,
+    itemSet,
+    item,
+    gettingDate
+  } = useItemContext();
   const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
-  useEffect(() => {
-    itemSet(itemId);
+  const [date, setDate] = useState('');
+
+  const dateGet = () => {
+    const date = addDays(new Date(),gettingDate)
+    setDate(format(date, "yyyy年M月dd日"))
+  }
+
+  useEffect( async () => {
+    await itemSet(itemId);
     totalCostPriceSet();
     takeHomePaySet();
     videosSet();
     sitesSet();
+    dateGet();
   },[])
-
 
   return(
     <>
@@ -32,6 +48,7 @@ export const ItemShow = () => {
         <span className='big-number'>{Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))}</span>
         日後
       </p>
+      <p>{date}</p>
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
       
       <h3>参考動画</h3>

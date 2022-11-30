@@ -18,6 +18,7 @@ export const ItemIndex = () => {
     totalCostPriceSet();
   },[])
 
+
   return(
     <>
       <ul className='items-list'>
