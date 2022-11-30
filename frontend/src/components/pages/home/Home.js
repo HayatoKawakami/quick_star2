@@ -8,27 +8,13 @@ import { useCostContext } from "../../../contexts/CostContext";
 
 export const Home = () => {
 
-  const { baseURL } = useConstContext();
+  const { baseURL, dateGet, date  } = useConstContext();
   const { itemsSet, items } = useItemContext();
   const { user, loggedIn, takeHomePaySet, takeHomePay } = useUserContext();
   const { totalCostPriceSet, totalCostPrice } = useCostContext();
 
-  const [date, setDate] = useState('');
-
-  const getDate = () => {
-    const dateObj = new Date();
-    const aryWeek = ["月","火","水","木","金","土","日"]
-
-    const dateText = dateObj.getFullYear() + "年" +
-                      dateObj.getMonth() + "月" +
-                      dateObj.getDate() + "日" +
-                      " " + aryWeek[dateObj.getDay()] + "曜日"
-
-    setDate(dateText);
-  }
-
   useEffect(() => {
-    getDate();
+    dateGet();
     itemsSet();
     takeHomePaySet();
     totalCostPriceSet();

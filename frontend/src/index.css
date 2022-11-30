@@ -234,6 +234,16 @@ input {
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.user-icon img {
+  min-width: 100%;
+  max-width: 200%;
+  height: 100%;
+  transform: translateX(-15px);
+  margin: 0 auto;
 }
 
 .menu {
@@ -287,10 +297,15 @@ input {
 
 .menu-user-icon {
   width: 12vw;
+  height: 12vw;
   border-radius: 100%;
   margin-right: 10px;
   display: flex;
   align-items: center;
+}
+.menu-user-icon img {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .menu-user-text {
@@ -477,6 +492,9 @@ iframe {
 .items-item {
   width: 100%;
   height: 30vw;
+  border:1px solid #222222;
+  border-radius: 5px;
+  box-shadow: 0px 0px 6px #222222;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;

@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 import { useUserContext } from "./UserContext";
+import { useCostContext } from "./CostContext";
 
 const ItemContext = createContext();
 
@@ -18,17 +19,18 @@ export const ItemContextProvider = ({children}) => {
   const [video, setVideo] = useState({});
   const [sites, setSites] = useState({});
   const [ url, setUrl] = useState('');
+  const [gettingDate, setGettingDate] = useState('');
 
   const [ site_name, setSite_name] = useState('');
   const [ site_url, setSite_url] = useState('');
-  const { 
+  const {
     navigate,
     axiosGet,
     axiosPost,
     axiosPut,
-    axiosDelete, } = useConstContext();
-  const { loggedIn, user, userId } = useUserContext();
-
+    axiosDelete,
+  } = useConstContext();
+  const { loggedIn, takeHomePay } = useUserContext();
 
   const options = [
     {value: "amazon", label: "Amazon"},
@@ -64,15 +66,18 @@ export const ItemContextProvider = ({children}) => {
     try {
       const res = await axiosGet("items", id)
       console.log("欲しいもの情報取得完了", res.data);
+      await setGettingDate(Math.round(res.data.price / ((takeHomePay - 142000) / 30 )))
+      console.log(Math.round(res.data.price / ((takeHomePay - 142000) / 30 )))
       setItem(res.data);
       setName(res.data.name);
       setPrice(res.data.price);
+      
     } catch (error) {
       console.log("欲しいものデータ取得エラー", error);
     }
   }
 
-  const createItem = async (user_id) => {
+  const createItem = async (userId) => {
     const itemData = {
       name: name,
       price: price,
@@ -275,6 +280,7 @@ export const ItemContextProvider = ({children}) => {
     handleChangeSiteUrl,
     createItem,
     editItem,
+    gettingDate,
   }
 
   return(

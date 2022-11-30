@@ -1,7 +1,8 @@
-import React, { createContext, useContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from '../../lib/axios';
+import { format } from "date-fns";
 
 const ConstContext = createContext();
 
@@ -14,6 +15,14 @@ export const ConstContextProvider = ({children}) => {
   const baseURL = "http://localhost:3000"
   const baseApiURL = "http://localhost:3000/api/v1"
   const navigate = useNavigate();
+
+  const [date, setDate] = useState('');
+
+  const dateGet = () => {
+    const dateObj = format(new Date(), 'yyyy年M月d日');
+    // const aryWeek = ["月","火","水","木","金","土","日"]
+    setDate(dateObj);
+  }
 
   const axiosGet = (path, id) => {
     if (id) {
@@ -51,6 +60,8 @@ export const ConstContextProvider = ({children}) => {
     baseURL,
     baseApiURL,
     navigate,
+    dateGet,
+    date,
     FontAwesomeIcon,
     axiosGet,
     axiosPost,
