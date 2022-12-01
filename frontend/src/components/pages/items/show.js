@@ -17,25 +17,29 @@ export const ItemShow = () => {
     sites,
     itemSet,
     item,
-    gettingDate
   } = useItemContext();
   const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
   const [date, setDate] = useState('');
 
-  const dateGet = () => {
-    const date = addDays(new Date(),gettingDate)
+  const [gettingDate, setGettingDate] = useState('');
+
+  const dateGetting = () => {
+    // const plusDate = Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))
+    const plusDate = Math.round(36000 / ((takeHomePay - 142000) / 30 ))
+    console.log(plusDate)
+    const date = addDays(new Date(), plusDate)
     setDate(format(date, "yyyy年M月dd日"))
   }
 
-  useEffect( async () => {
-    await itemSet(itemId);
+  useEffect(() => {
+    itemSet(itemId);
     totalCostPriceSet();
     takeHomePaySet();
     videosSet();
     sitesSet();
-    dateGet();
+    dateGetting()
   },[])
 
   return(
@@ -50,7 +54,6 @@ export const ItemShow = () => {
       </p>
       <p>{date}</p>
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
-      
       <h3>参考動画</h3>
       <ul className="youtube-video">
       {Object.values(videos).filter(video => {
