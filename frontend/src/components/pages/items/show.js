@@ -17,29 +17,25 @@ export const ItemShow = () => {
     sites,
     itemSet,
     item,
+    price,
   } = useItemContext();
   const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
   const [date, setDate] = useState('');
 
-  const [gettingDate, setGettingDate] = useState('');
-
   const dateGetting = () => {
-    // const plusDate = Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))
-    const plusDate = Math.round(36000 / ((takeHomePay - 142000) / 30 ))
-    console.log(plusDate)
-    const date = addDays(new Date(), plusDate)
-    setDate(format(date, "yyyy年M月dd日"))
+    const dateCount =  Math.round(price / ((takeHomePay - totalCostPrice) / 30 ))
+    const gettingDate = format(addDays( new Date(), dateCount ), "yyyy年MM月dd日")
+    return gettingDate
   }
 
-  useEffect(() => {
+  useEffect( ()=> {
     itemSet(itemId);
-    totalCostPriceSet();
-    takeHomePaySet();
     videosSet();
     sitesSet();
-    dateGetting()
+    takeHomePaySet();
+    totalCostPriceSet();
   },[])
 
   return(
@@ -48,11 +44,11 @@ export const ItemShow = () => {
         <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
         <p className='item-name'>{item.name}</p>
       </div>
-      <p className='item-get-day'>
+      <p className='item-get-count'>
         <span className='big-number'>{Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))}</span>
         日後
       </p>
-      <p>{date}</p>
+      <p className='item-get-day'>{dateGetting()}予定</p>
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
       <h3>参考動画</h3>
       <ul className="youtube-video">

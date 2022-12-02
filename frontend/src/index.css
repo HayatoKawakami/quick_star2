@@ -465,12 +465,18 @@ input {
   transform: translateY(-6px);
 }
 
-.item-get-day {
+.item-get-count {
   width: 100%;
   font-size: 5vw;
   font-weight: bold;
   text-align: center;
-  transform: translateY(-20px);
+  transform: translateY(0px);
+}
+
+.item-get-day {
+  margin: 0 auto;
+  font-size: 3.5vw;
+  font-weight: bold;
 }
 
 .item-price {
