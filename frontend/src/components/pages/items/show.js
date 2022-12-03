@@ -19,18 +19,21 @@ export const ItemShow = () => {
     item,
     price,
   } = useItemContext();
+
   const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
-  const [date, setDate] = useState('');
+  const dateCount =  Math.round(price / ((takeHomePay - totalCostPrice) / 30 ))
+  const todayMs = Date.parse(new Date());
 
-  const dateGetting = () => {
-    const dateCount =  Math.round(price / ((takeHomePay - totalCostPrice) / 30 ))
-    const gettingDate = format(addDays( new Date(), dateCount ), "yyyy年MM月dd日")
-    return gettingDate
-  }
+  const dateGetMs = Date.parse(addDays( todayMs, dateCount ))
+  const dateGetting = format(dateGetMs, "yyyy年MM月dd日")
 
-  useEffect( ()=> {
+  console.log("アイテム作成日時", Date.parse(item.created_at))
+  const dateCountMs = dateGetMs - todayMs
+  const dateCounting = Math.round(dateCountMs / (24*60*60*1000))
+
+  useEffect(()=> {
     itemSet(itemId);
     videosSet();
     sitesSet();
@@ -45,10 +48,10 @@ export const ItemShow = () => {
         <p className='item-name'>{item.name}</p>
       </div>
       <p className='item-get-count'>
-        <span className='big-number'>{Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))}</span>
+        <span className='big-number'>{dateCounting}</span>
         日後
       </p>
-      <p className='item-get-day'>{dateGetting()}予定</p>
+      <p className='item-get-day'>{dateGetting}予定</p>
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
       <h3>参考動画</h3>
       <ul className="youtube-video">
