@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2022_12_03_022635) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "start", default: false
+    t.datetime "start"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
