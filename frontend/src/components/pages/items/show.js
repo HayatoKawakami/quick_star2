@@ -23,15 +23,21 @@ export const ItemShow = () => {
   const { totalCostPriceSet ,totalCostPrice } = useCostContext();
   const { itemId }  = useParams();
 
-  const dateCount =  Math.round(price / ((takeHomePay - totalCostPrice) / 30 ))
-  const todayMs = Date.parse(new Date());
-
-  const dateGetMs = Date.parse(addDays( todayMs, dateCount ))
-  const dateGetting = format(dateGetMs, "yyyy年MM月dd日")
-
-  console.log("アイテム作成日時", Date.parse(item.created_at))
-  const dateCountMs = dateGetMs - todayMs
-  const dateCounting = Math.round(dateCountMs / (24*60*60*1000))
+  // 所要日数
+  const getCount =  Math.round(price / ((takeHomePay - totalCostPrice) / 30 ))
+  // 今日の日付
+  const today = new Date()
+  // スタートボタンを押した日付
+  const startDay = new Date(item.start)
+  // スタートボタン押した日付をミリ表示
+  const startDayMs = Date.parse(startDay)
+  // スタートボタンを押した後に確定する日付を計算
+  const dateGet = addDays( startDay, getCount )
+  console.log(dateGet)
+  // スタートボタンを押した後に確定する日付表示
+  const dateGetting = format(today, "yyyy年MM月dd日")
+  // 手に入るまでの日数
+  const dateCounting = Math.round((dateGet - today) / (24*60*60*1000))
 
   useEffect(()=> {
     itemSet(itemId);
