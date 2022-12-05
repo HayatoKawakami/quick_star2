@@ -4,12 +4,12 @@ import { useConstContext } from '../../../contexts/ConstContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useCostContext } from '../../../contexts/CostContext';
-import { format, addDays } from 'date-fns';
+
 
 export const ItemShow = () => {
 
   const { baseURL } = useConstContext();
-  const { takeHomePaySet, takeHomePay, loggedIn } = useUserContext();
+  const { takeHomePaySet, loggedIn } = useUserContext();
   const {
     videosSet,
     videos,
@@ -17,29 +17,32 @@ export const ItemShow = () => {
     sites,
     itemSet,
     item,
-    price,
+    GetDaySet,
+    CountDaySet,
+    getDay,
+    countDay,
+    createStart,
+    deleteStart,
   } = useItemContext();
 
-  const { totalCostPriceSet ,totalCostPrice } = useCostContext();
+  const { totalCostPriceSet} = useCostContext();
   const { itemId }  = useParams();
 
-  // 所要日数
-  const getCount =  Math.round(price / ((takeHomePay - totalCostPrice) / 30 ))
-  // 今日の日付
-  const today = new Date()
-  // スタートボタンを押した日付
-  const startDay = new Date(item.start)
-  // スタートボタン押した日付をミリ表示
-  const startDayMs = Date.parse(startDay)
-  // スタートボタンを押した後に確定する日付を計算
-  const dateGet = addDays( startDay, getCount )
-  console.log(dateGet)
-  // スタートボタンを押した後に確定する日付表示
-  const dateGetting = format(today, "yyyy年MM月dd日")
-  // 手に入るまでの日数
-  const dateCounting = Math.round((dateGet - today) / (24*60*60*1000))
+  const StartBtn = () => {
+    if(item.start !== null) {
+      return <p className='btn red-btn' onClick={()=>{deleteStart(itemId)}}>STOP</p>
+    } else if (item.start === null ) {
+      return <p className='btn green-btn' onClick={()=>{createStart(itemId)}}>START</p>
+    }
+  }
 
-  useEffect(()=> {
+  // お手隙で修正
+  setTimeout(()=> {
+    CountDaySet();
+    GetDaySet();
+  }, 20)
+
+  useEffect( ()=> {
     itemSet(itemId);
     videosSet();
     sitesSet();
@@ -54,10 +57,11 @@ export const ItemShow = () => {
         <p className='item-name'>{item.name}</p>
       </div>
       <p className='item-get-count'>
-        <span className='big-number'>{dateCounting}</span>
+        <span className='big-number'>{countDay}</span>
         日後
       </p>
-      <p className='item-get-day'>{dateGetting}予定</p>
+      <p className='item-get-day' >{getDay}予定</p>
+      <StartBtn />
       <p className='item-price'>必要額 <span className='big-number'>{Number(item.price).toLocaleString()}</span> 円</p>
       <h3>参考動画</h3>
       <ul className="youtube-video">
