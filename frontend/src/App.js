@@ -13,13 +13,13 @@ export const App = () => {
     return(
         <ConstContextProvider>
             <UserContextProvider>
-                <ItemContextProvider>
-                    <CostContextProvider>
+                <CostContextProvider>
+                    <ItemContextProvider>
                         <Menu />
                         <StatusBar />
                         <Container />
-                    </CostContextProvider>
-                </ItemContextProvider>
+                    </ItemContextProvider>
+                </CostContextProvider>
             </UserContextProvider>
         </ConstContextProvider>
     );

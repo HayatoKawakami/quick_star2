@@ -1,7 +1,7 @@
 module Api
   module V1
     class ItemsController < ApplicationController
-      wrap_parameters :item, only: %i[name price user_id]
+      wrap_parameters :item, only: %i[name price user_id start]
       before_action :set_item, only: %i[show update destroy]
       def index
         items = Item.all
@@ -44,7 +44,7 @@ module Api
       end
 
       def item_params
-        params.require(:item).permit(:name, :price, :user_id)
+        params.require(:item).permit(:name, :price, :user_id, :start)
       end
     end
   end
