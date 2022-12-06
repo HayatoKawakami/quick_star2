@@ -421,6 +421,19 @@ input {
   background-color: rgb(186, 186, 186);
 }
 
+.badge {
+  width: 14vw;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vw;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 3px 0px;
+  margin: 0 auto;
+}
+
 .home-header {
   width: 100%;
 }
@@ -475,11 +488,12 @@ input {
   font-size: 5vw;
   font-weight: bold;
   text-align: center;
-  transform: translateY(0px);
 }
 
 .item-get-day {
   margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 3.5vw;
   font-weight: bold;
 }
@@ -546,7 +560,7 @@ iframe {
 }
 .big-number {
   font-size: 12vw;
-  margin: 5px;
+  margin-right: 5px;
   font-weight: bold;
 }
 

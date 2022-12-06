@@ -23,7 +23,7 @@ module Api
 
       def update
         if @item.update(item_params)
-          render json: @item
+          render json: { status: 200, item: @item }
         else
           render json: @item.error
         end

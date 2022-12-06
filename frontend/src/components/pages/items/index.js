@@ -8,7 +8,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
   const { baseURL, FontAwesomeIcon, navigate } = useConstContext();
-  const { items, itemsSet,  } = useItemContext();
+  const { items, itemsSet, countDay, CountDaySet  } = useItemContext();
   const { user, loggedIn, takeHomePay, takeHomePaySet } = useUserContext();
   const { totalCostPriceSet, totalCostPrice } = useCostContext();
 
@@ -17,6 +17,7 @@ export const ItemIndex = () => {
     takeHomePaySet();
     totalCostPriceSet();
   },[])
+
 
 
   return(
@@ -29,7 +30,7 @@ export const ItemIndex = () => {
                   <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
                   <div className='item-index-words-box'>
                     <p className='item-index-words1'>「{value.name}」</p>
-                    <p className='item-index-words2'>が手に入るまであと<span className='big-number'>{Math.round(value.price / ((takeHomePay - totalCostPrice) / 30 ))}</span>日</p>
+                    <p className='item-index-words2'>が手に入るまであと<span className='big-number'>{CountDaySet(value)}</span>日</p>
                   </div>
                 </Link>
               </li>
