@@ -264,14 +264,16 @@ export const ItemContextProvider = ({children}) => {
       const dateGet = Date.parse(addDays( startDay, getCount ))
       const dateGetting = format(new Date(dateGet), "yyyy年MM月dd日")
       setGetDay(dateGetting);
+      return dateGetting;
     } else {
       const dateGet = Date.parse(addDays( today, getCount ))
       const dateGetting = format(new Date(dateGet), "yyyy年MM月dd日")
       setGetDay(dateGetting);
+      return dateGetting;
     }
   }
 
-  const CountDaySet = () => {
+  const CountDaySet = (item) => {
     const getCount = Math.round(item.price / ((takeHomePay - totalCostPrice) / 30 ))
     const today = new Date();
     if(item.start){
@@ -279,32 +281,36 @@ export const ItemContextProvider = ({children}) => {
       const dateGet = Date.parse(addDays( startDay, getCount ))
       const dateCounting = Math.round((dateGet - today) / (24*60*60*1000))
       setCountDay(dateCounting);
+      return dateCounting
     } else {
       const dateGet = Date.parse(addDays( today, getCount ))
       const dateCounting = Math.round((dateGet - today) / (24*60*60*1000))
       setCountDay(dateCounting);
+      return dateCounting
     }
   }
 
-  const createStart = (itemId) => {
+  const createStart = async (itemId) => {
     const startData = {
       start: new Date()
     }
     try{
-      const res = axiosPut("items", itemId, startData)
-      console.log(res)
+      const res = await axiosPut("items", itemId, startData)
+      console.log("スタート！！",res.data)
+      setItem(res.data.item)
     } catch(error) {
       console.log(error)
     }
   }
 
-  const deleteStart = (itemId) => {
+  const deleteStart = async (itemId) => {
     const startData = {
       start: null,
     }
     try{
-      const res = axiosPut("items", itemId, startData)
-      console.log(res)
+      const res = await axiosPut("items", itemId, startData)
+      console.log("中止しました", res.data)
+      setItem(res.data.item)
     } catch(error){
       console.log(error)
     }

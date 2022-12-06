@@ -8,7 +8,7 @@ import { useCostContext } from '../../../contexts/CostContext';
 
 export const ItemShow = () => {
 
-  const { baseURL } = useConstContext();
+  const { baseURL, navigate } = useConstContext();
   const { takeHomePaySet, loggedIn } = useUserContext();
   const {
     videosSet,
@@ -30,15 +30,31 @@ export const ItemShow = () => {
 
   const StartBtn = () => {
     if(item.start !== null) {
-      return <p className='btn red-btn' onClick={()=>{deleteStart(itemId)}}>STOP</p>
+      return null
     } else if (item.start === null ) {
-      return <p className='btn green-btn' onClick={()=>{createStart(itemId)}}>START</p>
+      return <p className='btn cyan-btn' onClick={()=>{createStart(itemId)}}>スタートする</p>
+    }
+  }
+
+  const StartBadge = () => {
+    if(item.start !== null) {
+      return <p className='badge red-btn'>進行中</p>
+    } else if (item.start === null ) {
+      return null
+    }
+  }
+
+  const StopBtn = () => {
+    if(item.start !== null) {
+      return <p className='btn red-btn' onClick={()=>{deleteStart(itemId)}}>中止する</p>
+    } else if (item.start === null ) {
+      return null
     }
   }
 
   // お手隙で修正
   setTimeout(()=> {
-    CountDaySet();
+    CountDaySet(item);
     GetDaySet();
   }, 20)
 
@@ -52,13 +68,14 @@ export const ItemShow = () => {
 
   return(
     <>
+
       <div className='item-image-name-box'>
         <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
         <p className='item-name'>{item.name}</p>
       </div>
       <p className='item-get-count'>
         <span className='big-number'>{countDay}</span>
-        日後
+        日後<StartBadge/>
       </p>
       <p className='item-get-day' >{getDay}予定</p>
       <StartBtn />
@@ -116,6 +133,7 @@ export const ItemShow = () => {
           }
         })}
       </ul>
+      <StopBtn />
       <Link className='btn green-btn' to="edit">
         <p>商品情報変更</p>
       </Link>
