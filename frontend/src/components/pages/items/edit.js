@@ -29,6 +29,7 @@ export const ItemEdit = () => {
     siteDestroy,
     itemDestroy,
     editItem,
+    rendering
   } = useItemContext();
 
   const { itemId } = useParams();
@@ -129,6 +130,7 @@ export const ItemEdit = () => {
       <button className='btn red-btn' onClick={() =>{itemDestroy(itemId)}}>
         <p>削除</p>
       </button>
+
 
     </>
   );

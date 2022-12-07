@@ -28,6 +28,7 @@ export const ItemShow = () => {
   const { totalCostPriceSet} = useCostContext();
   const { itemId }  = useParams();
 
+
   const StartBtn = () => {
     if(item.start !== null) {
       return null
@@ -141,6 +142,7 @@ export const ItemShow = () => {
         <p>戻る</p>
       </Link>
       <br />
+      
     </>
   );
 }
