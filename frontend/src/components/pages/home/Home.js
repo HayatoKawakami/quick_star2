@@ -38,7 +38,7 @@ export const Home = () => {
               <img className="item-index-image" src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
               <div className='item-index-words-box'>
                 <p className='item-index-words1'>「{item.name}」</p>
-                <p className='item-index-words2'>が手に入るまであと<span className='big-number'>{CountDaySet(item)}</span>日</p>
+                <p className='item-index-words2'>あと<span className='big-number'>{CountDaySet(item)}</span>日</p>
               </div>
             </Link>
           </li>

@@ -30,7 +30,7 @@ export const ItemIndex = () => {
                   <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
                   <div className='item-index-words-box'>
                     <p className='item-index-words1'>「{value.name}」</p>
-                    <p className='item-index-words2'>が手に入るまであと<span className='big-number'>{CountDaySet(value)}</span>日</p>
+                    <p className='item-index-words2'>あと<span className='big-number'>{CountDaySet(value)}</span>日</p>
                   </div>
                 </Link>
               </li>

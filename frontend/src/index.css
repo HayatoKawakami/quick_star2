@@ -555,12 +555,12 @@ iframe {
   text-align: center;
   position: absolute;
   bottom: 0;
-  right: 20px;
+  right: 10px;
 
 }
 .big-number {
   font-size: 12vw;
-  margin-right: 5px;
+  margin: 0px 2vw;
   font-weight: bold;
 }
 

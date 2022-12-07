@@ -21,7 +21,8 @@ export const ItemContextProvider = ({children}) => {
   const [video, setVideo] = useState({});
   const [sites, setSites] = useState({});
   const [ url, setUrl] = useState('');
-  const [gettingDate, setGettingDate] = useState('');
+
+
 
   const [ site_name, setSite_name] = useState('');
   const [ site_url, setSite_url] = useState('');
@@ -89,17 +90,16 @@ export const ItemContextProvider = ({children}) => {
       price: price,
       user_id: userId
     }
-
     const config = {
       headers: {  'Content-Type': 'application/json'}
     }
-
     try {
       const res = await axiosPost("items", itemData, config)
       console.log("欲しいもの追加完了",res.data);
       createImage(res.data.item);
       createVideo(res.data.item);
-      createSite(res.data.item)
+      createSite(res.data.item);
+      navigate(`/items/${res.data.item.id}`);
     } catch (error) {
       console.log("欲しいもの追加処理エラー", error);
     }
@@ -109,11 +109,9 @@ export const ItemContextProvider = ({children}) => {
     const imageData = new FormData();
     imageData.append("image", image);
     imageData.append("item_id", item.id)
-
     const config = {
       headers: { 'Content-Type': 'multipart/form-data'}
     }
-
     try {
       const res = await axiosPost("images", imageData, config);
       console.log("欲しいもの画像追加完了", res.data);
@@ -127,8 +125,10 @@ export const ItemContextProvider = ({children}) => {
       url: url,
       item_id: item.id,
     }
-
     try {
+      if(url === ""){
+        return
+      }
       const res = await axiosPost("videos", videoData);
       console.log("欲しいもの参考動画登録完了", res.data)
     } catch (error) {
@@ -145,6 +145,9 @@ export const ItemContextProvider = ({children}) => {
     }
 
     try {
+      if(site_url === ""){
+        return
+      }
       const res = await axiosPost("sites", siteData);
       console.log("購入サイト登録完了", res.data);
       navigate(`/items/${item.id}`)
@@ -160,53 +163,67 @@ export const ItemContextProvider = ({children}) => {
     }
 
     try {
-      const res = await axiosPut("items", itemData, itemId)
+      const res = await axiosPut("items", itemId, itemData)
       console.log("欲しいもの情報更新完了", res.data);
+      editImage(itemId);
+      editVideos(itemId);
+      editSites(itemId);
       navigate(`/items/${itemId}`)
     } catch (error) {
       console.log("欲しいもの情報更新処理エラー", error);
     }
+  }
 
-    const imageData = new FormData();
-    imageData.append("image", image);
-    imageData.append("item_id", itemId);
-
-    const config = {
+    const editImage = async (itemId) => {
+      const imageData = new FormData();
+      imageData.append("image", image);
+      imageData.append("item_id", itemId);
+      const config = {
       headers:{'Content-Type': 'multipart/form-data'},
     }
-
-    try {
-      const res = await axiosPost("images", imageData, config);
-      console.log("欲しいもの画像追加完了", res.data);
-    } catch (error) {
-      console.log("欲しいもの画像追加処理エラー", error);
+      try {
+        if(image === ""){
+          return
+        }
+        const res = await axiosPost("images", imageData, config);
+        console.log("欲しいもの画像追加完了", res.data);
+      } catch (error) {
+        console.log("欲しいもの画像追加処理エラー", error);
+      }
     }
 
-    const videoData = {
-      url: url,
-      item_id: itemId,
+    const editVideos = async (itemId) => {
+      const videoData = {
+        url: url,
+        item_id: itemId,
+      }
+      try {
+        if(url === ""){
+          return
+        }
+        const res = await axiosPost("videos", videoData);
+        console.log("動画URL登録完了", res.data);
+      } catch (error) {
+        console.log("動画URL登録処理エラー", error);
+      }
     }
 
-    try {
-      const res = await axiosPost("videos", videoData);
-      console.log("動画URL登録完了", res.data);
-    } catch (error) {
-      console.log("動画URL登録処理エラー", error);
+    const editSites = async (itemId) => {
+      const siteData = {
+        site_name: site_name,
+        url: site_url,
+        item_id: itemId,
+      }
+      try {
+        if(site_url === ""){
+          return
+        }
+        const res = await axiosPost("sites", siteData)
+        console.log("購入サイト情報追加完了", res.data);
+      } catch (error) {
+        console.log("購入サイト情報追加処理エラー", error);
+      }
     }
-
-    const siteData = {
-      site_name: site_name,
-      url: site_url,
-      item_id: itemId,
-    }
-
-    try {
-      const res = await axiosPost("sites", siteData)
-      console.log("購入サイト情報追加完了", res.data);
-    } catch (error) {
-      console.log("購入サイト情報追加処理エラー", error);
-    }
-  }
 
   const itemDestroy = async (id) => {
     try {
