@@ -200,6 +200,7 @@ input {
   width: 100%;
 }
 
+
 .menu {
 }
 .status-bar {
@@ -435,7 +436,36 @@ input {
 }
 
 .home-header {
-  width: 100%;
+  width: 100vw;
+  height: 20vh;
+  transform: translateX(-3.8vw) translateY(-20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header-image {
+  width: 100vw;
+}
+
+.header-word-box {
+  position: absolute;
+  top: 13vw;
+  left: 10vw;
+}
+
+.header-greet {
+  color: white;
+  font-weight: bold;
+  font-size: 5.5vw;
+  text-shadow: 1px 1px 1px #222222;
+}
+.header-date {
+  color: white;
+  font-weight: bold;
+  font-size: 4vw;
+  text-shadow: 1px 1px 1px #222222;
 }
 
 .home-item-list {
@@ -470,6 +500,11 @@ input {
 
 .item-image {
   width: 100vw;
+}
+
+.edit-item-image {
+  width: 100vw;
+  transform: translateX(-4vw);
 }
 
 .item-name {
@@ -527,34 +562,30 @@ iframe {
   position: relative;
 }
 
-.item-index-words-box {
-  position: absolute;
-  top: 0;
-  margin: 0 auto;
-  width: 100%;
+.items-item a {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
-.item-index-words1 {
+.item-index-name {
+  width: 100%;
   color: white;
-  font-size: 5.8vw;
+  font-size: 4vw;
   font-weight: bold;
   text-shadow: 1px 1px 5px black;
+  background-color: #222222;
+  text-align: center;
   position: absolute;
-  top: 10px;
-  
+  bottom: 0;
+  padding: 3px 0px;
 }
-.item-index-words2 {
+.item-index-count {
   color: white;
   font-size: 5.5vw;
   font-weight: bold;
   text-shadow: 1px 1px 5px black;
   text-align: center;
   position: absolute;
-  bottom: 0;
+  bottom: 6vw;
   right: 10px;
 
 }
@@ -608,6 +639,7 @@ iframe {
 }
 
 .costs-item-name {
+  width: 100%;
   background-color: #222222;
   text-align: center;
   padding: 3px 0px;

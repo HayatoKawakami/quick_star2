@@ -8,7 +8,7 @@ import { useCostContext } from '../../../contexts/CostContext';
 
 export const ItemShow = () => {
 
-  const { baseURL, navigate } = useConstContext();
+  const { baseURL, ellipsisWord } = useConstContext();
   const { takeHomePaySet, loggedIn } = useUserContext();
   const {
     videosSet,
@@ -72,7 +72,7 @@ export const ItemShow = () => {
 
       <div className='item-image-name-box'>
         <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
-        <p className='item-name'>{item.name}</p>
+        <p className='item-name'>{ellipsisWord(`${item.name}`)(24)('...')}</p>
       </div>
       <p className='item-get-count'>
         <span className='big-number'>{countDay}</span>

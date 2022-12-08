@@ -56,6 +56,10 @@ export const ConstContextProvider = ({children}) => {
     }
   }
 
+  const ellipsisWord = text => len => ellipsis =>
+    text.length >= len ? text.slice(0, len - ellipsis.length) + ellipsis : text
+
+
   const value = {
     baseURL,
     baseApiURL,
@@ -67,6 +71,7 @@ export const ConstContextProvider = ({children}) => {
     axiosPost,
     axiosPut,
     axiosDelete,
+    ellipsisWord,
   }
 
   return(
