@@ -8,7 +8,7 @@ import { useCostContext } from "../../../contexts/CostContext";
 
 export const Home = () => {
 
-  const { baseURL, dateGet, date  } = useConstContext();
+  const { baseURL, dateGet, date, ellipsisWord  } = useConstContext();
   const { itemsSet, items, CountDaySet } = useItemContext();
   const { user, loggedIn, takeHomePaySet, takeHomePay } = useUserContext();
   const { totalCostPriceSet, totalCostPrice } = useCostContext();
@@ -23,8 +23,11 @@ export const Home = () => {
   return(
     <>
       <div className="home-header">
-        <h3>{user.name} さん、こんにちは。</h3>
-        <p>{date}</p>
+        <img className="header-image" src={`${baseURL}/layouts/home-header.jpg`} alt="" />
+        <div className="header-word-box">
+          <p className="header-greet">{user.name} さん、こんにちは。</p>
+          <p className="header-date">{date}</p>
+        </div>
       </div>
       <h3>Target</h3>
       <ul className="items-list">
@@ -36,10 +39,8 @@ export const Home = () => {
           <li className="items-item" key={index}>
             <Link to={`items/${itemId}`}>
               <img className="item-index-image" src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
-              <div className='item-index-words-box'>
-                <p className='item-index-words1'>「{item.name}」</p>
-                <p className='item-index-words2'>あと<span className='big-number'>{CountDaySet(item)}</span>日</p>
-              </div>
+              <p className='item-index-count'>あと<span className='big-number'>{CountDaySet(item)}</span>日</p>
+              <p className='item-index-name'>{ellipsisWord(`${item.name}`)(30)('...')}</p>
             </Link>
           </li>
         );

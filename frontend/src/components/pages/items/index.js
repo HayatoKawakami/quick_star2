@@ -7,7 +7,7 @@ import { useCostContext } from '../../../contexts/CostContext';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
-  const { baseURL, FontAwesomeIcon, navigate } = useConstContext();
+  const { baseURL, FontAwesomeIcon, ellipsisWord } = useConstContext();
   const { items, itemsSet, countDay, CountDaySet  } = useItemContext();
   const { user, loggedIn, takeHomePay, takeHomePaySet } = useUserContext();
   const { totalCostPriceSet, totalCostPrice } = useCostContext();
@@ -28,10 +28,8 @@ export const ItemIndex = () => {
               <li className='items-item' key={index}>
                 <Link to={`/items/${value.id}`}>
                   <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
-                  <div className='item-index-words-box'>
-                    <p className='item-index-words1'>「{value.name}」</p>
-                    <p className='item-index-words2'>あと<span className='big-number'>{CountDaySet(value)}</span>日</p>
-                  </div>
+                  <p className='item-index-name'>{ellipsisWord(`${value.name}`)(30)('...')}</p>
+                  <p className='item-index-count'>あと<span className='big-number'>{CountDaySet(value)}</span>日</p>
                 </Link>
               </li>
             );

@@ -5,7 +5,7 @@ import { useItemContext } from "../../contexts/ItemContext";
 import { useUserContext } from "../../contexts/UserContext";
 
 export const StatusBar = () =>{
-  const { baseURL, navigate } = useConstContext();
+  const { baseURL, navigate, ellipsisWord } = useConstContext();
   const { loggedIn } = useUserContext();
   const { item } = useItemContext();
   const location = useLocation();
@@ -98,7 +98,7 @@ export const StatusBar = () =>{
   return(
     <div className="status-bar">
       <ActiveBackBtn/>
-      <p className="status-word">{statusWord()}</p>
+      <p className="status-word">{ellipsisWord(statusWord())(20)('...')}</p>
     </div>
   );
 }
