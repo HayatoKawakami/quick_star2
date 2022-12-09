@@ -29,6 +29,9 @@ export const Home = () => {
           <p className="header-date">{date}</p>
         </div>
       </div>
+      <p className='baffa'>
+        月の余り<span className='big-number'>{(takeHomePay - totalCostPrice).toLocaleString()}</span>円
+      </p>
       <h3>Target</h3>
       <ul className="items-list">
       {Object.values(items).filter(item => {
@@ -38,9 +41,10 @@ export const Home = () => {
         return(
           <li className="items-item" key={index}>
             <Link to={`items/${itemId}`}>
-              <img className="item-index-image" src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
+              <img className="item-index-image" src={`${baseURL}/uploads/item/image/${item.id}/item.jpg?${new Date().getTime()}`} alt="" />
               <p className='item-index-count'>あと<span className='big-number'>{CountDaySet(item)}</span>日</p>
               <p className='item-index-name'>{ellipsisWord(`${item.name}`)(30)('...')}</p>
+              <p className='item-index-price'>{item.price.toLocaleString()}円</p>
             </Link>
           </li>
         );

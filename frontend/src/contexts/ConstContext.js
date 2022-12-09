@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from '../../lib/axios';
 import { format } from "date-fns";
+import { useLocation } from 'react-router-dom';
 
 const ConstContext = createContext();
 
@@ -15,6 +16,7 @@ export const ConstContextProvider = ({children}) => {
   const baseURL = "http://localhost:3000"
   const baseApiURL = "http://localhost:3000/api/v1"
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [date, setDate] = useState('');
 
@@ -64,6 +66,7 @@ export const ConstContextProvider = ({children}) => {
     baseURL,
     baseApiURL,
     navigate,
+    location,
     dateGet,
     date,
     FontAwesomeIcon,

@@ -34,7 +34,7 @@ export const UserProfile = () => {
   return(
     <div>
       <div className='user-icon'>
-        <img src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
+        <img src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg?${new Date().getTime()}`} alt="" />
       </div>
       <p>名前：{user.name}</p>
       <p>性別：{userSex()}</p>

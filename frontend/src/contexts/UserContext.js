@@ -90,7 +90,7 @@ export const UserContextProvider = ({ children }) => {
       setEmail(res.data.email);
       setIncome(res.data.income)
       console.log("ユーザー情報取得完了",res.data)
-      setPreviewImage(res.data.image.url)
+      setPreviewImage(res.data.image.url + `?${new Date().getTime()}`)
     } catch (error) {
       console.log("ユーザー情報取得処理エラー", error)
     }

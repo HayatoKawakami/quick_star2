@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
+import { useUserContext } from '../../../contexts/UserContext';
 import { useCostContext } from '../../../contexts/CostContext';
 import { Link } from 'react-router-dom';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const CostIndex = () => {
   const { baseURL, FontAwesomeIcon } = useConstContext();
+  const { takeHomePaySet, takeHomePay } = useUserContext();
   const { costs, setCostIndex, totalCostPrice, totalCostPriceSet } = useCostContext();
 
   const CostImage = (name) => {
@@ -35,12 +37,19 @@ export const CostIndex = () => {
   useEffect(() => {
     setCostIndex();
     totalCostPriceSet();
+    takeHomePaySet();
   }, [])
 
   return(
     <>
-      <p>
-        合計金額：{totalCostPrice}円
+      <p className='baffa'>
+        月の余り<span className='big-number'>{(takeHomePay - totalCostPrice).toLocaleString()}</span>円
+      </p>
+      <p className='cost-index-takehomepay'>
+        手取り額<span className='middium-number'>{takeHomePay.toLocaleString()}</span>円
+      </p>
+      <p className='cost-index-totalcostprice'>
+        固定費合計<span className='middium-number'>{totalCostPrice.toLocaleString()}</span>円
       </p>
       <ul className='costs-list'>
         {Object.values(costs).map((cost, index) => {

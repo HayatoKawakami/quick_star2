@@ -71,7 +71,7 @@ export const ItemShow = () => {
     <>
 
       <div className='item-image-name-box'>
-        <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
+        <img className='item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg?${new Date().getTime()}`} alt="" />
         <p className='item-name'>{ellipsisWord(`${item.name}`)(24)('...')}</p>
       </div>
       <p className='item-get-count'>
