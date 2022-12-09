@@ -5,10 +5,10 @@ import { useItemContext } from "../../contexts/ItemContext";
 import { useUserContext } from "../../contexts/UserContext";
 
 export const StatusBar = () =>{
-  const { baseURL, navigate, ellipsisWord } = useConstContext();
+  const { baseURL, navigate, location, ellipsisWord } = useConstContext();
   const { loggedIn } = useUserContext();
   const { item } = useItemContext();
-  const location = useLocation();
+  
 
   const ActiveBackBtn = () => {
     if (loggedIn === false || location.pathname === "/") {

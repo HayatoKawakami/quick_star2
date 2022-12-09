@@ -30,7 +30,7 @@ export const Menu = () => {
           <div className="menu-box-after" onClick={activeMenuBox}></div>
           <div className="menu-user-box">
             <Link to={`users/profile`} onClick={activeMenuBox}>
-              <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg`} alt="" />
+              <img className="menu-user-icon" src={`${baseURL}/uploads/user/image/${user.id}/icon.jpg?${new Date().getTime()}`} alt="" />
             </Link>
             <Link className="menu-user-text" to={`users/profile`} onClick={activeMenuBox}>
               <p className="">{user.name}</p>

@@ -22,8 +22,6 @@ export const ItemContextProvider = ({children}) => {
   const [sites, setSites] = useState({});
   const [ url, setUrl] = useState('');
 
-
-
   const [ site_name, setSite_name] = useState('');
   const [ site_url, setSite_url] = useState('');
 
@@ -32,6 +30,7 @@ export const ItemContextProvider = ({children}) => {
 
   const {
     navigate,
+    location,
     axiosGet,
     axiosPost,
     axiosPut,
@@ -297,12 +296,16 @@ export const ItemContextProvider = ({children}) => {
       const startDay = new Date(item.start);
       const dateGet = Date.parse(addDays( startDay, getCount ))
       const dateCounting = Math.round((dateGet - today) / (24*60*60*1000))
-      setCountDay(dateCounting);
+      if(location.pathname === `/items/${Number(location.pathname.split("/items/").slice(1,2))}`) {
+        setCountDay(dateCounting);
+      }
       return dateCounting
     } else {
       const dateGet = Date.parse(addDays( today, getCount ))
       const dateCounting = Math.round((dateGet - today) / (24*60*60*1000))
-      setCountDay(dateCounting);
+      if(location.pathname === `/items/${Number(location.pathname.split("/items/").slice(1,2))}`) {
+        setCountDay(dateCounting);
+      }
       return dateCounting
     }
   }

@@ -8,9 +8,9 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemIndex = () => {
   const { baseURL, FontAwesomeIcon, ellipsisWord } = useConstContext();
-  const { items, itemsSet, countDay, CountDaySet  } = useItemContext();
-  const { user, loggedIn, takeHomePay, takeHomePaySet } = useUserContext();
-  const { totalCostPriceSet, totalCostPrice } = useCostContext();
+  const { items, itemsSet, CountDaySet  } = useItemContext();
+  const { user, takeHomePaySet } = useUserContext();
+  const { totalCostPriceSet } = useCostContext();
 
   useEffect(() => {
     itemsSet();
@@ -27,9 +27,10 @@ export const ItemIndex = () => {
             return(
               <li className='items-item' key={index}>
                 <Link to={`/items/${value.id}`}>
-                  <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg`} alt="" />
+                  <img className='item-index-image' src={`${baseURL}/uploads/item/image/${value.id}/item.jpg?${new Date().getTime()}`} alt="" />
                   <p className='item-index-name'>{ellipsisWord(`${value.name}`)(30)('...')}</p>
                   <p className='item-index-count'>あと<span className='big-number'>{CountDaySet(value)}</span>日</p>
+                  <p className='item-index-price'>{value.price.toLocaleString()}円</p>
                 </Link>
               </li>
             );

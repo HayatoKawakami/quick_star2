@@ -40,7 +40,7 @@ export const ItemEdit = () => {
 
   return(
     <>
-      <img className='edit-item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg`} alt="" />
+      <img className='edit-item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg${new Date().getTime()}`} alt="" />
       <br />
       <div className='form-block'>
         <label htmlFor="">商品名</label>
