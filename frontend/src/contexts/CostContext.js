@@ -19,6 +19,7 @@ export const CostContextProvider = ({children}) => {
   const { userId, loggedIn } = useUserContext();
 
   const [costs, setCosts] = useState('');
+  const [cost, setCost] = useState('');
   const [name, setName] = useState(' ');
   const [price, setPrice] = useState('');
   const [totalCostPrice, setTotalCostPrice] = useState('');
@@ -66,6 +67,7 @@ export const CostContextProvider = ({children}) => {
     try {
       const res = await axiosGet("costs", costId)
       console.log("固定費情報取得完了", res.data);
+      setCost(res.data);
       setName(res.data.name);
       setPrice(res.data.price);
     } catch(error){
@@ -110,6 +112,7 @@ export const CostContextProvider = ({children}) => {
 
   const value = {
     costs,
+    cost,
     name,
     price,
     label,

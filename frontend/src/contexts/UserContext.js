@@ -138,13 +138,18 @@ export const UserContextProvider = ({ children }) => {
   const Login = async (data) => {
     try {
       const res = await axiosPost("login", data);
-      console.log("ログイン完了", res.data);
-      setLoggedIn(true);
-      setUser(res.data.user);
-      takeHomePaySet();
-      navigate("/");
+      if(res.data.logged_in === true){
+        console.log("ログイン完了", res.data);
+        setLoggedIn(true);
+        setUser(res.data.user);
+        takeHomePaySet();
+        navigate("/");
+      } else {
+        console.log("メールアドレス、またはパスワードが間違っています", res.data)
+        return
+      }
     } catch (error) {
-      console.log("メールアドレス、またはパスワードが間違っています");
+      console.log("ログイン処理エラー", error)
     }
   }
 

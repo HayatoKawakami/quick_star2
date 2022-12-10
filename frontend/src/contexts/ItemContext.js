@@ -112,8 +112,12 @@ export const ItemContextProvider = ({children}) => {
       headers: { 'Content-Type': 'multipart/form-data'}
     }
     try {
-      const res = await axiosPost("images", imageData, config);
-      console.log("欲しいもの画像追加完了", res.data);
+      if(image){
+        const res = await axiosPost("images", imageData, config);
+        console.log("欲しいもの画像追加完了", res.data);
+      } else {
+        return
+      }
     } catch (error) {
       console.log("欲しいもの画像追加処理エラー", error);
     }
