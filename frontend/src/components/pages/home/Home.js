@@ -30,7 +30,7 @@ export const Home = () => {
         </div>
       </div>
       <p className='baffa'>
-        月の余り<span className='big-number'>{(takeHomePay - totalCostPrice).toLocaleString()}</span>円
+        月の余り<span className='big-number'>{Math.floor(takeHomePay - totalCostPrice).toLocaleString()}</span>円
       </p>
       <h3>Target</h3>
       <ul className="items-list">

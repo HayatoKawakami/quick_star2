@@ -30,16 +30,7 @@ export const CostEdit = () => {
   return(
     <>
       <div className='form-block'>
-        <label className=' essencial' htmlFor="">コスト名</label>
-        <br />
-        <Select options={costsSelect} onChange={handleChangeName}/>
-        <input  type="text"
-        name="name"
-        value={name}
-        onChange={handleChangeOtherName}
-        style={label === "その他" ? {'display': 'block'} : {'display': 'none'}}
-        placeholder="コスト名"
-        />
+        <input type="hidden" name="name" value={name} />
       </div>
       <div className='form-block'>
         <label htmlFor="">金額</label>

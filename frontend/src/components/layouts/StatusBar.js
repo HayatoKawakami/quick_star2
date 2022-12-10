@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useConstContext } from "../../contexts/ConstContext";
+import { useCostContext } from "../../contexts/CostContext";
 import { useItemContext } from "../../contexts/ItemContext";
 import { useUserContext } from "../../contexts/UserContext";
 
@@ -8,7 +9,7 @@ export const StatusBar = () =>{
   const { baseURL, navigate, location, ellipsisWord } = useConstContext();
   const { loggedIn } = useUserContext();
   const { item } = useItemContext();
-  
+  const { cost } = useCostContext();
 
   const ActiveBackBtn = () => {
     if (loggedIn === false || location.pathname === "/") {
@@ -70,7 +71,7 @@ export const StatusBar = () =>{
     } else if (location.pathname === `/items/${Number(location.pathname.split('/').slice(2,3))}/edit`){
       return "欲しいもの編集";
     } else if (location.pathname === `/costs/${Number(location.pathname.split('/').slice(2,3))}/edit`){
-      return "編集";
+      return `${cost.name} の編集`;
     } else if (location.pathname === "/costs/new"){
       return "固定費を追加する";
     } else if (location.pathname === ""){
