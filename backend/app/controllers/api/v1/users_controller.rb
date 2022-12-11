@@ -8,39 +8,37 @@ module Api
 
       def index
         users = User.all
-        render json: users
+        render json: { status: 200, users: users }
       end
 
       def show
-        render json: @user
+        render json: { status: 200, user: @user }
       end
 
       def create
         user = User.new(user_params)
         if user.save!
           log_in(user)
-          render json: { status: :created, user: user }
+          render json: { status: 200, user: user }
         else
-          render json: { status: 500 }
+          render json: { status: 404 }
         end
       end
 
-      def edit; end
-
       def update
         if @user.update!(user_params)
-          render json: @user
+          render json: { status: 200, user: @user }
         else
-          render json: @user.errors
+          render json: { status: 404, user: @user.error }
         end
       end
 
       def destroy
         if @user.destroy
           reset_session
-          render json: @user
+          render json: { status: 200, user: @user }
         else
-          render json: @user.errors
+          render json: { status: 404, user: @user.error }
         end
       end
 

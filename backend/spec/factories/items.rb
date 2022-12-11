@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    name { "MyString" }
-    price { 1 }
-    user { nil }
+    name { 'テストの木刀' }
+    price { 100 }
+    user
   end
 end

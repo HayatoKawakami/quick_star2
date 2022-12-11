@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'ユーザー登録情報を全て入力した場合、'
 end
