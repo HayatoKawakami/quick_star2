@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :cost do
-    name { "MyString" }
-    price { 1 }
-    user { nil }
+    name { '家賃' }
+    price { 55_000 }
+    user
   end
 end

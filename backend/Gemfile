@@ -77,7 +77,7 @@ group :development, :test do
   # デバッグで使用する
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   # RSpecに対応させる
-  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec-rails'
   # RSpecで使用するfixtureの役割
   gem 'factory_bot_rails', '~> 4.11'
 end

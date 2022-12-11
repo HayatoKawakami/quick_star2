@@ -1,8 +1,4 @@
-module Api
-  module V1
-    class ApplicationController < ActionController::API
-      include UsersHelper
-      include SessionsHelper
-    end
-  end
+class ApplicationController < ActionController::API
+  include UsersHelper
+  include SessionsHelper
 end
