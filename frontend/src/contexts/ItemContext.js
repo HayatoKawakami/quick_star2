@@ -64,7 +64,7 @@ export const ItemContextProvider = ({children}) => {
   const itemsSet = async () => {
     try {
       const res = await axiosGet("items")
-      setItems(res.data);
+      setItems(res.data.items);
       console.log("欲しいもの一覧取得完了", res.data);
     } catch (error) {
       console.log("欲しいもの一覧データ取得エラー", error)
@@ -75,9 +75,9 @@ export const ItemContextProvider = ({children}) => {
     try {
       const res = await axiosGet("items", id)
       console.log("欲しいもの情報取得完了", res.data);
-      setItem(res.data);
-      setName(res.data.name);
-      setPrice(res.data.price);
+      setItem(res.data.item);
+      setName(res.data.item.name);
+      setPrice(res.data.item.price);
     } catch (error) {
       console.log("欲しいものデータ取得エラー", error);
     }
