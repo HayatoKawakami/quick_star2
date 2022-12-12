@@ -5,19 +5,19 @@ module Api
       before_action :set_item, only: %i[show update destroy]
       def index
         items = Item.all
-        render json: items
+        render json: { status: 200, items: items }
       end
 
       def show
-        render json: @item
+        render json: { status: 200, item: @item }
       end
 
       def create
         @item = Item.new(item_params)
         if @item.save!
-          render json: { status: :created, item: @item }
+          render json: { status: 200, item: @item }
         else
-          render json: { status: 500 }
+          render json: { status: 404 }
         end
       end
 
@@ -25,15 +25,15 @@ module Api
         if @item.update(item_params)
           render json: { status: 200, item: @item }
         else
-          render json: @item.error
+          render json: { status: 404, item: @item.error }
         end
       end
 
       def destroy
         if @item.destroy
-          render json: @item
+          render json: { status: 200, item: @item }
         else
-          render json: @item.error
+          render json: { status: 404, item: @item.error }
         end
       end
 
@@ -44,7 +44,7 @@ module Api
       end
 
       def item_params
-        params.require(:item).permit(:name, :price, :user_id, :start)
+        params.permit(:name, :price, :user_id, :start)
       end
     end
   end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    name { 'テストの木刀' }
+    sequence(:name) { |n| "テストの木刀#{n}" }
     price { 100 }
-    user
+    association :user
   end
 end
