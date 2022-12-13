@@ -260,7 +260,7 @@ export const ItemContextProvider = ({children}) => {
   const sitesSet = async () => {
     try {
       const res = await axiosGet("sites");
-      setSites(res.data);
+      setSites(res.data.sites);
       console.log("購入サイト候補情報一覧取得", res.data);
     } catch (error) {
       console.log("購入サイト候補情報一覧取得処理エラー", error)

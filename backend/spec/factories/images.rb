@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :image do
-    image { "MyString" }
-    item { nil }
+    image { 'item.jpg' }
+    association :item
   end
 end

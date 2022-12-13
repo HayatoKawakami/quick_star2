@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :cost do
-    name { '家賃' }
-    price { 55_000 }
+    sequence(:name) { |n| "固定費#{n}" }
+    price { 1000 }
     association :user
   end
 end

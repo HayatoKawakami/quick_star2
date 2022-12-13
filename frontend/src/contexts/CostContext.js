@@ -47,7 +47,7 @@ export const CostContextProvider = ({children}) => {
     try {
       const response = await axiosGet("/costs")
       console.log("固定費一覧データ取得完了", response.data)
-      setCosts(response.data);
+      setCosts(response.data.costs);
     } catch(error) {
       console.log("固定費データ取得処理エラー", error)
     }
@@ -57,7 +57,7 @@ export const CostContextProvider = ({children}) => {
     try {
       const res = await axiosGet("calc_all_costs")
       console.log("固定費合計額取得完了", res.data)
-      setTotalCostPrice(res.data)
+      setTotalCostPrice(res.data.total_costs_price)
     } catch(error) {
       console.log("固定費合計額取得処理エラー", error)
     }
@@ -67,9 +67,9 @@ export const CostContextProvider = ({children}) => {
     try {
       const res = await axiosGet("costs", costId)
       console.log("固定費情報取得完了", res.data);
-      setCost(res.data);
-      setName(res.data.name);
-      setPrice(res.data.price);
+      setCost(res.data.cost);
+      setName(res.data.cost.name);
+      setPrice(res.data.cost.price);
     } catch(error){
       console.log("固定費情報取得処理エラー", error);
     }

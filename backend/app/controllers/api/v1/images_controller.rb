@@ -1,15 +1,10 @@
 module Api
   module V1
     class ImagesController < ApplicationController
-      def index
-        images = Image.where(item_id: 3)
-        render json: images
-      end
-
       def create
         image = Image.new(image_params)
         if image.save!
-          render json: { status: :created, image: image }
+          render json: { status: 200, image: image }
         else
           render json: image.errors
         end
