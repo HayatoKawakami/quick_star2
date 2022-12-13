@@ -27,7 +27,7 @@ module Api
         if @user.update!(user_params)
           render json: { status: 200, user: @user }
         else
-          render json: { status: 404, user: @user.error }
+          render json: { status: 404, message: 'ユーザー情報を更新できませんでした' }
         end
       end
 
@@ -56,6 +56,7 @@ module Api
         # 　手取り額　=　income　-　社会保険料-　源泉所得税　の順
         take_home_pay = income - social_insurance - income_tax
         render json: {
+          status: 200,
           income: income,
           health_insurance: @health_insurance,
           welfare_pension_insurance: @welfare_pension_insurance,

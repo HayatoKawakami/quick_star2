@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :video do
-    url { "MyString" }
-    item { nil }
+    sequence(:url) {|n| "https://test-url#{n}" }
+    association :item
   end
 end

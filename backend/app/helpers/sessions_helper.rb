@@ -5,9 +5,9 @@ module SessionsHelper
 
   def logged_in?
     if current_user
-      render json: { logged_in: true, user: @current_user }
+      render json: { status: 200, logged_in: true, user: @current_user }
     else
-      render json: { logged_in: false, messages: 'ユーザーが存在しません' }
+      render json: { status: 404, logged_in: false, message: 'ログイン中のユーザーが存在しません' }
     end
   end
 end

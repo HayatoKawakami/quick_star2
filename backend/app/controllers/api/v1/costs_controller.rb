@@ -4,35 +4,35 @@ module Api
       before_action :set_cost, only: %i[show update destroy]
       def index
         costs = Cost.where(user_id: session[:user_id])
-        render json: costs
+        render json: { status: 200, costs: costs }
       end
 
       def show
-        render json: @cost
+        render json: { status: 200, cost: @cost }
       end
 
       def create
         @cost = Cost.new(cost_params)
         if @cost.save!
-          render json: { status: :created, cost: @cost }
+          render json: { status: 200, cost: @cost }
         else
-          render json: @cost.errors
+          render json: { status: 404, cost: @cost.errors }
         end
       end
 
       def update
         if @cost.update(cost_params)
-          render json: @cost
+          render json: { status: 200, cost: @cost }
         else
-          render json: @cost.errors
+          render json: { status: 404, cost: @cost.errors }
         end
       end
 
       def destroy
         if @cost.destroy
-          render json: @cost
+          render json: { status: 200, cost: @cost }
         else
-          render json: @cost.errors
+          render json: { status: 404, cost: @cost.errors }
         end
       end
 
@@ -42,13 +42,13 @@ module Api
         costs.each do |cost|
           price += cost.price
         end
-        render json: price
+        render json: { status: 200, total_costs_price: price }
       end
 
       private
 
       def cost_params
-        params.require(:cost).permit(:name, :price, :user_id)
+        params.permit(:name, :price, :user_id)
       end
 
       def set_cost

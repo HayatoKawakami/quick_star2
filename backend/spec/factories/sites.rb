@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :site do
-    type { "" }
-    url { "MyString" }
-    item { nil }
+    site_name { 'amazon' }
+    sequence(:url) {|n| "https://test-url#{n}" }
+    association :item
   end
 end
