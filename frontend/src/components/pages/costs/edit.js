@@ -27,6 +27,14 @@ export const CostEdit = () => {
     costSet(costId);
   }, [])
 
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      updateCost(costId, data)
+    }
+  }
+
   return(
     <>
       <div className='form-block'>
@@ -36,6 +44,7 @@ export const CostEdit = () => {
         <label htmlFor="">金額</label>
         <input type="number"
                 value={price}
+                onKeyDown={handleEnterKeyDown}
                 onChange={handleChangePrice}
         />
       </div>

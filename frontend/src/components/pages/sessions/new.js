@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useUserContext } from '../../../contexts/UserContext';
+import { useConstContext } from '../../../contexts/ConstContext';
 
 export const LoginForm = () => {
 
@@ -22,6 +23,14 @@ export const LoginForm = () => {
     return <Navigate replace to="/"/>;
   }
 
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      Login(data);
+    }
+  }
+
   return(
     <>
       <label htmlFor="email">メールアドレス</label>
@@ -39,6 +48,7 @@ export const LoginForm = () => {
       value={password}
       onChange={handleChangePassword}
       placeholder="パスワード"
+      onKeyDown={handleEnterKeyDown}
       />
       <br />
 

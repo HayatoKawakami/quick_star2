@@ -9,6 +9,14 @@ export const CostNew = () => {
   const { FontAwesomeIcon } = useConstContext();
   const { name, price, label, costsSelect, handleChangeName, handleChangePrice, handleChangeOtherName,createCost  } = useCostContext();
 
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      createCost()
+    }
+  }
+
   return(
     <>
       <div className='form-block'>
@@ -30,6 +38,7 @@ export const CostNew = () => {
         <input type="number"
                 name="price"
                 value={price}
+                onKeyDown={handleEnterKeyDown}
                 onChange={handleChangePrice}
         />
       </div>

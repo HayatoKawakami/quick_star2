@@ -22,8 +22,14 @@ export const ItemNew = () => {
           getImage,
           createItem,
         } = useItemContext();
-
-
+        
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      createItem(userId)
+    }
+  }
 
 
   return(
@@ -39,12 +45,15 @@ export const ItemNew = () => {
       <input className='integer-input' type="number"
               value={price}
               onChange={handleChangePrice}
+              onKeyDown={handleEnterKeyDown}
       />
+            
+
       <label className='input-label' htmlFor="">参考動画URL</label>
-      <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
+      <input type="text" value={url} onKeyDown={handleEnterKeyDown} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
       <label className='input-label' htmlFor="">購入サイト候補</label>
       <Select className='select-input' options={options} onChange={handleChangeSiteName}/>
-      <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
+      <input type="text" value={site_url} onKeyDown={handleEnterKeyDown} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
       <input type="hidden" name="user_id" value={userId} />
 
       <button className='btn cyan-btn' onClick={()=>{createItem(userId)}} >

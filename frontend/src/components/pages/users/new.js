@@ -40,6 +40,14 @@ export const UserNew = () => {
     return <Navigate replace to="/"/>;
   }
 
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      createUser(data)
+    }
+  }
+
   return(
     <div>
       <label className=" essencial" htmlFor="name">名前</label>
@@ -122,10 +130,11 @@ export const UserNew = () => {
         <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       </div>
 
-      <div className='form-block'>
-        <label htmlFor="email">収入※額面</label>
+      <div className='form-block '>
+        <label className="essencial" htmlFor="email">収入※額面</label>
         <input type="number"
         name="income"
+        onKeyDown={handleEnterKeyDown}
         onChange={handleChangeIncome}
         value={income}
         />

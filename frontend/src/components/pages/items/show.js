@@ -138,7 +138,7 @@ export const ItemShow = () => {
       <Link className='btn green-btn' to="edit">
         <p>商品情報変更</p>
       </Link>
-      <Link className='btn gray-btn' to={`/items/`}>
+      <Link className='btn gray-btn' to="/items">
         <p>戻る</p>
       </Link>
       <br />
