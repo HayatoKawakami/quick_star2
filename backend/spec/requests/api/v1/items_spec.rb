@@ -71,17 +71,31 @@ describe 'ImageAPI' do
   before do
     @user = create(:user)
     @item = create(:item, user_id: @user.id)
+    @image = create(:image,
+                    image: Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                                                  '/public/uploads/item/image/3/item.jpg')),
+                    item_id: @item.id)
   end
   describe 'POST /images' do
     before do
       @image_create_params = {
-        image: 'item.jpg',
+        image: Rack::Test::UploadedFile.new(File.join(Rails.root, '/public/uploads/item/image/3/item.jpg')),
         item_id: @item.id
       }
     end
-    example '画像情報が正常に保存される' do
-      post '/api/v1/images/', params: @image_create_params
-      expect(JSON.parse(response.body)['image']['image']).to eq('item.jpg')
+    example '画像情報が正常に保存できる' do
+      expect do
+        post '/api/v1/images/', params: @image_create_params
+        expect(response.status).to eq 200
+      end.to change { Image.count }.by(1)
+    end
+  end
+  describe 'DELETE' do
+    example '画像情報が正常に削除できる' do
+      expect do
+        delete "/api/v1/images/#{@image.id}"
+        expect(response.status).to eq 200
+      end.to change { Image.count }.by(-1)
     end
   end
 end
