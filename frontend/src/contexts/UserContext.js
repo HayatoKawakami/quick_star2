@@ -86,11 +86,11 @@ export const UserContextProvider = ({ children }) => {
     try {
       const res = await axiosGet("users", user.id)
       setUserId(res.data.id)
-      setName(res.data.name);
-      setEmail(res.data.email);
-      setIncome(res.data.income)
+      setName(res.data.user.name);
+      setEmail(res.data.user.email);
+      setIncome(res.data.user.income)
       console.log("ユーザー情報取得完了",res.data)
-      setPreviewImage(res.data.image.url + `?${new Date().getTime()}`)
+      setPreviewImage(res.data.user.image.url + `?${new Date().getTime()}`)
     } catch (error) {
       console.log("ユーザー情報取得処理エラー", error)
     }
@@ -118,7 +118,7 @@ export const UserContextProvider = ({ children }) => {
     try {
       const res = await axiosPut("users", user.id, data, config);
       console.log("送信したデータ", res.data);
-      setUser(res.data);
+      setUser(res.data.user);
       navigate("users/profile");
     } catch (error) {
       console.log("ユーザー情報更新エラー", error);

@@ -241,7 +241,7 @@ export const ItemContextProvider = ({children}) => {
   const videosSet = async () => {
     try {
       const res = await axiosGet("videos");
-      setVideos(res.data);
+      setVideos(res.data.videos);
       console.log("動画情報一覧取得完了", res.data);
     } catch (error) {
       console.log("動画情報取得処理エラー", error)

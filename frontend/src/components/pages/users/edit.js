@@ -31,6 +31,14 @@ export const UserEdit = () => {
     userSet();
   },[])
 
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      editUser(data)
+    }
+  }
+
 
 
   return(
@@ -42,6 +50,7 @@ export const UserEdit = () => {
         <label htmlFor="image">画像</label>
         <input type="file"
         accept='image/*, .jpg, .png, .jpeg, .gif'
+        onKeyDown={handleEnterKeyDown}
         onChange={getPreviewImage}
         />
       </div>
@@ -50,6 +59,7 @@ export const UserEdit = () => {
         <label htmlFor="name">名前</label>
         <input type="text"
         name="name"
+        onKeyDown={handleEnterKeyDown}
         onChange={handleChangeName}
         value={name}
         />
@@ -60,6 +70,7 @@ export const UserEdit = () => {
         <label htmlFor="email">メールアドレス</label>
         <input type="email"
         name="email"
+        onKeyDown={handleEnterKeyDown}
         onChange={handleChangeEmail}
         value={email}
         />
@@ -69,6 +80,7 @@ export const UserEdit = () => {
         <label htmlFor="email">収入※額面</label>
         <input type="number"
         name="income"
+        onKeyDown={handleEnterKeyDown}
         onChange={handleChangeIncome}
         value={income}
         />

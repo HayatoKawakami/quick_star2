@@ -38,6 +38,14 @@ export const ItemEdit = () => {
     itemSet(itemId);
   },[])
 
+  const handleEnterKeyDown = (e) => {
+    if(e && e.key !== 'Enter') {
+      return
+    } else {
+      editItem(itemId)
+    }
+  }
+
   return(
     <>
       <img className='edit-item-image' src={`${baseURL}/uploads/item/image/${item.id}/item.jpg${new Date().getTime()}`} alt="" />
@@ -48,6 +56,7 @@ export const ItemEdit = () => {
                 name="name"
                 value={name}
                 onChange={handleChangeName}
+                onKeyDown={handleEnterKeyDown}
         />
       </div>
       <div className='form-block'>
@@ -56,6 +65,7 @@ export const ItemEdit = () => {
           name="price"
           value={price}
           onChange={handleChangePrice}
+          onKeyDown={handleEnterKeyDown}
         />
       </div>
 
@@ -67,7 +77,7 @@ export const ItemEdit = () => {
       <div className='form-block'>
         <label htmlFor="">参考動画追加</label>
         <br />
-        <input type="text" value={url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
+        <input type="text" value={url} onKeyDown={handleEnterKeyDown} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />
         <ul>
         {Object.values(videos).filter(video => {
           return video.item_id === Number(itemId);
@@ -121,10 +131,10 @@ export const ItemEdit = () => {
           })}
         </ul>
         <Select options={options} onChange={handleChangeSiteName} />
-        <input type="text" value={site_url} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
+        <input type="text" value={site_url} onKeyDown={handleEnterKeyDown} onChange={handleChangeSiteUrl} placeholder="購入サイトURL" />
       </div>
 
-      <button className='btn green-btn' onClick={()=>{editItem(itemId)}}>
+      <button className='btn green-btn' onKeyDown={handleEnterKeyDown} onClick={()=>{editItem(itemId)}}>
         <p>変更</p>
       </button>
       <button className='btn red-btn' onClick={() =>{itemDestroy(itemId)}}>
