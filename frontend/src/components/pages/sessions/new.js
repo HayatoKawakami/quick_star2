@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useUserContext } from '../../../contexts/UserContext';
-import { useConstContext } from '../../../contexts/ConstContext';
+
 
 export const LoginForm = () => {
 
@@ -51,7 +51,6 @@ export const LoginForm = () => {
       onKeyDown={handleEnterKeyDown}
       />
       <br />
-      <p>hayato</p>
 
       <input type="button" onClick={()=>{Login(data)}} value="ログイン" />
     </>

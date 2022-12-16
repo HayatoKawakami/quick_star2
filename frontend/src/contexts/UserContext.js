@@ -35,7 +35,7 @@ export const UserContextProvider = ({ children }) => {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleChangeName = (e) => { setName(e.target.value); }
+  const handleChangeName = (e) => { setName(e.target.value ); }
   const handleChangeEmail = (e) => { setEmail(e.target.value); }
   const handleChangePassword = (e) => { setPassword(e.target.value); }
   const handleChangePasswordConfirmation = (e) => { setPasswordConfirmation(e.target.value); }
@@ -89,10 +89,10 @@ export const UserContextProvider = ({ children }) => {
       setName(res.data.user.name);
       setEmail(res.data.user.email);
       setIncome(res.data.user.income)
-      console.log("ユーザー情報取得完了",res.data)
+      // console.log("ユーザー情報取得完了",res.data)
       setPreviewImage(res.data.user.image.url + `?${new Date().getTime()}`)
     } catch (error) {
-      console.log("ユーザー情報取得処理エラー", error)
+      // console.log("ユーザー情報取得処理エラー", errorっs)
     }
   }
 

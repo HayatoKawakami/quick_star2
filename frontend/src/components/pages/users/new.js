@@ -139,6 +139,7 @@ export const UserNew = () => {
         value={income}
         />
       </div>
+      <p>hayato</p>
 
       <input type="button" onClick={()=> {createUser(data)}} value="新規登録" />
     </div>

@@ -7,10 +7,12 @@ import { UserContextProvider } from "./contexts/UserContext";
 import { ConstContextProvider } from "./contexts/ConstContext";
 import { ItemContextProvider } from "./contexts/ItemContext";
 import { CostContextProvider } from "./contexts/CostContext";
+import { BrowserRouter } from "react-router-dom";
 
 
 export const App = () => {
     return(
+        <BrowserRouter>
         <ConstContextProvider>
             <UserContextProvider>
                 <CostContextProvider>
@@ -22,5 +24,6 @@ export const App = () => {
                 </CostContextProvider>
             </UserContextProvider>
         </ConstContextProvider>
+        </BrowserRouter>
     );
 }
