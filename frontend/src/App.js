@@ -8,6 +8,7 @@ import { ConstContextProvider } from "./contexts/ConstContext";
 import { ItemContextProvider } from "./contexts/ItemContext";
 import { CostContextProvider } from "./contexts/CostContext";
 import { BrowserRouter } from "react-router-dom";
+import { useConstContext } from "./contexts/ConstContext";
 
 
 export const App = () => {
