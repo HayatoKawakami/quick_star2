@@ -5,7 +5,7 @@ import axios from '../../lib/axios';
 import { format } from "date-fns";
 import { useLocation } from 'react-router-dom';
 
-const ConstContext = createContext();
+const ConstContext = createContext("");
 
 export const useConstContext = () => {
   return useContext(ConstContext);

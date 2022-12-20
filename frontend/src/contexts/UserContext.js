@@ -1,7 +1,7 @@
 import React, { useState,useEffect, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 
-const UserContext = createContext();
+const UserContext = createContext("");
 
 export const useUserContext = () => {
   return useContext(UserContext);
