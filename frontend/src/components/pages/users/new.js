@@ -50,8 +50,7 @@ export const UserNew = () => {
 
   return(
     <div>
-      <label className=" essencial" htmlFor="name">名前</label>
-      <br/>
+      <label name="name" className=" essencial" htmlFor="name">名前</label>
       <input
       id="name"
       name="name"
