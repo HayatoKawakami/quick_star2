@@ -20,5 +20,5 @@ test("名前入力が正常に動作する", ()=>{
   render(<UserNew/>)
   const nameInputValue = screen.getByLabelText("名前")
   fileEvent.change(nameInputValue, { target: { value: "テストくん" } })
-  expect(nameInputValue.value).toBe("テストくん")
+  expect(nameInputValue.value).toBe("テストくん") 
 })
