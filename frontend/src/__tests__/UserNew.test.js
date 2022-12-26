@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import { UserNew } from '../components/pages/users/new';
 import userEvent from "@testing-library/user-event";
+import { LoginForm } from '../components/pages/sessions/new';
 
 test("ユーザー新規登録画面に「hayato」が正常に表示されている", ()=>{
   render(<UserNew/>)
@@ -10,7 +11,7 @@ test("ユーザー新規登録画面に「hayato」が正常に表示されて�
   expect(hayato).toBeInTheDocument();
 })
 
-test("ユーザー新規登録画面に新規登録ボタンが表示されている", () => { 
+test("ユーザー新規登録画面に新規登録ボタンが表示されている", () => {
   render(<UserNew/>)
   const text = screen.getByText("新規登録")
   expect(text).toBeInTheDocument()
@@ -21,4 +22,10 @@ test("名前入力が正常に動作する", ()=>{
   const nameInputValue = screen.getByLabelText("名前")
   userEvent.type(nameInputValue, "テストくん")
   expect(nameInputValue.value).toBe("テストくん")
+})
+
+test("ログインフォーム", ()=>{
+  render(<LoginForm/>)
+  const emailLabel = screen.getByText("メールアドレス");
+  expect(emailLabel).toBeInTheDocument()
 })
