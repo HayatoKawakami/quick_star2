@@ -107,7 +107,7 @@ export const UserNew = () => {
           name={sex}
           value="1"
           onChange={handleChangeSex}
-          checked="checked"
+          defaultChecked={true}
           />
           男性
           <input
@@ -120,13 +120,15 @@ export const UserNew = () => {
       </div>
 
       <div className='form-block'>
-        <label className=" essencial" htmlFor="birthday">生年月日</label>
-        <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
+        <label className=" essencial" htmlFor="userNewBirthday">生年月日</label>
+        <input id="userNewBirthday" type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       </div>
 
       <div className='form-block '>
-        <label className="essencial" htmlFor="email">収入※額面</label>
-        <input type="number"
+        <label className="essencial" htmlFor="userNewIncome">収入※額面</label>
+        <input 
+        id="userNewIncome"
+        type="number"
         name="income"
         onKeyDown={handleEnterKeyDown}
         onChange={handleChangeIncome}
