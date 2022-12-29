@@ -100,9 +100,8 @@ export const UserNew = () => {
       <input type="file" name="image" accept="image/*,.png,.jpg,.jpeg,.gif" onChange={getImage} />
 
       <div className="radio">
-        <label className=" essencial" htmlFor="sex">性別</label>
+        <label  className=" essencial" htmlFor="sex">性別</label>
         <br/>
-        <label>
           <input
           type="radio"
           name={sex}
@@ -111,8 +110,6 @@ export const UserNew = () => {
           checked="checked"
           />
           男性
-        </label>
-        <label>
           <input
           type="radio"
           name={sex}
@@ -120,12 +117,10 @@ export const UserNew = () => {
           onChange={handleChangeSex}
           />
           女性
-        </label>
       </div>
 
       <div className='form-block'>
         <label className=" essencial" htmlFor="birthday">生年月日</label>
-        <br/>
         <input type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       </div>
 
@@ -138,7 +133,6 @@ export const UserNew = () => {
         value={income}
         />
       </div>
-      <p>hayato</p>
 
       <input type="button" onClick={()=> {createUser(data)}} value="新規登録" />
     </div>
