@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import { UserNew } from '../components/pages/users/new';
+import userEvent from '@testing-library/user-event'
 
 
 
@@ -13,7 +14,7 @@ test("ユーザー新規登録画面に新規登録ボタンが表示されて�
 
 test("名前入力が正常に動作する", ()=>{
   render(<UserNew/>)
-  const nameInput = screen.getByLabelText("名前")
+  const nameInput = screen.getByTestId("userNewNameInput")
   fireEvent.change(nameInput, {
     target: {value: "テストくん"}
   })
@@ -22,7 +23,7 @@ test("名前入力が正常に動作する", ()=>{
 
 test("メールアドレス入力が正常に動作する", () => {
   render(<UserNew/>)
-  const emailInput = screen.getByLabelText("メールアドレス")
+  const emailInput = screen.getByTestId("userNewEmailInput")
   fireEvent.change(emailInput, {
     target: { value: "test@gmail.com" }
   })
@@ -31,7 +32,7 @@ test("メールアドレス入力が正常に動作する", () => {
 
 test("パスワード入力が正常に動作する", () => {
   render(<UserNew/>)
-  const passwordInput = screen.getByLabelText("パスワード")
+  const passwordInput = screen.getByTestId("userNewPasswordInput")
   fireEvent.change(passwordInput, {
     target: { value: "0000"}
   })
@@ -40,7 +41,7 @@ test("パスワード入力が正常に動作する", () => {
 
 test("パスワード確認入力が正常に動作する", () => {
   render(<UserNew/>)
-  const passwordConfirmationInput = screen.getByLabelText("パスワード確認")
+  const passwordConfirmationInput = screen.getByTestId("userNewPasswordConfirmationInput")
   fireEvent.change(passwordConfirmationInput, {
     target: { value: "0000" }
   })
@@ -58,7 +59,7 @@ test("パスワード確認入力が正常に動作する", () => {
 
 test("生年月日入力が正常に動作する", () => {
   render(<UserNew/>)
-  const birthdayInput = screen.getByLabelText("生年月日")
+  const birthdayInput = screen.getByTestId("userNewBirthdayInput")
   fireEvent.change(birthdayInput, {
     target: { value: "2022-12-15" }
   })
@@ -67,7 +68,7 @@ test("生年月日入力が正常に動作する", () => {
 
 test("額面収入入力が正常に動作する", () => {
   render(<UserNew/>)
-  const incomeInput = screen.getByLabelText("収入※額面")
+  const incomeInput = screen.getByTestId("userNewIncomeInput")
   fireEvent.change(incomeInput, {
     target: { value: "300000" }
   })
@@ -76,4 +77,22 @@ test("額面収入入力が正常に動作する", () => {
 
 test("必要情報を入力してユーザーが正常に作成される", () => {
   render(<UserNew/>)
+  const nameInput = screen.getByTestId("userNewNameInput")
+  const emailInput = screen.getByTestId("userNewEmailInput")
+  const passwordInput = screen.getByTestId("userNewPasswordInput")
+  const passwordConfirmation = screen.getByTestId("userNewPasswordConfirmationInput")
+  const birthdayInput = screen.getByTestId("userNewBirthdayInput")
+  const incomeInput = screen.getByTestId("userNewIncomeInput")
+  const submitButton = screen.getByTestId("userNewSubmitButton")
+
+  userEvent.type(nameInput, "河上勇人")
+  userEvent.type(emailInput, "hayato.drsp@gmail.com")
+  userEvent.type(passwordInput, "0000")
+  userEvent.type(passwordConfirmation, "0000")
+  userEvent.type(birthdayInput, "1990-03-22")
+  userEvent.type(incomeInput, "300000")
+
+  userEvent.click(submitButton);
+  // ここまででテストコーディングを中断。
+
 })
