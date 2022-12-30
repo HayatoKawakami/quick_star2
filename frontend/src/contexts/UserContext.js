@@ -25,6 +25,7 @@ export const UserContextProvider = ({ children }) => {
   const [incomeTax, setincomeTax] = useState('');
   const [takeHomePay, setTakeHomePay] = useState('');
 
+
   const {
     navigate,
     axiosGet,
@@ -73,7 +74,7 @@ export const UserContextProvider = ({ children }) => {
 
     try {
       const res = await axiosPost("users", data, config)
-      console.log('ユーザー新規作成完了'+ res.data);
+      console.log('ユーザー新規作成完了', res.data);
       setUser(res.data.user);
       setLoggedIn(true);
       navigate("/");

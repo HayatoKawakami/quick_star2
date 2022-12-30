@@ -22,7 +22,8 @@ export const UserNew = () => {
     birthday,
     income,
     loggedIn,
-    createUser
+    createUser,
+    flash,
   } = useUserContext();
 
   const data = new FormData()
@@ -52,7 +53,7 @@ export const UserNew = () => {
     <div>
       <label name="name" className=" essencial" htmlFor="name">名前</label>
       <input
-      id="name"
+      data-testid="userNewNameInput"
       name="name"
       value={name}
       onChange={handleChangeName}
@@ -64,7 +65,7 @@ export const UserNew = () => {
       <label className=" essencial" htmlFor="email">メールアドレス</label>
       <br/>
       <input
-      id="email"
+      data-testid="userNewEmailInput"
       name="email"
       value={email}
       onChange={handleChangeEmail}
@@ -76,7 +77,7 @@ export const UserNew = () => {
       <label className=" essencial" htmlFor="password">パスワード</label>
       <br/>
       <input
-      id="password"
+      data-testid="userNewPasswordInput"
       name="password"
       value={password}
       onChange={handleChangePassword}
@@ -88,7 +89,7 @@ export const UserNew = () => {
       <label className=" essencial" htmlFor="passwordConfirmation">パスワード確認</label>
       <br/>
       <input
-      id="passwordConfirmation"
+      data-testid="userNewPasswordConfirmationInput"
       name="passwordConfirmation"
       value={passwordConfirmation}
       onChange={handleChangePasswordConfirmation}
@@ -121,13 +122,13 @@ export const UserNew = () => {
 
       <div className='form-block'>
         <label className=" essencial" htmlFor="userNewBirthday">生年月日</label>
-        <input id="userNewBirthday" type="date" name="birthday" value={birthday} onChange={handleBirthday} />
+        <input data-testid="userNewBirthdayInput" type="date" name="birthday" value={birthday} onChange={handleBirthday} />
       </div>
 
       <div className='form-block '>
         <label className="essencial" htmlFor="userNewIncome">収入※額面</label>
         <input 
-        id="userNewIncome"
+        data-testid="userNewIncomeInput"
         type="number"
         name="income"
         onKeyDown={handleEnterKeyDown}
@@ -136,7 +137,8 @@ export const UserNew = () => {
         />
       </div>
 
-      <input type="button" onClick={()=> {createUser(data)}} value="新規登録" />
+      <input data-testid="userNewSubmitButton" type="button" onClick={()=> {createUser(data)}} value="新規登録" />
+      <p>{flash}</p>
     </div>
   );
 }
