@@ -25,7 +25,7 @@ export const Home = () => {
       <div className="home-header">
         <img className="header-image" src={`${baseURL}/layouts/home-header.jpg`} alt="" />
         <div className="header-word-box">
-          <p className="header-greet">{user.name} さん、こんにちは。</p>
+          <p className="header-greet">{ellipsisWord(`これはテスト`)(7)('...')} さん、こんにちは。</p>
           <p className="header-date">{date}</p>
         </div>
       </div>
