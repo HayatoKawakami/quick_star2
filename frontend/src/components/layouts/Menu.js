@@ -9,7 +9,7 @@ import { faQuestionCircle, faCheckSquare } from '@fortawesome/free-regular-svg-i
 
 export const Menu = () => {
 
-  const { baseURL, FontAwesomeIcon } = useConstContext();
+  const { baseURL, FontAwesomeIcon, ellipsisWord } = useConstContext();
   const { user, loggedIn } = useUserContext();
 
   const [active, setActive] = useState(false);
@@ -34,7 +34,7 @@ export const Menu = () => {
             </Link>
             <Link className="menu-user-text" to={`users/profile`} onClick={activeMenuBox}>
               <p className="">{user.name}</p>
-              <p className="">{user.email}</p>
+              <p className="">{ellipsisWord(`${user.email}`)(22)('...')}</p>
             </Link>
             <Link className='menu-user-dot' to={`users/profile`} onClick={activeMenuBox}>
               <FontAwesomeIcon icon={faEllipsisH}/>
