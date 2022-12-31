@@ -9,20 +9,23 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 export const ItemNew = () => {
   const { FontAwesomeIcon } = useConstContext();
   const { user, userId, loggedIn } = useUserContext();
-  const { name,
-          price,
-          url,
-          site_url,
-          handleChangeName,
-          handleChangePrice,
-          handleChangeSiteName,
-          handleChangeSiteUrl,
-          handleChangeUrl,
-          options,
-          getImage,
-          createItem,
-        } = useItemContext();
-        
+  const { 
+    name,
+    price,
+    url,
+    site_url,
+    handleChangeName,
+    handleChangePrice,
+    handleChangeSiteName,
+    handleChangeSiteUrl,
+    handleChangeUrl,
+    options,
+    getImage,
+    createItem,
+    setName,
+    setPrice,
+  } = useItemContext();
+
   const handleEnterKeyDown = (e) => {
     if(e && e.key !== 'Enter') {
       return
@@ -30,6 +33,11 @@ export const ItemNew = () => {
       createItem(userId)
     }
   }
+
+  useEffect(()=>{
+    setName("");
+    setPrice("");
+  },[])
 
 
   return(
@@ -47,7 +55,6 @@ export const ItemNew = () => {
               onChange={handleChangePrice}
               onKeyDown={handleEnterKeyDown}
       />
-            
 
       <label className='input-label' htmlFor="">参考動画URL</label>
       <input type="text" value={url} onKeyDown={handleEnterKeyDown} onChange={handleChangeUrl} placeholder="https://www.youtube.com/embed/3IsR..." />

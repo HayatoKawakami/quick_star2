@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useCostContext } from '../../../contexts/CostContext';
 import Select from 'react-select';
@@ -7,7 +7,17 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 export const CostNew = () => {
 
   const { FontAwesomeIcon } = useConstContext();
-  const { name, price, label, costsSelect, handleChangeName, handleChangePrice, handleChangeOtherName,createCost  } = useCostContext();
+  const {
+    name,
+    price,
+    label,
+    costsSelect,
+    handleChangeName,
+    handleChangePrice,
+    handleChangeOtherName,
+    createCost,
+    setPrice,
+  } = useCostContext();
 
   const handleEnterKeyDown = (e) => {
     if(e && e.key !== 'Enter') {
@@ -16,6 +26,10 @@ export const CostNew = () => {
       createCost()
     }
   }
+
+  useEffect(()=>{
+    setPrice("");
+  },[])
 
   return(
     <>
