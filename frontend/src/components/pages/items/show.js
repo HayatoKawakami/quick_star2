@@ -67,6 +67,10 @@ export const ItemShow = () => {
     totalCostPriceSet();
   },[])
 
+  if (loggedIn === false) {
+    return <Navigate replace to="/login"/>
+  }
+
   return(
     <>
 

@@ -38,6 +38,10 @@ export const ItemEdit = () => {
     itemSet(itemId);
   },[])
 
+  if (loggedIn === false) {
+    return <Navigate replace to="/login"/>
+  }
+
   const handleEnterKeyDown = (e) => {
     if(e && e.key !== 'Enter') {
       return

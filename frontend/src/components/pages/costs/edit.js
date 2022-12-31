@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { useCostContext } from '../../../contexts/CostContext';
+import { useUserContext } from '../../../contexts/UserContext';
 import Select from 'react-select';
 
 export const CostEdit = () => {
@@ -16,6 +17,7 @@ export const CostEdit = () => {
     updateCost,
     destroyCost
   } = useCostContext();
+  const { loggedIn } = useUserContext();
   const { costId } = useParams();
 
   const data = {

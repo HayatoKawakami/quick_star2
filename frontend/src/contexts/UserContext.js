@@ -25,7 +25,6 @@ export const UserContextProvider = ({ children }) => {
   const [incomeTax, setincomeTax] = useState('');
   const [takeHomePay, setTakeHomePay] = useState('');
 
-
   const {
     navigate,
     axiosGet,

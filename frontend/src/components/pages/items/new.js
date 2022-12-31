@@ -39,6 +39,10 @@ export const ItemNew = () => {
     setPrice("");
   },[])
 
+  if (loggedIn === true) {
+    return <Navigate replace to="/"/>;
+  }
+
 
   return(
     <>

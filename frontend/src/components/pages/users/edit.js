@@ -15,7 +15,8 @@ export const UserEdit = () => {
     previewImage,
     userSet,
     editUser,
-    userDestroy
+    userDestroy,
+    loggedIn,
   } = useUserContext();
 
   const data = new FormData();
@@ -30,6 +31,10 @@ export const UserEdit = () => {
   useEffect(()=> {
     userSet();
   },[])
+
+  if (loggedIn === false) {
+    return <Navigate replace to="/login"/>
+  }
 
   const handleEnterKeyDown = (e) => {
     if(e && e.key !== 'Enter') {
