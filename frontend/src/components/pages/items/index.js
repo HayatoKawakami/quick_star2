@@ -9,7 +9,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 export const ItemIndex = () => {
   const { baseURL, FontAwesomeIcon, ellipsisWord } = useConstContext();
   const { items, itemsSet, CountDaySet  } = useItemContext();
-  const { user, takeHomePaySet } = useUserContext();
+  const { user, takeHomePaySet, loggedIn } = useUserContext();
   const { totalCostPriceSet } = useCostContext();
 
   useEffect(() => {
@@ -17,6 +17,10 @@ export const ItemIndex = () => {
     takeHomePaySet();
     totalCostPriceSet();
   },[])
+
+  if (loggedIn === false) {
+    return <Navigate replace to="/login"/>
+  }
 
 
 

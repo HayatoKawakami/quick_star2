@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useConstContext } from '../../../contexts/ConstContext';
 import { useUserContext } from '../../../contexts/UserContext';
 import { useCostContext } from '../../../contexts/CostContext';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export const CostIndex = () => {
   const { baseURL, FontAwesomeIcon } = useConstContext();
-  const { takeHomePaySet, takeHomePay } = useUserContext();
+  const { takeHomePaySet, takeHomePay, loggedIn } = useUserContext();
   const { costs, setCostIndex, totalCostPrice, totalCostPriceSet } = useCostContext();
 
   const CostImage = (name) => {
@@ -39,6 +39,10 @@ export const CostIndex = () => {
     totalCostPriceSet();
     takeHomePaySet();
   }, [])
+
+  if (loggedIn === false) {
+    return <Navigate replace to="/login"/>;
+  }
 
   return(
     <>

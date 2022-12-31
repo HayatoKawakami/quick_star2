@@ -3,7 +3,7 @@ import { useConstContext } from "../../../contexts/ConstContext";
 import { useUserContext } from "../../../contexts/UserContext";
 import { useItemContext } from "../../../contexts/ItemContext";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useCostContext } from "../../../contexts/CostContext";
 
 export const Home = () => {
@@ -20,12 +20,16 @@ export const Home = () => {
     totalCostPriceSet();
   },[])
 
+  if (loggedIn === false) {
+    return <Navigate replace to="/login"/>
+  }
+
   return(
     <>
       <div className="home-header">
         <img className="header-image" src={`${baseURL}/layouts/home-header.jpg`} alt="" />
         <div className="header-word-box">
-          <p className="header-greet">{ellipsisWord(`これはテスト`)(7)('...')} さん、こんにちは。</p>
+          <p className="header-greet">{ellipsisWord(`${user.name}`)(7)('...')} さん、こんにちは。</p>
           <p className="header-date">{date}</p>
         </div>
       </div>
