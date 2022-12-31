@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { useConstContext } from "./ConstContext";
 import { useUserContext } from "./UserContext";
 import { format, addDays} from 'date-fns';
@@ -51,8 +51,6 @@ export const ItemContextProvider = ({children}) => {
   const handleChangeUrl = (e) => {setUrl(e.target.value);}
   const handleChangeSiteName = (e) => {setSite_name(e.value);}
   const handleChangeSiteUrl = (e) => {setSite_url(e.target.value);}
-
-  
 
   const getImage = (e) => {
     if (!e.target.files) return
@@ -350,6 +348,8 @@ export const ItemContextProvider = ({children}) => {
     navigate,
     name,
     price,
+    setName,
+    setPrice,
     image,
     itemSet,
     videoDestroy,
